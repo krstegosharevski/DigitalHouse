@@ -1,0 +1,79 @@
+<!-- <div class="container-fluid " style="background-color: #f6f3f4;">
+  <div class="row ">
+    <div class="col-10"></div>
+    <div class="col-2">  <select class="form-select m-2 fw-light" (change)="ChangeLang($event)" name="" id="">
+        <option [selected]="lang==='en'" class="fw-light" value="en">English</option>
+        <option [selected]="lang==='mk'" class="fw-light" value="mk">Macedonian</option>
+      </select></div>
+  </div>
+
+</div> -->
+
+
+
+<nav class="navbar navbar-expand navbar-light bg-light sticky-top py-3" style="background-color: #E20074 !important; border-bottom: 3px solid white;">
+  <div class="container-fluid">
+    <a class="navbar-brand ps-4" href="index.html" style="color: white;">Digital House</a>
+
+    <!-- Dropdown копче за мобилни екрани -->
+    <div class="btn-group me-4 pe-4 d-lg-none ms-auto" dropdown>
+      <button id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle" aria-controls="dropdown-basic">
+        Menu <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/actions">Products</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/actions">Tariffs</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/problems">Report Problem</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/aboutus">About Us</a></li>
+        <li class="divider dropdown-divider"></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/login">Log in</a></li>
+      </ul>
+    </div>
+
+    <!-- <div class="collapse navbar-collapse " id="navbarResponsive">
+      <ul class="navbar-nav mx-auto ">
+        <li class="nav-item active ps-2">
+          <a class="nav-link text-color" routerLink="/reports" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item ps-2">
+          <a class="nav-link text-color" routerLink="/actions" routerLinkActive="active">Tariffs</a>
+        </li>
+        <li class="nav-item ps-2">
+          <a class="nav-link text-color" routerLink="/calendars" routerLinkActive="active">Report Problem</a>
+        </li>
+        <li class="nav-item ps-2">
+          <a class="nav-link text-color" routerLink="/users" routerLinkActive="active">About Us</a>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown ms-auto me-4">
+      <div class="dropdown ms-auto me-4">
+        <div class="btn-group" dropdown>
+          <button class="btn btn-light mx-1" type="submit">Sing up</button>
+        </div>
+      </div>
+    </div> -->
+    <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarResponsive">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active ps-2">
+          <a class="nav-link text-color" routerLink="/products" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item ps-2">
+          <a class="nav-link text-color" routerLink="/actions" routerLinkActive="active">Tariffs</a>
+        </li>
+        <li class="nav-item ps-2">
+          <a class="nav-link text-color" routerLink="/problems" routerLinkActive="active">Report Problem</a>
+        </li>
+        <li class="nav-item ps-2">
+          <a class="nav-link text-color" routerLink="/aboutus" routerLinkActive="active">About Us</a>
+        </li>
+      </ul>
+      <button class="btn btn-log-in ms-auto me-4" routerLink="/login">Log in</button>
+    </div>
+  </div>
+</nav>
+<div class="mx-1" style="background-color: white;">
+
+</div>
+
+

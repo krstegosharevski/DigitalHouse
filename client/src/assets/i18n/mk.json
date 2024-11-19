@@ -1,0 +1,157 @@
+{
+    "report":"Репорти",
+    "action":"Акции",
+    "calendar":"Календар",
+    "user":"Корисници",
+    "operator":"Оператор",
+    "ported":"Историја на пресенсени броеви",
+    "admin":"Админ",
+    "about us": "За нас",
+    "downtime":"Застој",
+    "series":"Серии",
+    "help":"Помош",
+    "contact":"Контакт",
+    "footerText": "© 2024 Авторски права: Агенција за електронски комуникации. Сите права се задржани.",
+    "from":"Од",
+    "to":"До",
+    "filter":"Филтер",
+    "search":"Пребарај",
+
+    "reports":{
+        "reports":"Репорти",
+        "operatosDonators": "Сите оператори: Донатори",
+        "operatosReceivers": "Сите оператори: Примачи",
+        "export": "Префлете го на"
+    },
+
+    "actions": {
+        "information":"Информациски Панел",
+        "searchNumber":"Пребарај број",
+        "headers":{
+            "newService":"Лансирање на нови услуги или производи",
+            "partnershipsCollaborations":"Партнерства и соработки",
+            "awards":"Награди и признанија",
+            "responsibility":"Социјална одговорност"
+        },
+        "content":{
+            "newService":"Агенцијата за електронски комуникации лансираше нова апликација за следење на квалитетот на мобилната мрежа.",
+            "partnershipsCollaborations":"Агенцијата за електронски комуникации потпишува меморандум за соработка со водечките телекомуникациски компании во земјава.",
+            "awards":"„Агенцијата за електронски комуникации добива меѓународно признание за нејзините напори во дигиталната трансформација“.",
+            "responsibility":"„Агенцијата за електронски комуникации започнува кампања за подигање на свеста за безбедноста на интернет кај младите.”"
+        }
+    },
+
+    "calendars":{
+        "calendars":"Календар",
+        "chooseDate":"Одбери датум",
+        "form":{
+            "selectDate":"Одбери датум",
+            "date":"Датум",
+            "searchTitle":"Пребарај наслов",
+            "title":"Наслов",
+            "selectType":"Избери тип",
+            "type":"Тип",
+            "wDay":"Работен ден",
+            "nwDay":"Не-работен ден",
+            "addDescription":"Додај опис",
+            "description":"Опиц",
+            "markDate":"Одбележи датум"
+        },
+        "total":"Вкупно",
+        "days":"Денови",
+        "page":"Страна",
+        "next":"Следно",
+        "sortedBy":"Сортирани според"
+    },
+
+    "users":{
+        "users":"Корисници",
+        "addUser":"Додај корисник",
+        "description": "Опис",
+        "role":"Улога",
+        "updated":"Обновено",
+        "form":{
+            "addUsername":"Додај корисничко име ",
+            "username":"Корисничко име",
+            "addPassword":"Додај пасворд",
+            "password":"Пасворд",
+            "selectRole":"Одбери улога",
+            "role":"Улога",
+            "regulator":"Регулатор",
+            "administrator":"Администратор",
+            "survey":"Пополнете ја анкетата",
+            "view":"Преглед",
+            "edit":"Уреди",
+            "suspensions":"Суспензии",
+            "report":"Извештај",
+            "routingErrors":"Грешки во рутирањето",
+            "calendar":"Календар",
+            "user":"Корисник",
+            "operators":"Оператори",
+            "help":"Помош",
+            "portedHistory":"Историја на пренесен број"
+        },
+        "total":"Вкупно",
+        "days":"Денови",
+        "page":"Страна",
+        "next":"Следно",
+        "sortedBy":"Сортирани според"
+    },
+
+    "operators":{
+        "operators":"Оператори",
+        "addOperators":"Додај оператор",
+        "form" : {
+            "addOperatorsName": "Додај име на Оператор",
+            "name":"Име",
+            "addOperatorsCode": "Add Operator code",
+            "code":"Код",
+            "addOperatorsX509": "Додај x509",
+            "cName":"Заедничко име",
+            "addOperatorsKeystore": "Додај псевдоним AEK keystore",
+            "keystore":"АЕК keystore алијас",
+            "addOperatorsEndpoint": "Додај WebService endpoint",
+            "endpoint":"WebService endpoint",
+            "addOperatorsFixed": "Додај денови за блокирање за фиксни броеви",
+            "fixed":"Блокирање денови за фиксни броеви:",
+            "addOperatorsMobile": "Додај денови за блокирање за мобилни броеви",
+            "mobile":"Блокирање денови за мобилни броеви",
+            "description":"Опис"
+        },
+        "operatorName" : "Име на оператор",
+        "operatorCode" : "Код на оператор",
+        "certificates" : "Сертификати",
+        "assigned":"Сите доделени серии од",
+        "noSeries":"Не е доделена серија",
+        "totalSeries":"Вкупно доделени серии"
+
+    },
+
+    "porteds": {
+        "checkStatus":"Проверете го статусот за пренесениот број",
+        "sNumber":"Пребарај број",
+        "donor":"Донатор",
+        "recipient":"Примател",
+        "routingCode":"Код за рутирање",
+        "date":"Датум",
+        "name":"Име",
+        "comment":"Коментар",
+        "check":"Проверете",
+        "status":"Статус"
+    },
+
+    "portedsRequests":{
+        "pending":"ВО ОЧЕКУВАЊЕ",
+        "accept":"ПРИФАТИ",
+        "reject":"ОДБИ",
+        "selectStatus":"Одберете Статус",
+        "dateOfPorting":"Датум на пренесување",
+        "donorOperatorCode":"Код на донатор",
+        "recipientOperatorCode":"Код на примачот",
+        "donorRoutingCode":"Код за рутирање на донаторот",
+        "status":"Статус",
+        "acceptLower": "Прифати",
+        "rejectLower": "Одби"
+    }
+}
+

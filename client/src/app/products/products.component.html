@@ -1,0 +1,120 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container justify-content-center">
+
+    <!-- Dropdown за Mobile Phones -->
+    <div class="btn-group mx-2" dropdown>
+      <button id="mobileDropdown" dropdownToggle type="button" class="btn btn-light dropdown-toggle">
+        Mobile Phones
+      </button>
+      <ul *dropdownMenu class="dropdown-menu" aria-labelledby="mobileDropdown">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/smartphones">Smartphones</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/feature-phones">Feature Phones</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/mobile-accessories">Accessories</a></li>
+      </ul>
+    </div>
+
+    <!-- Dropdown за Televisions -->
+    <div class="btn-group mx-2" dropdown>
+      <button id="tvDropdown" dropdownToggle type="button" class="btn btn-light dropdown-toggle">
+        Televisions
+      </button>
+      <ul *dropdownMenu class="dropdown-menu" aria-labelledby="tvDropdown">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/led-tvs">LED TVs</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/smart-tvs">Smart TVs</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/tv-accessories">Accessories</a></li>
+      </ul>
+    </div>
+
+    <!-- Dropdown за Computers -->
+    <div class="btn-group mx-2" dropdown>
+      <button id="computerDropdown" dropdownToggle type="button" class="btn btn-light dropdown-toggle">
+        Computers
+      </button>
+      <ul *dropdownMenu class="dropdown-menu" aria-labelledby="computerDropdown">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/laptops">Laptops</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/desktops">Desktops</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/monitors">Monitors</a></li>
+      </ul>
+    </div>
+
+    <!-- Dropdown за Accessories -->
+    <div class="btn-group mx-2" dropdown>
+      <button id="accessoriesDropdown" dropdownToggle type="button" class="btn btn-light dropdown-toggle">
+        Accessories
+      </button>
+      <ul *dropdownMenu class="dropdown-menu" aria-labelledby="accessoriesDropdown">
+        <li role="menuitem"><a class="dropdown-item" routerLink="/chargers">Chargers</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/cases">Cases</a></li>
+        <li role="menuitem"><a class="dropdown-item" routerLink="/headphones">Headphones</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <div class="row">
+    <!-- Filter Menu -->
+    <div class="col-md-3">
+      <div class="filter-menu border p-3 text-center">
+        <h5>Price</h5>
+        <button class="btn btn-outline-secondary w-100 my-2">0 - 6 000 MKD</button>
+        <button class="btn btn-outline-secondary w-100 my-2">6 000 - 12 000 MKD</button>
+        <button class="btn btn-outline-secondary w-100 my-2">12 000 - 24 000 MKD</button>
+        <button class="btn btn-outline-secondary w-100 my-2">24 000 MKD +</button>
+      </div>
+    </div>
+    <!-- End Filter Menu -->
+
+    <!-- Products: Pagination -->
+    <div class="col-md-9" style="background-color: #E20074;">
+      <div class="products">
+        <!-- Производите и пагинацијата ќе одат овде -->
+        <div class="row">
+          <!-- Секој производ би бил во сопствен <div class="col-md-4"> -->
+          <!-- Примерен производ -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="product-image.jpg" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product Name</h5>
+                <p class="card-text">Product Description</p>
+                <p class="text-muted">Price: 7 000 MKD</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="product-image.jpg" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product Name</h5>
+                <p class="card-text">Product Description</p>
+                <p class="text-muted">Price: 7 000 MKD</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="product-image.jpg" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Product Name</h5>
+                <p class="card-text">Product Description</p>
+                <p class="text-muted">Price: 7 000 MKD</p>
+              </div>
+            </div>
+          </div>
+          <!-- Примерен производ -->
+        </div>
+        <!-- Pagination can go here -->
+      </div>
+    </div>
+    <!-- Products: Pagination -->
+  </div>
+</div>
+
+
+
+
+<div class="p-4">
+  <img src="assets/images/logo.jpg">
+</div>

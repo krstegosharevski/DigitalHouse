@@ -1,0 +1,164 @@
+.extra-small-text{
+    font-size: 0.75rem;
+}
+
+
+
+  .form-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space between rows */
+  }
+  .form-inline label {
+    margin-right: 10px; /* Space between label and input */
+  }
+  .form-control {
+    width: 200px; /* Adjust width as needed */
+  }
+
+  /*ova testiram nadolu */
+
+  .styled-select {
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #ffffff;
+    border: 2px solid #fe4066; /* Sweet gray border */
+    color: #333333; /* Dark gray text */
+    padding: 10px 40px 10px 10px; /* Padding to accommodate the arrow */
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none; /* Remove outline */
+    position: relative;
+    display: inline-block;
+    background-image: url('https://img.icons8.com/ios-glyphs/30/000000/circled-chevron-down.png'); /* Button-like arrow icon */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+/* Style the select element on hover */
+.styled-select:hover {
+    border-color: #333333;
+}
+
+/* Optional: Style the select options */
+.styled-select option {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Add a button appearance */
+.styled-select::after {
+    content: '▼';
+    font-size: 12px;
+    color: #333333; /* Dark gray arrow */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Ignore pointer events on the arrow */
+}
+
+.button-like {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fe4066;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-like:hover {
+    background-color: #333333;
+}
+
+.custom-button{
+  border: 2px solid black;  color: black; background-color: #fe4066;
+}
+
+.custom-button:hover {
+  background-color: #d83656; /* Darker shade on hover */
+  color: white; /* Change text color on hover */
+}
+
+
+/* Od ovde e novo */  
+
+.carousel-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /*color: #E20074;*/
+  
+  padding: 15px;
+  height: 100%; /* Full height of slide */
+}
+
+.carousel-caption h5{
+  font-size: 4.2rem; /* Adjust size based on preference */
+  text-shadow:  3px 3px 5px #E20074; /* Shadow with #E20074 color */
+}
+.carousel-caption p {
+  font-size: 3.2rem; /* Adjust size based on preference */
+  text-shadow: 3px 3px 5px #E20074; /* Shadow with #E20074 color */
+  
+}
+
+carousel, slide {
+  width: 100%;
+  max-height: 550px; /* Поставете ја саканата висина */
+}
+
+slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Овозможува сликата да ја пополни областа без да го нарушува дизајнот */
+}
+
+@media (max-width: 768px) {
+  .carousel-caption h5 {
+    font-size: 1rem;
+    text-shadow: 2px 2px 4px #E20074;
+  }
+  .carousel-caption p {
+    font-size: 0.9rem;
+    text-shadow: 2px 2px 4px #E20074;
+  }
+
+  carousel, slide {
+    width: 100%;
+    max-height: 200px; /* Поставете ја саканата висина */
+  }
+  
+  slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Овозможува сликата да ја пополни областа без да го нарушува дизајнот */
+  }
+}
+
+
+.custom-rounded-top {
+  background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  overflow: hidden; /* За да ги заобли и содржините внатре */
+  border: 1px solid #ddd; /* За да добие мала граница */
+}
+
+.custom-rounded-top-white{
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  overflow: hidden; /* За да ги заобли и содржините внатре */
+  
+}
+
+

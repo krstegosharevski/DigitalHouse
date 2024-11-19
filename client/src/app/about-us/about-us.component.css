@@ -1,0 +1,15 @@
+/* Test code */
+
+.logo-container {
+  background-color: #f8f9fa;
+  /* Светла позадина */
+  padding: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.logo-container img {
+  max-width: 450px;
+  /* Зголемена големина на логото */
+  height: auto;
+}

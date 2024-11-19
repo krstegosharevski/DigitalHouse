@@ -1,0 +1,156 @@
+{
+    "report":"Reports",
+    "action":"Actions",
+    "calendar":"Calendars",
+    "user":"Users",
+    "operator":"Operator",
+    "ported":"Ported number history",
+    "admin":"Admin",
+    "about us":"About us",
+    "downtime":"Downtime",
+    "series":"Series",
+    "help":"Help",
+    "contact":"Contact",
+    "footerText": "© 2024 Copyright: Agency for electronic communications. All rights reserved.",
+    "from":"From",
+    "to":"To",
+    "filter":"Filter",
+    "search":"Search",
+    
+    "reports":{
+        "reports":"Reports",
+        "operatosDonators": "All operators: Donators",
+        "operatosReceivers": "All operators: Receivers",
+        "export": "Export this to"
+    },
+    "actions": {
+        "information":"Information Panel",
+        "searchNumber":"Search number",
+        "headers":{
+            "newService":"Launch of New Services or Products",
+            "partnershipsCollaborations":"Partnerships and Collaborations",
+            "awards":"Awards and Recognitions",
+            "responsibility":"Social Responsibility"
+        },
+        "content":{
+            "newService":"The Agency for Electronic Communications launches a new app for monitoring mobile network quality.",
+            "partnershipsCollaborations":"The Agency for Electronic Communications signs a memorandum of cooperation with leading telecommunications companies in the country.",
+            "awards":"“The Agency for Electronic Communications receives international recognition for its efforts in digital transformation.”",
+            "responsibility":"“The Agency for Electronic Communications launches a campaign to raise awareness about internet safety among young people.”"
+        }
+    },
+
+    "calendars":{
+        "calendars":"Calendar",
+        "chooseDate":"Choose date",
+        "form":{
+            "selectDate":"Select date",
+            "date":"Date",
+            "searchTitle":"Search title",
+            "title":"Title",
+            "selectType":"Select type",
+            "type":"Type",
+            "wDay":"Working day",
+            "nwDay":"Non-working day",
+            "addDescription":"Add Description",
+            "description":"Description",
+            "markDate":"Mark Date"
+        },
+        "total":"Total",
+        "days":"Days",
+        "page":"Page",
+        "next":"Next",
+        "sortedBy":"Sorted by"
+    },
+
+    "users":{
+        "users":"Users",
+        "addUser":"Add user",
+        "description": "Description",
+        "role":"Role",
+        "updated":"Updated",
+        "form":{
+            "addUsername":"Add username",
+            "username":"Username",
+            "addPassword":"Add passowrd",
+            "password":"Password",
+            "selectRole":"Select role",
+            "role":"Role",
+            "regulator":"Regulator",
+            "administrator":"Administrator",
+            "survey":"Complete the survey",
+            "view":"View",
+            "edit":"Edit",
+            "suspensions":"Suspensions",
+            "report":"Report",
+            "routingErrors":"Routing errors",
+            "calendar":"Calendar",
+            "user":"User",
+            "operators":"Operators",
+            "help":"Help",
+            "portedHistory":"Ported number history"
+        },
+        "total":"Total",
+        "days":"Days",
+        "page":"Page",
+        "next":"Next",
+        "sortedBy":"Sorted by"
+    },
+
+    "operators":{
+        "operators":"Operators",
+        "addOperators":"Add operator",
+        "form" : {
+            "addOperatorsName": "Add Operator name",
+            "name":"Name",
+            "addOperatorsCode": "Add Operator code",
+            "code":"Code",
+            "addOperatorsX509": "Add x509",
+            "cName":"Common name",
+            "addOperatorsKeystore": "Add AEK keystore alias",
+            "keystore":"AEK keystore alias",
+            "addOperatorsEndpoint": "Add WebService endpoint",
+            "endpoint":"WebService endpoint",
+            "addOperatorsFixed": "Add Blocking days for fixed numbers",
+            "fixed":"Blocking days for fixed numbers:",
+            "addOperatorsMobile": "Add Blocking days for mobile numbers",
+            "mobile":"Blocking days for mobile numbers",
+            "description":"Description"
+        },
+        "operatorName" : "Operator name",
+        "operatorCode" : "Operator code",
+        "certificates" : "Certificates",
+        "assigned":"All assigned series from",
+        "noSeries":"No series assigned",
+        "totalSeries":"Total series assigned"
+    },
+
+    "porteds": {
+        "checkStatus":"Check status for ported number",
+        "sNumber":"Search number",
+        "donor":"Donor",
+        "recipient":"Recipient",
+        "routingCode":"Routing Code",
+        "date":"Date",
+        "name":"Name",
+        "comment":"Comment",
+        "check":"Check",
+        "status":"Status"
+    },
+
+    "portedsRequests":{
+        "pending":"PENDING",
+        "accept":"ACCEPT",
+        "reject":"REJECT",
+        "selectStatus":"Select Status",
+        "dateOfPorting":"Date Of Porting",
+        "donorOperatorCode":"Donor Operator Code",
+        "recipientOperatorCode":"Recipient Operator Code",
+        "donorRoutingCode":"Donor Routing Code",
+        "status":"Status",
+        "acceptLower": "Accept",
+        "rejectLower": "Reject"
+    }
+
+
+}
