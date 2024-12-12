@@ -7,6 +7,7 @@ using DigitalHouseSystemApi.Data;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Services;
+using DigitalHouseSystemApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddCors();
@@ -33,6 +34,10 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 
 //Ovoj metod pazi go 202 video gledaj ako ima greshka tuka.

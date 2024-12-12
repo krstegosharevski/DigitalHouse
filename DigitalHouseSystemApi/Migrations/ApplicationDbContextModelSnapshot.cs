@@ -141,6 +141,57 @@ namespace DigitalHouseSystemApi.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("DigitalHouseSystemApi.Models.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("DigitalHouseSystemApi.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -252,6 +303,17 @@ namespace DigitalHouseSystemApi.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DigitalHouseSystemApi.Models.Photo", b =>
+                {
+                    b.HasOne("DigitalHouseSystemApi.Models.Product", "Product")
+                        .WithOne("Photo")
+                        .HasForeignKey("DigitalHouseSystemApi.Models.Photo", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("DigitalHouseSystemApi.Models.AppRole", null)
@@ -296,6 +358,11 @@ namespace DigitalHouseSystemApi.Migrations
             modelBuilder.Entity("DigitalHouseSystemApi.Models.AppUser", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("DigitalHouseSystemApi.Models.Product", b =>
+                {
+                    b.Navigation("Photo");
                 });
 #pragma warning restore 612, 618
         }

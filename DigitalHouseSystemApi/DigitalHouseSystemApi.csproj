@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.26.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.29" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.29" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.29" />
@@ -20,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

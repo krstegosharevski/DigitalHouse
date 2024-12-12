@@ -14,8 +14,7 @@ namespace DigitalHouseSystemApi.Data
         {
         }
 
-        
-
+        public DbSet<Product> Products { get; set; }
  
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,7 +31,12 @@ namespace DigitalHouseSystemApi.Data
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
-
+             
+            builder.Entity<Photo>()
+                .HasOne(ur => ur.Product)
+                .WithOne(u => u.Photo)
+                .HasForeignKey<Photo>(ur => ur.ProductId)
+                .IsRequired();
         }
 
     }
