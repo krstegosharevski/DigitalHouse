@@ -2,7 +2,7 @@
 
 namespace DigitalHouseSystemApi.Models
 {
-    [Table("Photos")]
+
     public class Photo
     {
         public int Id { get; set; }

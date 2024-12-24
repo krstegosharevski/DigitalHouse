@@ -8,6 +8,7 @@ using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Services;
 using DigitalHouseSystemApi.Helpers;
+using DigitalHouseSystemApi.Services.Impl;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddCors();
@@ -36,6 +37,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
@@ -69,8 +73,12 @@ builder.Services.AddAuthorization(opt =>
 });
 
 
-// Add services to the container.
+// Add services to the container. Here i changed after AddControllers()
 builder.Services.AddControllers();
+     //.AddJsonOptions(options =>
+     // {
+     //     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+     // });
 
 var app = builder.Build();
 

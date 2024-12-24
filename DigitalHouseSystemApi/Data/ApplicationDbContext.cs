@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using DigitalHouseSystemApi.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DigitalHouseSystemApi.Data
 {
@@ -15,6 +16,9 @@ namespace DigitalHouseSystemApi.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
  
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,6 +40,18 @@ namespace DigitalHouseSystemApi.Data
                 .HasOne(ur => ur.Product)
                 .WithOne(u => u.Photo)
                 .HasForeignKey<Photo>(ur => ur.ProductId)
+                .IsRequired();
+
+            builder.Entity<Product>()
+                .HasOne(ur => ur.Category)
+                .WithMany(u => u.Products)
+                .HasForeignKey(ur => ur.CategoryId)
+                .IsRequired();
+
+            builder.Entity<Product>()
+                .HasOne(ur => ur.Brand)
+                .WithMany(u => u.Products)
+                .HasForeignKey(ur => ur.BrandId)
                 .IsRequired();
         }
 

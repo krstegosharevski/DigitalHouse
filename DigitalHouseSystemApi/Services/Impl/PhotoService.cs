@@ -9,8 +9,9 @@ namespace DigitalHouseSystemApi.Services
     public class PhotoService : IPhotoService
     {
         private readonly Cloudinary _cloudinary;
+        private readonly IProductRepository _productRepository;
 
-        public PhotoService(IOptions<CloudinarySettings> config)
+        public PhotoService(IOptions<CloudinarySettings> config, IProductRepository productRepository)
         {
             var acc = new Account
                 (
@@ -19,6 +20,7 @@ namespace DigitalHouseSystemApi.Services
                     config.Value.ApiSecret
                 );
             _cloudinary = new Cloudinary(acc);
+            _productRepository = productRepository;
         }
 
         public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
@@ -38,8 +40,14 @@ namespace DigitalHouseSystemApi.Services
             return uploadResult;
         }
 
-        public async Task<DeletionResult> DeletePhotoAsync(string publicId)
+        public async Task<DeletionResult> DeletePhotoAsync(int productId)
         {
+            var product = await _productRepository.FindByIdAsync(productId);
+
+            if(product == null) throw new ArgumentException("Invalid product");
+
+            var publicId = product.Photo?.PublicId ?? throw new Exception("Photo does not exist.");
+
             var deleteParams = new DeletionParams(publicId);
             return await _cloudinary.DestroyAsync(deleteParams);
         }

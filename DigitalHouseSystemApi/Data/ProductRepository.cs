@@ -1,5 +1,7 @@
-﻿using DigitalHouseSystemApi.Interfaces;
+﻿using DigitalHouseSystemApi.DTOs;
+using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalHouseSystemApi.Data
 {
@@ -13,14 +15,37 @@ namespace DigitalHouseSystemApi.Data
             _context = context;
         }
 
-        public async Task<Product> FindByIdAsync(int id)
+        public void DeletePhoto(Photo photo)
         {
-            return await _context.Products.FindAsync(id);
+            _context.Photos.Remove(photo);
+        }
+
+        public async Task<Product?> FindByIdAsync(int id)
+        {
+            return await _context.Products
+                .Include(p => p.Photo)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return await _context.Products
+                .Include(p => p.Photo)
+                .Include(p=>  p.Category)
+                .Include(p => p.Brand)
+                .ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public void Save(Product product)
+        {
+            _context.Add(product);
         }
     }
 }
