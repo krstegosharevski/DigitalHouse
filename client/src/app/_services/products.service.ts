@@ -16,4 +16,8 @@ export class ProductsService {
   getAllProducts(){
     return this.http.get<ProductDto[]>(this.baseUrl + "product/get-all");
   }
+
+  getAllProductsByCategory(category: string){
+    return this.http.get<ProductDto[]>(this.baseUrl + `product/category?category=${category}`);
+  }
 }

@@ -19,6 +19,8 @@ namespace DigitalHouseSystemApi.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
  
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,7 +42,13 @@ namespace DigitalHouseSystemApi.Data
                 .HasOne(ur => ur.Product)
                 .WithOne(u => u.Photo)
                 .HasForeignKey<Photo>(ur => ur.ProductId)
-                .IsRequired();
+                .IsRequired(false);
+
+            builder.Entity<Photo>()
+                .HasOne(ur => ur.Category)
+                .WithOne(u => u.Photo)
+                .HasForeignKey<Photo>(ur => ur.CategoryId)
+                .IsRequired(false);
 
             builder.Entity<Product>()
                 .HasOne(ur => ur.Category)
@@ -53,6 +61,19 @@ namespace DigitalHouseSystemApi.Data
                 .WithMany(u => u.Products)
                 .HasForeignKey(ur => ur.BrandId)
                 .IsRequired();
+
+            builder.Entity<ProductColor>()
+                .HasKey(ur => new {ur.ProductId, ur.ColorId});
+
+            builder.Entity<ProductColor>()
+                .HasOne(ur => ur.Product)
+                .WithMany(u => u.ProductColors)
+                .HasForeignKey(ur => ur.ProductId);
+
+            builder.Entity<ProductColor>()
+                .HasOne(ur => ur.Color)
+                .WithMany(u => u.ProductColors)
+                .HasForeignKey(ur => ur.ColorId);
         }
 
     }

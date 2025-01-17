@@ -21,6 +21,11 @@ import { ProductsComponent } from './products/products.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductCategoriesComponent } from './product-tests/product-categories/product-categories.component';
+import { ProductBrandNavComponent } from './product-tests/product-brand-nav/product-brand-nav.component';
+import { ProductFiltersComponent } from './product-tests/product-filters/product-filters.component';
+import { ProductCardComponent } from './product-tests/product-card/product-card.component';
+import { ProductListComponent } from './product-tests/product-list/product-list.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -36,7 +41,12 @@ export function HttpLoaderFactory(http:HttpClient){
     ProductsComponent,
     ProblemsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductCategoriesComponent,
+    ProductBrandNavComponent,
+    ProductFiltersComponent,
+    ProductCardComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

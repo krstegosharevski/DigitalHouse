@@ -15,6 +15,10 @@ namespace DigitalHouseSystemApi.Data
         {
             return await _context.Brands.FirstOrDefaultAsync(p => p.Id == id);
         }
-            
+
+        public async Task<IEnumerable<Brand>> GetAllBrandsAsync()
+        {
+            return await _context.Brands.ToListAsync();
+        }
     }
 }

@@ -17,5 +17,22 @@ namespace DigitalHouseSystemApi.Data
         {
             return await _context.Categories.FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public async Task<Category> FindByNameAsync(string name)
+        {
+            return await _context.Categories.FirstOrDefaultAsync(p => p.Name ==  name);
+        }
+
+        public async Task<IEnumerable<Category>> GetAllAsync()
+        {
+            return await _context.Categories
+                .Include(p => p.Photo)
+                .ToListAsync();
+        }
+
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

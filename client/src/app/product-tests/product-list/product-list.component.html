@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+      <app-product-brand-nav></app-product-brand-nav>
+  </div>
+</div>
+<div class="container m-2">
+  <div class="row my-2 py-2">
+    <div class="col-md-3">
+      <app-product-filters
+        (priceFilter)="onPriceFilterSelected($event)" 
+        (brandFilter)="onBrandFilterSelected($event)">
+      </app-product-filters>
+    </div>
+  
+    <div class="col-md-9">
+      <div class="products">
+        <div class="row p-3">
+          <div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
+            <app-product-card [product]="product"></app-product-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -134,6 +134,25 @@ namespace DigitalHouseSystemApi.Controllers
             return Ok(productsDto);
         }
 
+        [HttpGet("category")]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> getProductsByCategory([FromQuery] string category)
+        {
+            try
+            {
+                // thorough the service; adding.
+                var products = await _productService.GetAllProductsByCategoryAsync(category);
+
+                return Ok(products);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
     }
 }

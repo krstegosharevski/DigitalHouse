@@ -10,6 +10,7 @@
         public string? PhotoUrl { get; set; }
         public string CategoryName { get; set; }
         public string BrandName { get; set; }
+        public IEnumerable<String>? Colors { get; set; }
 
         public ProductDto() { }
 

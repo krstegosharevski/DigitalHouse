@@ -6,6 +6,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductCategoriesComponent } from './product-tests/product-categories/product-categories.component';
+import { ProductListComponent } from './product-tests/product-list/product-list.component';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path: 'problems', component: ProblemsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'product-categories', component: ProductCategoriesComponent},
+  {path: 'products/:category', component: ProductListComponent},
   {path: '', component: ReportsComponent}
 ];
 

@@ -38,6 +38,18 @@ namespace DigitalHouseSystemApi.Data
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> GetAllProductsByCategoryIdAsync(int id)
+        {
+            return await _context.Products
+                .Include(p => p.Photo)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .Include(p => p.ProductColors)
+                .ThenInclude(p => p.Color)
+                .Where(p => p.CategoryId == id)
+                .ToListAsync();
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

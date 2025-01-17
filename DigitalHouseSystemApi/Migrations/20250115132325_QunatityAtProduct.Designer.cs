@@ -4,6 +4,7 @@ using DigitalHouseSystemApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalHouseSystemApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250115132325_QunatityAtProduct")]
+    partial class QunatityAtProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,10 +205,7 @@ namespace DigitalHouseSystemApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("PublicId")
@@ -219,13 +218,8 @@ namespace DigitalHouseSystemApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique()
-                        .HasFilter("[CategoryId] IS NOT NULL");
-
                     b.HasIndex("ProductId")
-                        .IsUnique()
-                        .HasFilter("[ProductId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Photos");
                 });
@@ -401,15 +395,11 @@ namespace DigitalHouseSystemApi.Migrations
 
             modelBuilder.Entity("DigitalHouseSystemApi.Models.Photo", b =>
                 {
-                    b.HasOne("DigitalHouseSystemApi.Models.Category", "Category")
-                        .WithOne("Photo")
-                        .HasForeignKey("DigitalHouseSystemApi.Models.Photo", "CategoryId");
-
                     b.HasOne("DigitalHouseSystemApi.Models.Product", "Product")
                         .WithOne("Photo")
-                        .HasForeignKey("DigitalHouseSystemApi.Models.Photo", "ProductId");
-
-                    b.Navigation("Category");
+                        .HasForeignKey("DigitalHouseSystemApi.Models.Photo", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
                 });
@@ -505,8 +495,6 @@ namespace DigitalHouseSystemApi.Migrations
 
             modelBuilder.Entity("DigitalHouseSystemApi.Models.Category", b =>
                 {
-                    b.Navigation("Photo");
-
                     b.Navigation("Products");
                 });
 

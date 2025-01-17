@@ -9,6 +9,7 @@ namespace DigitalHouseSystemApi.Services
     {
         Task<Product> FindByIdAsync(int id);
         Task<IEnumerable<Product>> GetAllProductsAsync();
+        Task<IEnumerable<ProductDto>> GetAllProductsByCategoryAsync(string category);
         Task<ProductDto> AddProductAsync(AddProductDto productDto ,IFormFile file);
         Task<bool> AddPhotoAsync(IFormFile file, int productId);
 

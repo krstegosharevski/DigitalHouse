@@ -22,6 +22,69 @@ namespace DigitalHouseSystemApi.Services.Impl
             _photoService = photoService;
         }
 
+
+        public async Task<Product> FindByIdAsync(int id)
+        {
+            return await _productRepository.FindByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
+        {
+            return await _productRepository.GetAllProductsAsync();
+        }
+
+        public async Task<IEnumerable<ProductDto>> GetAllProductsByCategoryAsync(string category)
+        {
+            Category c = await _categoryRepository.FindByNameAsync(category);
+            if (c == null) throw new ArgumentException("Category not found");
+
+            
+            IEnumerable<Product> p = await _productRepository.GetAllProductsByCategoryIdAsync(c.Id);
+
+            List<ProductDto> productsDto = new List<ProductDto>();
+
+            foreach (var product in p) 
+            {
+                ICollection<string> colors = product.ProductColors.Select(color => color.Color).Select(color => color.Name).ToList();
+                var productDto = product.MappToDtoModel();
+                productDto.Colors = colors;
+                productsDto.Add(productDto);
+            }
+
+            return productsDto;
+
+        }
+
+        public async Task<ProductDto> AddProductAsync(AddProductDto productDto, IFormFile file)
+        {
+            var category = await _categoryRepository.FindByIdAsync(productDto.CategoryId);
+            var brand = await _brandRepository.FindByIdAsync(productDto.BrandId);
+
+            if (category == null || brand == null)
+            {
+                throw new ArgumentException("Invalid category or brand");
+            }
+
+            var product = new Product(productDto.Name, productDto.Price, productDto.Description, productDto.IsPresent,productDto.Quantity, category, brand);
+
+            _productRepository.Save(product);
+
+
+
+
+            if (await _productRepository.SaveAllAsync())
+            {
+                var success = await AddPhotoAsync(file, product.Id); // product.Id бидејќи ID-то е креирано по Save
+                if (!success)
+                {
+                    throw new Exception("Error adding photo to product");
+                }
+                return product.MappToDtoModel();
+            }
+
+            throw new Exception("Error saving product");
+        }
+
         public async Task<bool> AddPhotoAsync(IFormFile file, int productId)
         {
             var product = await _productRepository.FindByIdAsync(productId);
@@ -44,35 +107,7 @@ namespace DigitalHouseSystemApi.Services.Impl
             return false;
         }
 
-        public async Task<ProductDto> AddProductAsync(AddProductDto productDto, IFormFile file)
-        {
-            var category = await _categoryRepository.FindByIdAsync(productDto.CategoryId);
-            var brand = await _brandRepository.FindByIdAsync(productDto.BrandId);
 
-            if (category == null || brand == null)
-            {
-                throw new ArgumentException("Invalid category or brand");
-            }
-
-            var product = new Product(productDto.Name, productDto.Price, productDto.Description, productDto.IsPresent, category, brand);
-
-            _productRepository.Save(product);
-
-            
-
-
-            if (await _productRepository.SaveAllAsync())
-            {
-                var success = await AddPhotoAsync(file, product.Id); // product.Id бидејќи ID-то е креирано по Save
-                if (!success)
-                {
-                    throw new Exception("Error adding photo to product");
-                }
-                return product.MappToDtoModel();
-            }
-
-            throw new Exception("Error saving product");
-        }
 
         public async Task DeletePhoto(int id)
         {
@@ -89,16 +124,6 @@ namespace DigitalHouseSystemApi.Services.Impl
             _productRepository.DeletePhoto(photo);
 
             await _productRepository.SaveAllAsync();
-        }
-
-        public async Task<Product> FindByIdAsync(int id)
-        {
-            return await _productRepository.FindByIdAsync(id);
-        }
-
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
-        {
-            return await _productRepository.GetAllProductsAsync();
         }
     }
 }
