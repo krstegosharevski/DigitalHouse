@@ -59,5 +59,11 @@ namespace DigitalHouseSystemApi.Data
         {
             _context.Add(product);
         }
+
+        public async Task<Product> FindProductByName(string name)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Name == name);
+            return product;
+        }
     }
 }

@@ -7,5 +7,6 @@ export interface ProductDto{
     photoUrl: string;
     categoryName: string;
     brandName: string;
+    colors: string[]
 }
 

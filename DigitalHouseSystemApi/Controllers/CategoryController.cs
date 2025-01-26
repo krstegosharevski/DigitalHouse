@@ -19,7 +19,7 @@ namespace DigitalHouseSystemApi.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> getAllCategories(){
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetAllCategories(){
             return  Ok(await _categoryService.FindAllCategoriesAsync());
         }
 

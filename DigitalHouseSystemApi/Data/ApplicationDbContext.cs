@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using DigitalHouseSystemApi.Models;
 using Microsoft.EntityFrameworkCore.Internal;
+using System.Reflection.Emit;
 
 namespace DigitalHouseSystemApi.Data
 {
@@ -21,6 +22,8 @@ namespace DigitalHouseSystemApi.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
  
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -74,6 +77,27 @@ namespace DigitalHouseSystemApi.Data
                 .HasOne(ur => ur.Color)
                 .WithMany(u => u.ProductColors)
                 .HasForeignKey(ur => ur.ColorId);
+
+            builder.Entity<ShoppingCart>()
+                .HasOne(ur => ur.AppUser)
+                .WithMany(u => u.ShoppingCarts)
+                .HasForeignKey(ur => ur.AppUserId);
+                
+            builder.Entity<ShoppingCartItem>()
+                .HasOne(ur => ur.ShoppingCart)
+                .WithMany(u => u.Items)
+                .HasForeignKey(ur => ur.ShoppingCartId);
+
+            builder.Entity<ShoppingCartItem>()
+                .HasOne(ur => ur.Product)
+                .WithMany()
+                .HasForeignKey(ur => ur.ProductId);
+
+            builder.Entity<ShoppingCart>()
+                .Property(sc => sc.Status)
+                .HasConversion<string>();
+
+            
         }
 
     }

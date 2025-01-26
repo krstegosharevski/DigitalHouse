@@ -83,3 +83,20 @@
     object-fit: contain;
     width: 100%;
   }
+
+  .color-button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%; /* За кружна форма */
+    margin: 5px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+  }
+  
+  .color-button:hover {
+    transform: scale(1.1); /* Зголемување при hover */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }

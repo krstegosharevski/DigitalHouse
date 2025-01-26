@@ -45,7 +45,8 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             foreach (var product in p) 
             {
-                ICollection<string> colors = product.ProductColors.Select(color => color.Color).Select(color => color.Name).ToList();
+                ICollection<string> colors = product.ProductColors.Select(color => color.Color).Select(color => color.HexCode).ToList();
+                
                 var productDto = product.MappToDtoModel();
                 productDto.Colors = colors;
                 productsDto.Add(productDto);

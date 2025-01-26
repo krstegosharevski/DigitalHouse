@@ -21,8 +21,8 @@
   
   <!-- Product Details Modal -->
   <div class="product-modal" *ngIf="showDetails" (click)="toggleDetails()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <div class="modal-header">
+    <div class="modal-content  " (click)="$event.stopPropagation()">
+      <div class="modal-header text-center">
         <h4>{{ product.name }}</h4>
         <button type="button" class="close-btn" (click)="toggleDetails()">&times;</button>
       </div>
@@ -32,17 +32,28 @@
             <img [src]="product.photoUrl" class="img-fluid" alt="Product Image">
           </div>
           <div class="col-md-6">
-            <h5>{{ product.brandName }}</h5>
+
+            <div class="description">
+              <h5>Details:</h5>
+              <h6>{{ product.description }}</h6>
+            </div>
+            <br>
+            <h5>Colors:</h5>
+            <div class="colors">
+              <button 
+                *ngFor="let color of product.colors" 
+                class="color-button" 
+                [style.backgroundColor]="color"
+                
+                [attr.title]="color">
+              </button>
+            </div>
+            
             <p class="price">{{ product.price }} MKD</p>
-            <p class="category">Category: {{ product.categoryName }}</p>
             <div class="stock-status mb-3">
               <span [class.text-success]="product.isPresent" [class.text-danger]="!product.isPresent">
                 {{ product.isPresent ? 'In Stock' : 'Out of Stock' }}
               </span>
-            </div>
-            <div class="description">
-              <h6>Description:</h6>
-              <p>{{ product.description }}</p>
             </div>
             <button class="btn btn-primary mt-3" [disabled]="!product.isPresent">
               Add to Cart

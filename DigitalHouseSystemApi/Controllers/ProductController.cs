@@ -22,7 +22,7 @@ namespace DigitalHouseSystemApi.Controllers
 
         //Okej metod
         [HttpPost("add-image")]
-        public async Task<ActionResult<PhotoDto>> addPhoto(IFormFile file, int id)
+        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, int id)
         {
             var product = await _productService.FindByIdAsync(id);
 
@@ -69,7 +69,7 @@ namespace DigitalHouseSystemApi.Controllers
         }
 
         [HttpDelete("delete-photo/{photoId}")]
-        public async Task<ActionResult> deletePhoto(int productId)
+        public async Task<ActionResult> DeletePhoto(int productId)
         {
             if (productId == 0) return NotFound();
 
@@ -118,7 +118,7 @@ namespace DigitalHouseSystemApi.Controllers
 
 
         [HttpGet("get-all")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> getAllProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
         {
             IEnumerable<Product> products = await _productService.GetAllProductsAsync();
             
@@ -135,7 +135,7 @@ namespace DigitalHouseSystemApi.Controllers
         }
 
         [HttpGet("category")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> getProductsByCategory([FromQuery] string category)
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory([FromQuery] string category)
         {
             try
             {

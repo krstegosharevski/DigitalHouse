@@ -8,5 +8,6 @@ namespace DigitalHouseSystemApi.Models
         public string? LastName { get; set; }
 
         public ICollection<AppUserRole>? UserRoles { get; set; }
+        public ICollection<ShoppingCart>? ShoppingCarts { get; set; } = new List<ShoppingCart>();
     }
 }

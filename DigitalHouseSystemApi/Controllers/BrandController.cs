@@ -14,7 +14,7 @@ namespace DigitalHouseSystemApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BrandDto>>> getAllBrands()
+        public async Task<ActionResult<IEnumerable<BrandDto>>> GetAllBrands()
         {
             return Ok(await _brandService.GetAllBrandsAsync());
         }
