@@ -1,0 +1,14 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Осигурува дека висината е секогаш 100% од екранот */
+  }
+  
+  .flex-grow-1 {
+    flex: 1; /* Содржината ќе зазема го целиот преостанат простор */
+  }
+  
+  footer {
+    background-color: #E20074; /* Задржи го твојот стил */
+  }
+  

@@ -17,15 +17,15 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { ProductsComponent } from './products/products.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ProductCategoriesComponent } from './product-tests/product-categories/product-categories.component';
-import { ProductBrandNavComponent } from './product-tests/product-brand-nav/product-brand-nav.component';
-import { ProductFiltersComponent } from './product-tests/product-filters/product-filters.component';
-import { ProductCardComponent } from './product-tests/product-card/product-card.component';
-import { ProductListComponent } from './product-tests/product-list/product-list.component';
+import { ProductCategoriesComponent } from './products/product-categories/product-categories.component';
+import { ProductBrandNavComponent } from './products/product-brand-nav/product-brand-nav.component';
+import { ProductFiltersComponent } from './products/product-filters/product-filters.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -38,7 +38,6 @@ export function HttpLoaderFactory(http:HttpClient){
     FooterComponent,
     ReportsComponent,
     AboutUsComponent,
-    ProductsComponent,
     ProblemsComponent,
     LoginComponent,
     RegisterComponent,
@@ -46,7 +45,8 @@ export function HttpLoaderFactory(http:HttpClient){
     ProductBrandNavComponent,
     ProductFiltersComponent,
     ProductCardComponent,
-    ProductListComponent
+    ProductListComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
