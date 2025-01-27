@@ -11,4 +11,11 @@
   footer {
     background-color: #E20074; /* Задржи го твојот стил */
   }
+
+  .custom-navbar{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+  }
   

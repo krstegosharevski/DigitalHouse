@@ -1,9 +1,6 @@
 .extra-small-text{
     font-size: 0.75rem;
 }
-
-
-
   .form-inline {
     display: flex;
     align-items: center;
@@ -88,8 +85,6 @@
 }
 
 
-/* Od ovde e novo */  
-
 .carousel-caption {
   display: flex;
   flex-direction: column;
@@ -147,7 +142,7 @@ slide img {
 
 
 .custom-rounded-top {
-  background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+  background: linear-gradient(to bottom,#ffffff, #f5f5f5);
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
   overflow: hidden; /* За да ги заобли и содржините внатре */
@@ -161,4 +156,7 @@ slide img {
   
 }
 
+.slide-div{
+  padding-top: 90px;
+}
 
