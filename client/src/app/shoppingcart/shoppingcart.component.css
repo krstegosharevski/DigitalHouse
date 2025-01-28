@@ -1,0 +1,44 @@
+.custom-td{
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    text-transform: uppercase;
+}
+
+tr,td{
+    font-weight: 300;
+}
+
+.btn-buy {
+    background-color: #E20074;
+    border: 2px solid rgb(236, 232, 232);
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.5); 
+
+}
+  
+.btn-buy:hover {
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.5); 
+}
+
+.x-button{
+    background-color: #E20074;
+    border: 2px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+}
+
+.x-button:hover{
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.5);
+}
+
+.round{
+    border-radius: 50%;
+    width: 30px;       
+    height: 30px;
+    background-color: #d73737;
+}  
+
