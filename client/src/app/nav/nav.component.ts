@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,13 +9,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavComponent implements OnInit {
   lang: string = '';
+  currentUser$ = this.accountService.currentUser$;
+  router: any;
  
-  constructor(private translateService:TranslateService) { 
+  constructor(private translateService:TranslateService, private accountService: AccountService) { 
 
   }
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en';
+    console.log(this.currentUser$);
   }
 
   ChangeLang(lang:any){
@@ -23,6 +27,11 @@ export class NavComponent implements OnInit {
     localStorage.setItem('lang', selectedLanguage);
 
     this.translateService.use(selectedLanguage);
+  }
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 }
 

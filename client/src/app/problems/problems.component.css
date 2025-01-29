@@ -71,6 +71,11 @@ input[type="text"] {
 
 .text-white{
   color: white;
+  font-weight: 350;
+}
+
+.text-size-custom{
+  font-size: large;
 }
 
 .magenta-color {
@@ -85,6 +90,7 @@ input[type="text"] {
 .insert-custome{
   background-color: #f5f7f8;;
   color: #E20074;
+  font-weight: 370;
 }
 
 .insert-custome:hover{
@@ -104,28 +110,32 @@ input[type="text"] {
   background-color: white;
 }
 
-.hover-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: #ff6347;
-  animation: line-hover 2s linear infinite;
-}
 
+.hover-button::before,
 .hover-button::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  right: -100%;
-  width: 100%;
+  width: 0;
   height: 2px;
-  background: #ff6347;
-  animation: line-hover 2s linear infinite;
-  animation-delay: 1s;
+  background: #e267a7; /* another color: ff6347;*/
+  transition: width 0.9s ease; 
 }
+
+.hover-button::before {
+  top: 0;
+  left: 0;
+}
+
+.hover-button::after {
+  bottom: 0;
+  right: 0;
+}
+
+.hover-button:hover::before,
+.hover-button:hover::after {
+  width: 100%;
+}
+
 
 @keyframes line-hover {
   0% {

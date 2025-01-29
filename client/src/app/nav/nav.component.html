@@ -1,7 +1,6 @@
-<nav class="navbar navbar-expand navbar-light bg-light sticky-top py-2 mb-4"
-  style="border-bottom: 3px solid white;">
+<nav class="navbar navbar-expand navbar-light bg-light sticky-top py-2 mb-4" style="border-bottom: 3px solid white;">
   <div class="container-fluid">
-    <a class="navbar-brand ps-4 fw-light" href="index.html" style="color: #E20074;">Digital House</a>
+    <a class="navbar-brand ps-4 fw-light" routerLink="" style="color: #E20074;">Digital House</a>
 
     <!-- Dropdown копче за мобилни екрани -->
     <div class="btn-group me-4 pe-4 d-lg-none ms-auto" dropdown>
@@ -34,8 +33,45 @@
           <a class="nav-link" routerLink="/aboutus" routerLinkActive="active">About Us</a>
         </li>
       </ul>
-      <button class="btn btn-log-in ms-auto me-4 fw-light" routerLink="/login">Log in</button>
+
+      <div class="d-flex align-items-center me-4">
+
+        <div *ngIf="!(currentUser$  | async)">
+          <button class="btn me-1">
+            <img src="assets/images/search-light.png" alt="Search" style="height: 29px; width: 29px;">
+          </button>
+
+          <button class="btn btn-log-in ms-2 fw-light" routerLink="/login">Log in</button>
+        </div>
+
+        <div *ngIf="(currentUser$ | async) as user">
+          <button class="btn me-1">
+            <img src="assets/images/search-light.png" alt="Search" style="height: 29px; width: 29px;">
+          </button>
+
+          <button class="btn me-2" routerLink="/shoppingcart">
+            <img src="assets/images/cart.png" alt="Cart" style="height: 24px; width: 24px;">
+          </button>
+
+          <div class="btn-group me-2" dropdown>
+            <button class="btn me-2 dropdown-toggle" id="button-basic"  type="button" dropdownToggle>
+              <img src="assets/images/user.png" alt="User" style="height: 24px; width: 24px;">
+            </button>
+            <ul id="dropdown-basic m-2 p-3" *dropdownMenu class="dropdown-menu  dropdown-menu-end" role="menu" aria-labelledby="button-basic">
+              <li  role="menuitem" class="px-3 ms-4 py-2 fw-light">Hello, <span style="color: #E20074;">{{user.username}}</span></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem" class="ms-4 px-3 py-2"><button class="btn btn-log-in fw-light" (click)="logout();">Log Out</button></li>
+            </ul>
+          </div>
+
+        </div>
+
+
+
+      </div>
     </div>
+
+
   </div>
 </nav>
 <div class="mx-1" style="background-color: white;"></div>
