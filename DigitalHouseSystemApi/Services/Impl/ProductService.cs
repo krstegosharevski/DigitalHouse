@@ -2,6 +2,7 @@
 using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 
 namespace DigitalHouseSystemApi.Services.Impl
 {
@@ -109,7 +110,6 @@ namespace DigitalHouseSystemApi.Services.Impl
         }
 
 
-
         public async Task DeletePhoto(int id)
         {
             var product = await _productRepository.FindByIdAsync(id);
@@ -126,5 +126,22 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             await _productRepository.SaveAllAsync();
         }
+
+        public async Task<ICollection<SearchProductDto>> GetAllSearchProductsAsync(string search)
+        {
+            var products = await _productRepository.SearchByNameProductsAsync(search);
+            ICollection<SearchProductDto> searchedProducts = new List<SearchProductDto>();
+
+            if (products == null || !products.Any()) { throw new SearchNotFoundException(search); }
+
+            foreach (var product in products)
+            {
+                searchedProducts.Add(new SearchProductDto(product.Name, product.Photo.Url));
+            }
+
+            return searchedProducts;
+        }
+
+        
     }
 }

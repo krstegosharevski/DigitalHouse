@@ -12,5 +12,6 @@ namespace DigitalHouseSystemApi.Interfaces
         Task<bool> SaveAllAsync();
         void DeletePhoto(Photo photo);
         Task<Product> FindProductByName(string name);
+        Task<IEnumerable<Product>> SearchByNameProductsAsync(string search);
     }
 }

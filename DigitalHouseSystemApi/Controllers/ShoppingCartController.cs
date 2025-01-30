@@ -1,7 +1,7 @@
 ﻿using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
-using DigitalHouseSystemApi.Extensions;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿namespace DigitalHouseSystemApi.Extensions
+﻿namespace DigitalHouseSystemApi.Models.Exceptions
 {
     public class ProductNotFoundException : Exception
     {

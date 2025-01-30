@@ -12,7 +12,7 @@ namespace DigitalHouseSystemApi.Services
         Task<IEnumerable<ProductDto>> GetAllProductsByCategoryAsync(string category);
         Task<ProductDto> AddProductAsync(AddProductDto productDto ,IFormFile file);
         Task<bool> AddPhotoAsync(IFormFile file, int productId);
-
         Task DeletePhoto(int id);
+        Task<ICollection<SearchProductDto>> GetAllSearchProductsAsync(string search);
     }
 }

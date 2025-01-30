@@ -1,7 +1,7 @@
 ﻿using DigitalHouseSystemApi.DTOs;
-using DigitalHouseSystemApi.Extensions;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 
 namespace DigitalHouseSystemApi.Services.Impl
 {

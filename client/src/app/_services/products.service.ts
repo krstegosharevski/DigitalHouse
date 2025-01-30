@@ -20,4 +20,8 @@ export class ProductsService {
   getAllProductsByCategory(category: string){
     return this.http.get<ProductDto[]>(this.baseUrl + `product/category?category=${category}`);
   }
+
+  getSearchedProducts(search: string){
+    return this.http.get<ProductDto[]>(this.baseUrl + `product/search?search=${search}`)
+  }
 }

@@ -11,6 +11,8 @@ export class NavComponent implements OnInit {
   lang: string = '';
   currentUser$ = this.accountService.currentUser$;
   router: any;
+  isSearchVisible: boolean = false;
+  
  
   constructor(private translateService:TranslateService, private accountService: AccountService) { 
 
@@ -27,6 +29,10 @@ export class NavComponent implements OnInit {
     localStorage.setItem('lang', selectedLanguage);
 
     this.translateService.use(selectedLanguage);
+  }
+
+  toggleSearch() {
+    this.isSearchVisible = !this.isSearchVisible;
   }
 
   logout() {

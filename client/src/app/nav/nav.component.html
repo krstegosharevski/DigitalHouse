@@ -37,17 +37,21 @@
       <div class="d-flex align-items-center me-4">
 
         <div *ngIf="!(currentUser$  | async)">
-          <button class="btn me-1">
+          <button class="btn me-1" (click)="toggleSearch()">
             <img src="assets/images/search-light.png" alt="Search" style="height: 29px; width: 29px;">
           </button>
+
+          <app-search *ngIf="isSearchVisible" [isActive]="isSearchVisible"></app-search>
 
           <button class="btn btn-log-in ms-2 fw-light" routerLink="/login">Log in</button>
         </div>
 
         <div *ngIf="(currentUser$ | async) as user">
-          <button class="btn me-1">
+          <button class="btn me-1" (click)="toggleSearch()">
             <img src="assets/images/search-light.png" alt="Search" style="height: 29px; width: 29px;">
           </button>
+
+          <app-search *ngIf="isSearchVisible" [isActive]="isSearchVisible"></app-search>
 
           <button class="btn me-2" routerLink="/shoppingcart">
             <img src="assets/images/cart.png" alt="Cart" style="height: 24px; width: 24px;">

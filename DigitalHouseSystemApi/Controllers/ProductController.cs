@@ -2,6 +2,7 @@
 using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -151,6 +152,23 @@ namespace DigitalHouseSystemApi.Controllers
             catch (Exception)
             {
                 return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<ICollection<SearchProductDto>>> GetSearchedProducts([FromQuery] string search)
+        {
+            try
+            {
+                var products = await _productService.GetAllSearchProductsAsync(search);
+                return Ok(products);
+            }
+            catch (SearchNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            } catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

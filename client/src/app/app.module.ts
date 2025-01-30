@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ReportsComponent } from './reports/reports.component';
@@ -26,6 +26,7 @@ import { ProductFiltersComponent } from './products/product-filters/product-filt
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { SearchComponent } from './search/search.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -46,7 +47,8 @@ export function HttpLoaderFactory(http:HttpClient){
     ProductFiltersComponent,
     ProductCardComponent,
     ProductListComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ export function HttpLoaderFactory(http:HttpClient){
     HttpClientModule,
     FormsModule,
     CarouselModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
