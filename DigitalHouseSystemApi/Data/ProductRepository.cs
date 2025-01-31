@@ -62,7 +62,14 @@ namespace DigitalHouseSystemApi.Data
 
         public async Task<Product> FindProductByName(string name)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Name == name);
+            var product = await _context.Products
+                .Include(p => p.Photo)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .Include(p => p.ProductColors)
+                .ThenInclude(p => p.Color)
+                .FirstOrDefaultAsync(p => p.Name == name);
+
             return product;
         }
 

@@ -24,4 +24,8 @@ export class ProductsService {
   getSearchedProducts(search: string){
     return this.http.get<ProductDto[]>(this.baseUrl + `product/search?search=${search}`)
   }
+
+  getSearchedNameProduct(name: string){
+    return this.http.get<ProductDto>(this.baseUrl+ `product/search-name?name=${name}`)
+  }
 }

@@ -142,6 +142,16 @@ namespace DigitalHouseSystemApi.Services.Impl
             return searchedProducts;
         }
 
-        
+        public async Task<ProductDto> GetSearchedProductAsync(string name)
+        {
+            var prod = await _productRepository.FindProductByName(name);
+            
+            if(prod == null) { throw new ProductNotFoundException(name); }
+
+            ProductDto product = new ProductDto();
+            product = prod.MappToDtoModel();
+
+            return product;
+        }
     }
 }

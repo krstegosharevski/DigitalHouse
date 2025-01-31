@@ -172,5 +172,23 @@ namespace DigitalHouseSystemApi.Controllers
             }
         }
 
+        [HttpGet("search-name")]
+        public async Task<ActionResult<ProductDto>> GetSearchedProduct([FromQuery] string name)
+        {
+            try
+            {
+                var product = await _productService.GetSearchedProductAsync(name);
+                return Ok(product);
+            }
+            catch (ProductNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

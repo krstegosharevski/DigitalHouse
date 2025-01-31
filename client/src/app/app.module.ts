@@ -27,6 +27,7 @@ import { ProductCardComponent } from './products/product-card/product-card.compo
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { SearchComponent } from './search/search.component';
+import { ProductSearchedComponent } from './products/product-searched/product-searched.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -48,7 +49,8 @@ export function HttpLoaderFactory(http:HttpClient){
     ProductCardComponent,
     ProductListComponent,
     ShoppingcartComponent,
-    SearchComponent
+    SearchComponent,
+    ProductSearchedComponent,
   ],
   imports: [
     BrowserModule,

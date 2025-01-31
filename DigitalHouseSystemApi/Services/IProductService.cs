@@ -14,5 +14,6 @@ namespace DigitalHouseSystemApi.Services
         Task<bool> AddPhotoAsync(IFormFile file, int productId);
         Task DeletePhoto(int id);
         Task<ICollection<SearchProductDto>> GetAllSearchProductsAsync(string search);
+        Task<ProductDto> GetSearchedProductAsync(string name);
     }
 }

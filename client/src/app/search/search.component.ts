@@ -3,6 +3,7 @@ import { ProductsService } from '../_services/products.service';
 import { ProductDto } from '../_models/productDto';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -13,9 +14,10 @@ export class SearchComponent implements OnInit {
   products : ProductDto[] = []
   searchControl = new FormControl('');
   @Input() isActive: boolean = false;
+  
 
 
-  constructor(private productService: ProductsService) { 
+  constructor(private productService: ProductsService, private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -64,6 +66,10 @@ export class SearchComponent implements OnInit {
     if (!target.closest('.search-container') && this.isActive) {
       this.isActive = false;
     }
+  }
+
+  onProductClick(product: string){
+    this.router.navigate(['/searched-product', product]);
   }
 
 }
