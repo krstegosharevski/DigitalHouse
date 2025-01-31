@@ -51,7 +51,10 @@
             <img src="assets/images/search-light.png" alt="Search" style="height: 29px; width: 29px;">
           </button>
 
-          <app-search *ngIf="isSearchVisible" [isActive]="isSearchVisible"></app-search>
+          <div class="search-wrapper search-container">
+            <app-search *ngIf="isSearchVisible" [isActive]="isSearchVisible"></app-search>
+          </div>
+          
 
           <button class="btn me-2" routerLink="/shoppingcart">
             <img src="assets/images/cart.png" alt="Cart" style="height: 24px; width: 24px;">

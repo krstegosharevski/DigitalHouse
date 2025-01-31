@@ -2,19 +2,17 @@
     <input 
       type="text" 
       [formControl]="searchControl" 
-      placeholder="Search product..." 
-      class="search-input"
+      placeholder="Search Digital House" 
+      class="search-input text-modify"
     />
-    <button (click)="onSearch(searchControl.value ?? '')" class="btn ps-2 btn-search fw-light">Search</button>
-  
+    <!-- <button (click)="onSearch(searchControl.value ?? '')" class="btn ps-2 btn-search fw-light">Search</button> -->
+     
     <div *ngIf="products.length > 0" class="product-list">
         <div *ngFor="let product of products" class="product-item">
           <img [src]="product.photoUrl" alt="{{ product.name }}" class="product-img">
           <span class="fw-light product-name">{{ product.name }}</span>
         </div>
     </div>
-  
-      
     
   </div> 
   

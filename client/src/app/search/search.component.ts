@@ -2,7 +2,7 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../_services/products.service';
 import { ProductDto } from '../_models/productDto';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -19,15 +19,41 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),  
+        distinctUntilChanged() 
+      )
+      .subscribe(value => {
+        this.onSearch(value ?? '');
+      });
   }
 
-  onSearch(search: string) : void{
+  //with click
+  // onSearch(search: string) : void{
+  //   this.productService.getSearchedProducts(search).subscribe({
+  //     next: (prods) =>{
+  //       this.products = prods;
+  //     },
+  //     error: (error) => {
+  //       console.error('Error loading brands:', error);
+  //     }
+  //   });
+  // }
+
+  //without click
+  onSearch(search: string): void {
+    if (!search.trim()) {
+      this.products = [];
+      return;
+    }
+
     this.productService.getSearchedProducts(search).subscribe({
-      next: (prods) =>{
+      next: (prods) => {
         this.products = prods;
       },
       error: (error) => {
-        console.error('Error loading brands:', error);
+        console.error('Error loading products:', error);
       }
     });
   }
