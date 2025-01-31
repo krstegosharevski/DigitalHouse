@@ -1,6 +1,122 @@
+<!-- 
+  <div class="container my-4 py-4">
+    <div class="row p-4 m-4" style="background-color: white;">
+      <div class="col-4">
+        <div class="card text-center" style="width: 21rem;">
+          <img class="card-img-top" src="{{ product?.photoUrl }}" alt="Card image cap">
+          <div class="card-body"> -->
+<!-- <h6 class="card-title fw-light" style="color: #E20074">Digital House®</h6> -->
+<!-- </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="card text-center">
+          <div class="card-header">
+            <h3 class="fw-light p-1">{{product?.brandName}} {{product?.name}}</h3>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mt-2">
+              
+              <h5 class="fw-light">{{product?.description}}</h5>
+              
+              <p class="fw-light pt-4 small" >Colors:</p>
+
+              <div class="colors mb-4">
+                <button 
+                  *ngFor="let color of product?.colors" 
+                  class="color-button" 
+                  [style.backgroundColor]="color"
+                  
+                  [attr.title]="color">
+                </button>
+              </div>
+              <p class="fw-light" style="font-size: 15px;">Free delivery</p>
+             
+              <div *ngIf="product?.isPresent == true" class="order-box fw-light row p-3 m-2">
+                <div class="col-4">
+                  <div>
+                  <img src="assets/images/cart-white.png" alt="Cart" style="height: 34px; width: 34px;">
+                  <p class="fw-light" style="font-size: 18px;">Price for product:</p>
+                </div>
+                </div>
+                
+                <div class="col-4 pt-4">
+                  <p>{{product?.price}}<span style="font-size: 12px;">MKD.</span></p>
+                </div>
+
+                <div class="col-4 pt-4">
+                  <button class="btn btn-log-in ms-2 fw-light" routerLink="/login">Add to Cart</button>
+                </div>
+                
+              </div>
+
+              <div *ngIf="product?.isPresent == false">
+                <p>Nema na zaliha</p>
+              </div>
+
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
 <div class="mt-4 pt-4">
-    <div class="mt-4 pt-4" style="background-color: blueviolet;">
-      <p *ngIf="product">Product name: {{ product.name }}</p>
-      <p *ngIf="!product">Loading product...</p>
+  <div class="mt-4 alert text-center fw-light" role="alert">
+    Free delivery for all orders!
+  </div>
+  <div class="container my-2 py-2">
+    <div class="row p-4 m-4 d-flex justify-content-center" style="background-color: white;">
+      <div class="col-md-4 col-12 mb-3">
+        <div class="card text-center" style="width: 21rem;">
+          <img class="card-img-top" src="{{ product?.photoUrl }}" alt="Card image cap">
+          <div class="card-body">
+            <!-- <h6 class="card-title fw-light" style="color: #E20074">Digital House®</h6> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-12">
+        <div class="card text-center">
+          <div class="card-header">
+            <h3 class="fw-light p-1">{{product?.brandName}} {{product?.name}}</h3>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mt-2">
+              <h5 class="fw-light">{{product?.description}}</h5>
+
+              <p class="fw-light pt-4 small">Colors:</p>
+
+              <div class="colors mb-4" style="padding-bottom: 30px;">
+                <button *ngFor="let color of product?.colors" class="color-button" [style.backgroundColor]="color"
+                  [attr.title]="color">
+                </button>
+              </div>
+
+              <div *ngIf="product?.isPresent == true" class="order-box fw-light row p-3 m-2">
+                <div class="col-md-4 col-12 text-center">
+                  <img src="assets/images/cart-white.png" alt="Cart" style="height: 34px; width: 34px;">
+                  <p class="fw-light" style="font-size: 18px;">Price for product:</p>
+                </div>
+
+                <div class="col-md-4 col-12 text-center pt-4">
+                  <p>{{product?.price}}<span style="font-size: 12px;"> MKD.</span></p>
+                </div>
+
+                <div class="col-md-4 col-12 text-center pt-4">
+                  <button class="btn btn-log-in ms-2 fw-light" routerLink="/login">Add to Cart</button>
+                </div>
+
+              </div>
+
+              <div class="order-box text-center p-3 m-2" *ngIf="product?.isPresent == false">
+                <p class="fw-light pt-2">Out of Stock.</p>
+              </div>
+
+            </blockquote>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+

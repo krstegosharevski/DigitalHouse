@@ -9,20 +9,25 @@
                 
                 <form class="magenta-color "  #ticketForm="ngForm" enctype="multipart/form-data">
                     <h1 class="fw-light text-white generate-ticket-title">Report Your Problem Here</h1>
-                
+
                     <div class="form-group">
-                        <label for="title" class="text-white text-size-custom">Name :</label>
+                        <label for="title" class="text-white text-size-custom">Your mail :</label>
                         <input type="text" id="title" name="title"  required>
                     </div>
                 
                     <div class="form-group">
-                        <label for="message" class="text-white text-size-custom">Content :</label>
+                        <label for="title" class="text-white text-size-custom">Problem Title :</label>
+                        <input type="text" id="title" name="title"  required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="message" class="text-white text-size-custom">Describe the Problem :</label>
                         <textarea id="message" name="message"  rows="2" required></textarea>
                     </div>
             
                     <div class="form-group white-color">
                         <label class="btn insert-custome">
-                            Insert picture
+                            Insert picture 
                             <input id="picture" name="picture" type="file"  hidden>
                         </label>
                     </div>

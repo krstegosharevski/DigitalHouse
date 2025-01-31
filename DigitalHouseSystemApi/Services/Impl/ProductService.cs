@@ -149,7 +149,9 @@ namespace DigitalHouseSystemApi.Services.Impl
             if(prod == null) { throw new ProductNotFoundException(name); }
 
             ProductDto product = new ProductDto();
+            ICollection<string> colors = prod.ProductColors.Select(color => color.Color).Select(color => color.HexCode).ToList();
             product = prod.MappToDtoModel();
+            product.Colors = colors;    
 
             return product;
         }

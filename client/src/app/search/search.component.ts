@@ -70,6 +70,8 @@ export class SearchComponent implements OnInit {
 
   onProductClick(product: string){
     this.router.navigate(['/searched-product', product]);
+    this.searchControl.setValue(''); 
+    this.products = []; 
   }
 
 }
