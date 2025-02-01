@@ -10,6 +10,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { SearchComponent } from './search/search.component';
 import { ProductSearchedComponent } from './products/product-searched/product-searched.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'shoppingcart', component: ShoppingcartComponent},
   {path: 'search', component: SearchComponent},
   {path: 'searched-product/:product', component: ProductSearchedComponent},
+  {path: 'add-product', component: AddProductComponent},
   {path: '', component: ReportsComponent}
 ];
 
