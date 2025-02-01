@@ -2,39 +2,36 @@
 
     <div class="text-center">
         <div class="row my-4 p-4" style="background-color: #f5f7f8;">
-            <!-- <div class="col-1 ps-4 pt-4 btn-custome-2 magenta-color">
-                <button class="btn btn-back" [routerLink]="['/']">Back</button>
-            </div> -->
             <div class="p-4 mt-4">
 
-                <form class="magenta-color " #ticketForm="ngForm" enctype="multipart/form-data">
-                    <h1 class="fw-light text-white generate-ticket-title">Page for adding new product.</h1>
+                <form class="color-for-bg text-color" #ticketForm="ngForm" enctype="multipart/form-data">
+                    <h1 class="text-style generate-ticket-title">Page for adding New Product.</h1>
 
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="title" class="text-white text-size-custom">Name :</label>
+                            <label for="title" class="text-style text-size-custom">Name :</label>
                             <input type="text" id="title" name="title" required>
                         </div>
 
                         <div class="form-group col-6">
-                            <label for="message" class="text-white text-size-custom">Product Informations :</label>
+                            <label for="message" class="text-style text-size-custom">Product Informations :</label>
                             <textarea id="message" name="message" rows="2" required></textarea>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="title" class="text-white text-size-custom">Category :</label>
+                            <label for="title" class="text-style text-size-custom">Category :</label>
                             <select [(ngModel)]="selectedCategory" required>
                                 <option *ngFor="let category of categories" [value]="category.id">
                                     {{ category.name }}
                                 </option>
                             </select>
                         </div>
-    
-    
+
+
                         <div class="form-group col-6">
-                            <label for="title" class="text-white text-size-custom">Brand :</label>
+                            <label for="title" class="text-style text-size-custom">Brand :</label>
                             <select [(ngModel)]="selectedCategory" required>
                                 <option *ngFor="let category of categories" [value]="category.id">
                                     {{ category.name }}
@@ -45,16 +42,16 @@
 
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="title" class="text-white text-size-custom">Price :</label>
+                            <label for="title" class="text-style text-size-custom">Price :</label>
                             <input type="text" id="title" name="title" required>
                         </div>
-    
+
                         <div class="form-group col-6">
-                            <label for="title" class="text-white text-size-custom">Available :</label>
+                            <label for="title" class="text-style text-size-custom">Available :</label>
                             <input type="text" id="title" name="title" required>
                         </div>
-    
-                        
+
+
                     </div>
 
                     <div class="form-group white-color mt-4">
@@ -63,7 +60,7 @@
                             <input id="picture" name="picture" type="file" hidden>
                         </label>
                     </div>
-                    
+
                     <div class="form-action pt-3">
                         <button type="submit" class="btn btn-bg hover-button p-3">Save</button>
                     </div>
