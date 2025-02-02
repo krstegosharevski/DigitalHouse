@@ -194,3 +194,21 @@ h1.generate-ticket-title::after {
         opacity: 0;
     }
 }
+
+/* Colors div */
+.color-box {
+    width: 29px;
+    height: 29px;
+    margin: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.color-box.selected {
+    border: 2px solid black;
+}
+
+.bg-neutral{
+    background-color: #f5f7f8;
+}

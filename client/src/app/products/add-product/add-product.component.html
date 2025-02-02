@@ -54,6 +54,20 @@
 
                     </div>
 
+                    <!-- Testing this -->
+                    <div class="form-group ">
+                        <label class="text-style text-size-custom">Available Colors:</label>
+                        <div class="d-flex flex-wrap bg-neutral p-3">
+                            <div *ngFor="let color of colors" class="color-box "
+                                [ngStyle]="{'background-color': color.hex}"
+                                [class.selected]="selectedColors.includes(color.hex)"
+                                (click)="toggleColorSelection(color.hex)"
+                                [attr.title]="color.name">
+                            </div>
+                        </div>
+                    </div>
+                    
+
                     <div class="form-group white-color mt-4">
                         <label class="btn insert-custome ">
                             Insert picture
