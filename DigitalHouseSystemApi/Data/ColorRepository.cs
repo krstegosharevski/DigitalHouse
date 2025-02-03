@@ -22,5 +22,10 @@ namespace DigitalHouseSystemApi.Data
         {
             return await _context.Colors.ToListAsync();
         }
+
+        public async Task<ICollection<Color>> FindAllByIdAsync(List<int> colorIds)
+        {
+            return await _context.Colors.Where(c => colorIds.Contains(c.Id)).ToListAsync();
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace DigitalHouseSystemApi.Services.Impl
         {
             _colorRepository = colorRepository;
         }
+
         public async Task<IEnumerable<ColorDto>> GetColorsAsync()
         {
             var col = await _colorRepository.SelectAllColorsAsync();
@@ -23,6 +24,11 @@ namespace DigitalHouseSystemApi.Services.Impl
             }
             
             return colors;
+        }
+
+        public async Task<ICollection<Color>> GetAllColorsByIdAsync(List<int> colorIds)
+        {
+            return await _colorRepository.FindAllByIdAsync(colorIds);
         }
     }
 }

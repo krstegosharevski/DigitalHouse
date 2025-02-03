@@ -107,9 +107,13 @@ namespace DigitalHouseSystemApi.Controllers
                
                 return Ok(addedProduct);
             }
-            catch (ArgumentException ex)
+            catch (CategoryNotFoundException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
+            }
+            catch (BrandNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception)
             {

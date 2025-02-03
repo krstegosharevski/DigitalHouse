@@ -1,4 +1,5 @@
-﻿using DigitalHouseSystemApi.Data.Mappers;
+﻿using DigitalHouseSystemApi.Data;
+using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
@@ -12,15 +13,18 @@ namespace DigitalHouseSystemApi.Services.Impl
         public readonly ICategoryRepository _categoryRepository;
         public readonly IBrandRepository _brandRepository;
         public readonly IPhotoService _photoService;
+        public readonly IColorService _colorService;
         public ProductService(
             IProductRepository productRepository, 
             ICategoryRepository categoryRepository, 
             IBrandRepository brandRepository,
-            IPhotoService photoService) { 
+            IPhotoService photoService,
+            IColorService colorService) { 
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
             _brandRepository = brandRepository;
             _photoService = photoService;
+            _colorService = colorService;
         }
 
 
@@ -61,17 +65,40 @@ namespace DigitalHouseSystemApi.Services.Impl
         {
             var category = await _categoryRepository.FindByIdAsync(productDto.CategoryId);
             var brand = await _brandRepository.FindByIdAsync(productDto.BrandId);
+            
 
-            if (category == null || brand == null)
+            if (category == null)
             {
-                throw new ArgumentException("Invalid category or brand");
+                throw new CategoryNotFoundException(productDto.CategoryId);
+            }
+            if (brand == null)
+            {
+                throw new BrandNotFoundException(productDto.BrandId);
             }
 
-            var product = new Product(productDto.Name, productDto.Price, productDto.Description, productDto.IsPresent,productDto.Quantity, category, brand);
+            int countProducts = 0;
+
+            if (productDto.ColorIds != null)
+            {
+                countProducts = productDto.ColorIds.Count;
+            }
+
+            var product = new Product(productDto.Name, productDto.Price, productDto.Description, productDto.IsPresent,productDto.Quantity = countProducts, category, brand);
 
             _productRepository.Save(product);
 
-
+            if (productDto.ColorIds != null && productDto.ColorIds.Any())
+            {
+                var colors = await _colorService.GetAllColorsByIdAsync(productDto.ColorIds);
+                foreach (var color in colors)
+                {
+                    product.ProductColors.Add(new ProductColor
+                    {
+                        Product = product,
+                        Color = color
+                    });
+                }
+            }
 
 
             if (await _productRepository.SaveAllAsync())

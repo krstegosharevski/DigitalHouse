@@ -7,5 +7,13 @@
 
         public int ColorId { get; set; }
         public Color Color { get; set; } = null!;
+
+        public ProductColor() { }
+
+        public ProductColor(Product product, Color color)
+        {
+            Product = product;
+            Color = color;
+        }
     }
 }

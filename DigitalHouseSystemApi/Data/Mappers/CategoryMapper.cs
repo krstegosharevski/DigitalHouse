@@ -11,6 +11,7 @@ namespace DigitalHouseSystemApi.Data.Mappers
             if (domainModel == null) { throw new Exception(); }
             return new CategoryDto()
             {
+                Id = domainModel.Id,
                 Name = domainModel.Name,
                 PhotoUrl = domainModel.Photo?.Url
             };

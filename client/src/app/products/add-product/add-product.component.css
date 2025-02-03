@@ -69,15 +69,14 @@ select {
 }
 
 .insert-custome {
-    background-color: #f5f7f8;
-    ;
-    color: #000000;
+    background-color: #000000;
+    color: white;
     font-weight: 370;
 }
 
 .insert-custome:hover {
-    color: white;
-    background-color: #E20074;
+    color: black;
+    background-color: white;
 }
 
 /* Hover button style. */
@@ -212,3 +211,20 @@ h1.generate-ticket-title::after {
 .bg-neutral{
     background-color: #f5f7f8;
 }
+
+/* Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 3px solid #000000;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: rgb(41, 205, 41);
+  }
+ 
+  

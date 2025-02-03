@@ -10,6 +10,7 @@ namespace DigitalHouseSystemApi.Data.Mappers
             if (domainModel == null) { throw new Exception(); }
             return new BrandDto()
             {
+                Id = domainModel.Id,
                 Name = domainModel.Name
             };
         }

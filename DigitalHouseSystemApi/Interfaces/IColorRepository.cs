@@ -6,5 +6,6 @@ namespace DigitalHouseSystemApi.Interfaces
     {
         Task<Color> GetColorByNameAsync(string name);
         Task<IEnumerable<Color>> SelectAllColorsAsync();
+        Task<ICollection<Color>> FindAllByIdAsync(List<int> colorIds);
     }
 }

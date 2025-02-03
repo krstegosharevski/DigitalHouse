@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CategoryDto } from '../_models/categoryDto';
+import { Color } from '../_models/color';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesService {
+export class ColorsService {
   baseUrl = environment.apiUrl;
 
   constructor(private http : HttpClient) { }
 
-  getAllCategories(){
-      return this.http.get<CategoryDto[]>(this.baseUrl + "category");
-    }
+  getAllColors(){
+    return this.http.get<Color[]>(this.baseUrl + "color");
+  }
+
 }

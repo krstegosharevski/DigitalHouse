@@ -24,7 +24,7 @@ export class ProductCategoriesComponent implements OnInit {
   }
 
   loadCategories(){
-      this.categoryService.getAllBrands().subscribe({
+      this.categoryService.getAllCategories().subscribe({
         next: (categories) => {
           this.categories = categories
         }, 

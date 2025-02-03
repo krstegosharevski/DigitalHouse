@@ -10,6 +10,7 @@ namespace DigitalHouseSystemApi.Data.Mappers
             if (domainModel == null) { throw new Exception(); }
             return new ColorDto()
             {
+                Id = domainModel.Id,
                 Name = domainModel.Name,
                 HexCode = domainModel.HexCode
             };
