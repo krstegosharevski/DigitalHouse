@@ -36,9 +36,20 @@
     font-weight: 350;
     transition: all 0.3s ease;
   }
+
+  .nav-link-user {
+    color: #000000 !important;
+    text-decoration: none;
+    position: relative;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    font-size: 15px !important;
+  }
+  
   
   /* Style for the underline on hover */
-  .nav-link::before {
+  .nav-link::before, 
+  .nav-link-user::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -52,26 +63,30 @@
   }
   
   /* Show the underline on hover */
-  .nav-link:hover::before {
+  .nav-link:hover::before,
+  .nav-link-user:hover::before {
     visibility: visible;
     transform: scaleX(1);
   }
   
   /* Change the text color and shadow on hover */
-  .nav-link:hover {
+  .nav-link:hover,
+  .nav-link-user:hover {
     color: #E20074 !important; /* #ffe6e6 */
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
   }
   
   /* Style for the active link */
-  .nav-link.active {
+  .nav-link.active,
+  .nav-link-user.active {
     color: #000000 !important;
     text-shadow: 0 0 10px rgba(255, 255, 255, 1);
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
 }
   
   /* Underline for the active link */
-  .nav-link.active::after {
+  .nav-link.active::after,
+  .nav-link-user.active::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -138,4 +153,7 @@
     background: white;
     z-index: 1000;
 }
+
+/* User Picture */
+
 

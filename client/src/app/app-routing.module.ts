@@ -11,6 +11,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { SearchComponent } from './search/search.component';
 import { ProductSearchedComponent } from './products/product-searched/product-searched.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
+import { AdminGuard } from './_guards/admin.guard';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path: 'shoppingcart', component: ShoppingcartComponent},
   {path: 'search', component: SearchComponent},
   {path: 'searched-product/:product', component: ProductSearchedComponent},
-  {path: 'add-product', component: AddProductComponent},
+  {path: 'admin/add-product', component: AddProductComponent, canActivate: [AdminGuard]},
   {path: '', component: ReportsComponent}
 ];
 

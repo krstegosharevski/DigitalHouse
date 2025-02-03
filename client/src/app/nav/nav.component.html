@@ -66,6 +66,9 @@
             </button>
             <ul id="dropdown-basic m-2 p-3" *dropdownMenu class="dropdown-menu  dropdown-menu-end" role="menu" aria-labelledby="button-basic">
               <li  role="menuitem" class="px-3 ms-4 py-2 fw-light">Hello, <span style="color: #E20074;">{{user.username}}</span></li>
+              <li  role="menuitem" class="px-3 ms-4 py-2 fw-light">
+                <a *appHasRole="['Admin', 'Moderator']" class="nav-link-user" routerLink="admin/add-product" routerLinkActive="active" >Add Product</a>
+              </li>
               <li class="divider dropdown-divider"></li>
               <li role="menuitem" class="ms-4 px-3 py-2"><button class="btn btn-log-in fw-light" (click)="logout();">Log Out</button></li>
             </ul>

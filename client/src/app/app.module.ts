@@ -29,6 +29,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { SearchComponent } from './search/search.component';
 import { ProductSearchedComponent } from './products/product-searched/product-searched.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -53,6 +54,7 @@ export function HttpLoaderFactory(http:HttpClient){
     SearchComponent,
     ProductSearchedComponent,
     AddProductComponent,
+    HasRoleDirective,
   ],
   imports: [
     BrowserModule,
