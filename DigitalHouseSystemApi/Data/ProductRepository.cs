@@ -26,6 +26,8 @@ namespace DigitalHouseSystemApi.Data
                 .Include(p => p.Photo)
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
+                .Include(p => p.ProductColors)
+                .ThenInclude(p => p.Color)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 

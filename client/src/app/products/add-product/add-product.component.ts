@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AddProductDto } from 'src/app/_models/addProductDto';
 import { BrandDto } from 'src/app/_models/brandDto';
 import { CategoryDto } from 'src/app/_models/categoryDto';
 import { Color } from 'src/app/_models/color';
+import { ProductDto } from 'src/app/_models/productDto';
 import { BrandsService } from 'src/app/_services/brands.service';
 import { CategoriesService } from 'src/app/_services/categories.service';
 import { ColorsService } from 'src/app/_services/colors.service';
@@ -21,32 +23,66 @@ export class AddProductComponent implements OnInit {
   colors: Color[] = [];
   selectedColors: number[] = [];
   selectedFile: File | null = null;
-  newProduct? : AddProductDto = undefined;
-  
+  newProduct?: AddProductDto = undefined;
+
   showErrorBanner: boolean = false;
   showSuccessBanner: boolean = false;
   @ViewChild('productForm') productForm!: NgForm;
 
+  @Input() isEditMode: boolean = false;
+  id!: number;
+
   constructor(
-    private colorsService: ColorsService, 
-    private brandService: BrandsService, 
+    private colorsService: ColorsService,
+    private brandService: BrandsService,
     private categoryService: CategoriesService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.newProduct = {
-      name: '',
-      price: 0,
-      description: '',
-      isPresent: false,
-      categoryId: 0,
-      brandId: 0,
-      colorIds: []
-    };
+    this.isEditMode = false;
+    
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('id'); // Земаме како стринг
+      if (idParam) {
+        this.id = +idParam; // Конвертираме во number
+        console.log('ID from URL:', this.id);
+      }
+    });
+
+    if (this.id != null) {
+      this.isEditMode = true
+      this.productService.getProductForEdit(this.id).subscribe({
+        next : (product) =>{
+          this.newProduct = {
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            isPresent: product.isPresent,
+            categoryId: product.category,
+            brandId: product.brand,
+            colorIds: product.colors
+          }
+          this.selectedColors = [...product.colors];
+        }
+      })
+    } else {
+      this.newProduct = {
+        name: '',
+        price: 0,
+        description: '',
+        isPresent: false,
+        categoryId: 0,
+        brandId: 0,
+        colorIds: []
+      };
+    }
     this.getColors()
     this.getBrands()
     this.getCategories()
+     console.log(this.isEditMode);
   }
 
   getColors() {
@@ -58,7 +94,7 @@ export class AddProductComponent implements OnInit {
     })
   }
 
-  getBrands(){
+  getBrands() {
     this.brandService.getAllBrands().subscribe({
       next: (brands) => {
         this.brands = brands
@@ -67,7 +103,7 @@ export class AddProductComponent implements OnInit {
     })
   }
 
-  getCategories(){
+  getCategories() {
     this.categoryService.getAllCategories().subscribe({
       next: (categories) => {
         this.categories = categories
@@ -113,13 +149,10 @@ export class AddProductComponent implements OnInit {
       return;
     }
 
-    if(this)
-    this.newProduct!.colorIds = this.selectedColors;
+    if (this)
+      this.newProduct!.colorIds = this.selectedColors;
 
-    if (!this.selectedFile) {
-      console.error("No file selected!");
-      return;
-    }
+   
 
     const formData = new FormData();
     formData.append('name', this.newProduct!.name);
@@ -131,21 +164,44 @@ export class AddProductComponent implements OnInit {
     this.newProduct!.colorIds.forEach((colorId, index) => {
       formData.append(`colorIds[${index}]`, colorId.toString());
     });
-    formData.append('file', this.selectedFile);
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile);
+    }
+   
 
-    this.productService.addNewProduct(formData).subscribe({
-      next: (response) => {
-        console.log('Product added successfully', response);
-        this.resetForm();
-        this.productForm.resetForm();
-        this.showSuccessBanner = true;
-      },
-      error: (err) => {
-        console.error('Error adding product', err);
-      }
-    });
+    if (this.isEditMode) {
+      
+      formData.forEach(x => {
+        console.log(x);
+      })
+      
+      this.productService.updateProduct(this.id, formData).subscribe({
+        next: (response) => {
+          console.log('Product updated successfully', response);
+          this.resetForm();
+          this.productForm.resetForm();
+          this.showSuccessBanner = true;
+        },
+        error: (err) => {
+          console.error('Error updating product', err);
+        }
+      });
+    } else {
+      this.productService.addNewProduct(formData).subscribe({
+        next: (response) => {
+          console.log('Product added successfully', response);
+          this.resetForm();
+          this.productForm.resetForm();
+          this.showSuccessBanner = true;
+        },
+        error: (err) => {
+          console.error('Error adding product', err);
+        }
+      });
+    }
+
+    
   }
 
- 
 
 }

@@ -6,5 +6,10 @@
            : base($"Product with Name: {name} was not found.")
         {
         }
+
+        public ProductNotFoundException(int id)
+          : base($"Product with Id: {id} was not found.")
+        {
+        }
     }
 }

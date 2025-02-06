@@ -11,6 +11,7 @@ namespace DigitalHouseSystemApi.Data.Mappers
             if (domainModel == null) { throw new Exception(); }
             return new ProductDto()
             {
+                Id = domainModel.Id,
                 Name = domainModel.Name,
                 Price = domainModel.Price,
                 Description = domainModel.Description,

@@ -1,4 +1,5 @@
-﻿using DigitalHouseSystemApi.Data;
+﻿using System.Xml.Linq;
+using DigitalHouseSystemApi.Data;
 using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Interfaces;
@@ -103,12 +104,87 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             if (await _productRepository.SaveAllAsync())
             {
-                var success = await AddPhotoAsync(file, product.Id); // product.Id бидејќи ID-то е креирано по Save
+                if (file != null)
+                {
+                    var success = await AddPhotoAsync(file, product.Id); // product.Id бидејќи ID-то е креирано по Save
+                    if (!success)
+                    {
+                        throw new Exception("Error adding photo to product");
+                    }
+                }
+               
+                return product.MappToDtoModel();
+            }
+
+            throw new Exception("Error saving product");
+        }
+
+        public async Task<ProductDto> EditProductAsync(int id, AddProductDto productDto, IFormFile file)
+        {
+            var prod = await _productRepository.FindByIdAsync(id);
+
+            if (prod == null)
+            {
+                throw new ProductNotFoundException(id);
+            }
+
+            var category = await _categoryRepository.FindByIdAsync(productDto.CategoryId);
+            var brand = await _brandRepository.FindByIdAsync(productDto.BrandId);
+
+
+            if (category == null)
+            {
+                throw new CategoryNotFoundException(productDto.CategoryId);
+            }
+            if (brand == null)
+            {
+                throw new BrandNotFoundException(productDto.BrandId);
+            }
+
+            int countProducts = prod.Quantity;
+
+            if (productDto.ColorIds != null)
+            {
+                countProducts = productDto.ColorIds.Count;
+            }
+
+            prod.Name = productDto.Name;
+            prod.Description = productDto.Description;
+            prod.Price = productDto.Price;
+            prod.Quantity = countProducts;
+            prod.IsPresent = productDto.IsPresent;
+            prod.Category = category;
+            prod.Brand = brand;
+
+            if (productDto.ColorIds != null && productDto.ColorIds.Any())
+            {
+                prod.ProductColors.Clear();
+
+                var colors = await _colorService.GetAllColorsByIdAsync(productDto.ColorIds);
+                foreach (var color in colors)
+                {
+                    prod.ProductColors.Add(new ProductColor
+                    {
+                        Product = prod,
+                        Color = color
+                    });
+                }
+            }
+
+            if (file != null) 
+            {
+                await DeletePhoto(id);
+
+                var success = await AddPhotoAsync(file, id); 
                 if (!success)
                 {
                     throw new Exception("Error adding photo to product");
                 }
-                return product.MappToDtoModel();
+            }
+
+            if(await _productRepository.SaveAllAsync())
+            {
+                return prod.MappToDtoModel();
             }
 
             throw new Exception("Error saving product");
@@ -182,5 +258,37 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             return product;
         }
+
+        public async Task<GetProductEditDto> GetProductEditAsync(int id)
+        {
+            var prod = await _productRepository.FindByIdAsync(id);
+            if (prod == null) {
+                throw new ProductNotFoundException(id);
+            }
+
+            ICollection<int> colorIds = new List<int>();
+            if (prod.ProductColors.Any())
+            {
+                foreach (var c in prod.ProductColors)
+                {
+                    colorIds.Add(c.ColorId);
+                }
+            }
+
+            return new GetProductEditDto
+            {
+                Id = id,
+                Name = prod.Name,
+                Price = prod.Price,
+                Description = prod.Description,
+                IsPresent = prod.IsPresent,
+                PhotoUrl = prod.Photo?.Url,
+                Category = prod.CategoryId,
+                Brand = prod.BrandId,
+                Colors = colorIds
+            };
+           
+        }
     }
 }
+

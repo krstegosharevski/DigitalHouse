@@ -121,6 +121,39 @@ namespace DigitalHouseSystemApi.Controllers
             }
         }
 
+        [HttpPut("edit-product")]
+        public async Task<ActionResult<ProductDto>> EditProduct(
+                                    [FromQuery] int productId,
+                                    [FromForm] AddProductDto productDto, 
+                                    [FromForm] IFormFile? file = null)
+        {
+            
+            if (productDto == null)
+            {
+                return BadRequest("Invalid product data");
+            }
+
+            try
+            {
+                // thorough the service; adding.
+                var addedProduct = await _productService.EditProductAsync(productId,productDto, file);
+
+                return Ok(addedProduct);
+            }
+            catch (CategoryNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (BrandNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
         [HttpGet("get-all")]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
@@ -182,6 +215,24 @@ namespace DigitalHouseSystemApi.Controllers
             try
             {
                 var product = await _productService.GetSearchedProductAsync(name);
+                return Ok(product);
+            }
+            catch (ProductNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get-product-edit")]
+        public async Task<ActionResult<GetProductEditDto>> GetProductForEdit([FromQuery] int id)
+        {
+            try
+            {
+                var product = await _productService.GetProductEditAsync(id);
                 return Ok(product);
             }
             catch (ProductNotFoundException ex)
