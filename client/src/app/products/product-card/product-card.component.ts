@@ -12,6 +12,8 @@ export class ProductCardComponent implements OnInit {
   
   @Input() product!: ProductDto;
   showDetails = false;
+  currentUser$ = this.accountService.currentUser$;
+
   
 
   constructor(private accountService : AccountService, private router : Router){}

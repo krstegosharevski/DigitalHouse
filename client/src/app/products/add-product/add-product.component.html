@@ -8,12 +8,12 @@
                       {{ isEditMode ? 'Edit Product' : 'Add New Product' }}  
                     </h1>
                   
-                    <!-- Банер за грешка -->
+                    <!-- Error -->
                     <div *ngIf="showErrorBanner" class="alert alert-danger">
                       All fields are required. Please fill in all fields.
                     </div>
 
-                    <!-- Банер за успешно додаден продукт -->
+                    <!-- Success -->
                     <div *ngIf="showSuccessBanner" class="alert alert-success">
                       {{ isEditMode ? 'Your Product was edited successfully!' : 'Your Product was added successfully!' }} 
                     </div>

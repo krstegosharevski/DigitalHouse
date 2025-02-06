@@ -7,19 +7,21 @@
     <img [src]="product.photoUrl" class="card-img-top" alt="Product Image" (click)="toggleDetails()">
     
     <div class="card-body text-center">
-      <p class="text-muted">{{ product.price }} MKD</p>
+      <p class="text-muted">{{ product!.price }} MKD</p>
       <div class="stock-status">
-        <span [class.text-success]="product.isPresent" [class.text-danger]="!product.isPresent">
+        <span [class.text-success]="product!.isPresent" [class.text-danger]="!product.isPresent">
           {{ product.isPresent ? 'In Stock' : 'Out of Stock' }}
         </span>
       </div>
       <button class="btn btn-primary" [disabled]="!product.isPresent">
         Add to Cart
       </button>
-    
-      <button *appHasRole="['Admin']" class="btn btn text-success px-2" (click)="rutiraj(this.product.id)">
-        Edit Product
-      </button>
+      <div *ngIf="(currentUser$ | async)">
+        <button *appHasRole="['Admin']" class="btn btn text-success px-2" (click)="rutiraj(this.product!.id)">
+          Edit Product
+        </button>
+      </div>
+     
     </div>
   </div>
   

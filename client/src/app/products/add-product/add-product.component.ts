@@ -45,10 +45,9 @@ export class AddProductComponent implements OnInit {
     this.isEditMode = false;
     
     this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id'); // Земаме како стринг
+      const idParam = params.get('id'); 
       if (idParam) {
-        this.id = +idParam; // Конвертираме во number
-        console.log('ID from URL:', this.id);
+        this.id = +idParam; // Converting
       }
     });
 
@@ -82,7 +81,6 @@ export class AddProductComponent implements OnInit {
     this.getColors()
     this.getBrands()
     this.getCategories()
-     console.log(this.isEditMode);
   }
 
   getColors() {
@@ -145,7 +143,7 @@ export class AddProductComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
-      this.showErrorBanner = true; // Прикажи банер за грешка
+      this.showErrorBanner = true; // Show error baner
       return;
     }
 
