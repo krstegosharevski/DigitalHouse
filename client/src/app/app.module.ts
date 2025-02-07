@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { SearchComponent } from './search/search.component';
 import { ProductSearchedComponent } from './products/product-searched/product-searched.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -78,7 +79,9 @@ export function HttpLoaderFactory(http:HttpClient){
     }
     )
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

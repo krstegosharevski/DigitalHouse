@@ -51,7 +51,7 @@ namespace DigitalHouseSystemApi.Controllers
 
             if (!roleResult.Succeeded)
             {
-                return BadRequest(roleResult.Errors);
+                return BadRequest(result.Errors);
             }
 
             return new UserDto

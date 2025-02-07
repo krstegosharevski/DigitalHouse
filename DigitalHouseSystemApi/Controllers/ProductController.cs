@@ -4,6 +4,7 @@ using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalHouseSystemApi.Controllers
@@ -92,6 +93,7 @@ namespace DigitalHouseSystemApi.Controllers
             }
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("add-product")]
         public async Task<ActionResult<ProductDto>> AddProduct([FromForm] AddProductDto productDto, [FromForm] IFormFile file)
         {
@@ -121,6 +123,7 @@ namespace DigitalHouseSystemApi.Controllers
             }
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("edit-product")]
         public async Task<ActionResult<ProductDto>> EditProduct(
                                     [FromQuery] int productId,

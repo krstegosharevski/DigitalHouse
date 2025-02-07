@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'searched-product/:product', component: ProductSearchedComponent},
   {path: 'admin/add-product', component: AddProductComponent, canActivate: [AdminGuard]},
-  {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]},
+  {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]}, 
   {path: '', component: ReportsComponent}
 ];
 

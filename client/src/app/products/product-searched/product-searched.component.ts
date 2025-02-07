@@ -19,9 +19,6 @@ export class ProductSearchedComponent implements OnInit {
       this.productName = params['product'];
       this.loadProducts();
     });
-
-    console.log(this.productName);
-    console.log(this.product?.name);
   }
 
   loadProducts(){

@@ -9,9 +9,10 @@ using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Services;
 using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Services.Impl;
+using DigitalHouseSystemApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Services.AddCors();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -23,6 +24,7 @@ builder.Services.AddCors(options =>
                   .AllowCredentials();
         });
 });
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -51,41 +53,16 @@ builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection(
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 
-//Ovoj metod pazi go 202 video gledaj ako ima greshka tuka.
-builder.Services.AddIdentityCore<AppUser>(opt =>
-{
-    opt.Password.RequireNonAlphanumeric = false;
-})
-    .AddRoles<AppRole>()
-    .AddRoleManager<RoleManager<AppRole>>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding
-            .UTF8.GetBytes(builder.Configuration["TokenKey"])),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
-
-builder.Services.AddAuthorization(opt =>
-{
-    opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-
-});
-
+builder.Services.AddIdentityServices(builder.Configuration);
 
 // Add services to the container. Here i changed after AddControllers()
 builder.Services.AddControllers();
-     //.AddJsonOptions(options =>
-     // {
-     //     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-     // });
+//.AddJsonOptions(options =>
+// {
+//     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+// });
+
 
 var app = builder.Build();
 
@@ -111,15 +88,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-//app.UseCors("AllowSpecificOrigin");
-
 app.UseCors("AllowSpecificOrigin");
 
 
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 
 app.MapControllerRoute(
@@ -142,7 +116,6 @@ catch (Exception ex)
     var logger = services.GetService<ILogger<Program>>();
     logger.LogError(ex, "An error occurred during migration");
 }
-
 
 
 app.Run();
