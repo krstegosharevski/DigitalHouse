@@ -9,7 +9,6 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ReportsComponent } from './reports/reports.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
@@ -31,6 +30,7 @@ import { ProductSearchedComponent } from './products/product-searched/product-se
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { HomeComponent } from './home/home.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -41,7 +41,6 @@ export function HttpLoaderFactory(http:HttpClient){
     AppComponent,
     NavComponent,
     FooterComponent,
-    ReportsComponent,
     AboutUsComponent,
     ProblemsComponent,
     LoginComponent,
@@ -56,6 +55,7 @@ export function HttpLoaderFactory(http:HttpClient){
     ProductSearchedComponent,
     AddProductComponent,
     HasRoleDirective,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

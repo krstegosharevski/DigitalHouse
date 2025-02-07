@@ -152,11 +152,19 @@ slide img {
 .custom-rounded-top-white{
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
   overflow: hidden; /* За да ги заобли и содржините внатре */
-  
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1), 0px -6px 12px rgba(0, 0, 0, 0.1), 6px 0px 12px rgba(0, 0, 0, 0.1), -6px 0px 12px rgba(0, 0, 0, 0.1);
 }
 
 .slide-div{
   padding-top: 90px;
 }
+
+.slide-slide{
+  background-color:#E20074; 
+  background: linear-gradient(to right, #E20074, #b24196);
+}
+
 

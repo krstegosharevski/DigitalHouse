@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReportsComponent } from './reports/reports.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ProblemsComponent } from './problems/problems.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { ProductSearchedComponent } from './products/product-searched/product-searched.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { AdminGuard } from './_guards/admin.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'searched-product/:product', component: ProductSearchedComponent},
   {path: 'admin/add-product', component: AddProductComponent, canActivate: [AdminGuard]},
   {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]}, 
-  {path: '', component: ReportsComponent}
+  {path: '', component: HomeComponent}
 ];
 
 @NgModule({
