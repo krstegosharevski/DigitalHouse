@@ -77,7 +77,14 @@ namespace DigitalHouseSystemApi.Data
 
         public async Task<IEnumerable<Product>> SearchByNameProductsAsync(string search)
         {
-            return await _context.Products.Include(p => p.Photo).Where(p => p.Name.Contains(search)).Take(5).ToListAsync();
+            //return await _context.Products.Include(p => p.Photo).Where(p => p.Name.ToLower().Contains(search.ToLower())).Take(7).ToListAsync();
+            return await _context.Products
+                .Include(p => p.Photo)
+                .Include(p => p.Brand)
+                .Where(p => EF.Functions.Like(p.Name, $"%{search}%")
+                    || EF.Functions.Like(p.Brand.Name, $"%{search}%"))
+                .Take(7)
+                .ToListAsync();
         }
     }
 }
