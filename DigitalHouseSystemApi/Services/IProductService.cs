@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using DigitalHouseSystemApi.DTOs;
+using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 
@@ -9,7 +10,7 @@ namespace DigitalHouseSystemApi.Services
     {
         Task<Product> FindByIdAsync(int id);
         Task<IEnumerable<Product>> GetAllProductsAsync();
-        Task<IEnumerable<ProductDto>> GetAllProductsByCategoryAsync(string category);
+        Task<PagedList<ProductDto>> GetAllProductsByCategoryAsync(string category, ProductParams productParams);
         Task<ProductDto> AddProductAsync(AddProductDto productDto ,IFormFile file);
         Task<ProductDto> EditProductAsync(int id,AddProductDto productDto, IFormFile file);
         Task<bool> AddPhotoAsync(IFormFile file, int productId);

@@ -1,5 +1,7 @@
 ﻿using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
+using DigitalHouseSystemApi.Extensions;
+using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Models.Exceptions;
@@ -22,7 +24,6 @@ namespace DigitalHouseSystemApi.Controllers
             _photoService = photoService;
         }
 
-        //Okej metod
         [HttpPost("add-image")]
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file, int id)
         {
@@ -176,16 +177,17 @@ namespace DigitalHouseSystemApi.Controllers
         }
 
         [HttpGet("category")]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory([FromQuery] string category)
+        public async Task<ActionResult<PagedList<ProductDto>>> GetProductsByCategory([FromQuery] string category, [FromQuery] ProductParams productParams)
         {
             try
             {
-                // thorough the service; adding.
-                var products = await _productService.GetAllProductsByCategoryAsync(category);
+                
+                var products = await _productService.GetAllProductsByCategoryAsync(category, productParams);
+                Response.AddPaginationHeader(new PaginationHeader(products.CurrentPage, products.PageSize, products.TotalCount, products.TotalPages));
 
                 return Ok(products);
             }
-            catch (ArgumentException ex)
+            catch (CategoryNotFoundException ex)
             {
                 return BadRequest(ex.Message);
             }

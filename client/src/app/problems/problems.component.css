@@ -82,6 +82,10 @@ input[type="text"] {
   background-color: #E20074;
 }
 
+.slide-slide{
+  background: linear-gradient(to right, #E20074, #b24196);
+}
+
 .btn-back{
   background-color: white;
   color: #E20074;

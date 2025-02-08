@@ -2,6 +2,7 @@
 using DigitalHouseSystemApi.Data;
 using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
+using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Models.Exceptions;
@@ -39,26 +40,22 @@ namespace DigitalHouseSystemApi.Services.Impl
             return await _productRepository.GetAllProductsAsync();
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsByCategoryAsync(string category)
+        public async Task<PagedList<ProductDto>> GetAllProductsByCategoryAsync(string category, ProductParams productParams)
         {
             Category c = await _categoryRepository.FindByNameAsync(category);
-            if (c == null) throw new ArgumentException("Category not found");
+            if (c == null) throw new CategoryNotFoundException(category);
 
-            
-            IEnumerable<Product> p = await _productRepository.GetAllProductsByCategoryIdAsync(c.Id);
+            PagedList<Product> pagedProducts = await _productRepository.GetAllProductsByCategoryIdAsync(c.Id, productParams);
 
-            List<ProductDto> productsDto = new List<ProductDto>();
 
-            foreach (var product in p) 
+            List<ProductDto> productsDto = pagedProducts.Select(product =>
             {
-                ICollection<string> colors = product.ProductColors.Select(color => color.Color).Select(color => color.HexCode).ToList();
-                
                 var productDto = product.MappToDtoModel();
-                productDto.Colors = colors;
-                productsDto.Add(productDto);
-            }
+                productDto.Colors = product.ProductColors.Select(pc => pc.Color.HexCode).ToList();
+                return productDto;
+            }).ToList();
 
-            return productsDto;
+            return new PagedList<ProductDto>(productsDto, pagedProducts.TotalCount, productParams.PageNumber, productParams.PageSize);
 
         }
 

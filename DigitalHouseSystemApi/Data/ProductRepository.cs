@@ -1,4 +1,5 @@
 ﻿using DigitalHouseSystemApi.DTOs;
+using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using Microsoft.EntityFrameworkCore;
@@ -40,16 +41,19 @@ namespace DigitalHouseSystemApi.Data
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsByCategoryIdAsync(int id)
+        public async Task<PagedList<Product>> GetAllProductsByCategoryIdAsync(int id, ProductParams productParams)
         {
-            return await _context.Products
+            var query = _context.Products
                 .Include(p => p.Photo)
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.ProductColors)
                 .ThenInclude(p => p.Color)
                 .Where(p => p.CategoryId == id)
-                .ToListAsync();
+                .AsNoTracking();
+                
+
+            return await PagedList<Product>.CreateAsync(query,productParams.PageNumber, productParams.PageSize);         
         }
 
         public async Task<bool> SaveAllAsync()
