@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ProductDto } from '../_models/productDto';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ProductEdit } from '../_models/productEdit';
+import { PaginatedResult } from '../_models/pagination';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { ProductEdit } from '../_models/productEdit';
 export class ProductsService {
 
   baseUrl = environment.apiUrl;
+  paginatedResult: PaginatedResult<ProductDto[]> = new PaginatedResult<ProductDto[]>;
 
   constructor(private http : HttpClient) { }
 
@@ -19,8 +21,27 @@ export class ProductsService {
     return this.http.get<ProductDto[]>(this.baseUrl + "product/get-all");
   }
 
-  getAllProductsByCategory(category: string){
-    return this.http.get<ProductDto[]>(this.baseUrl + `product/category?category=${category}`);
+  getAllProductsByCategory(category: string, page? : number, itemsPerPage?: number){
+    let params = new HttpParams;
+
+    if(page && itemsPerPage){
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage)
+    }
+
+
+    return this.http.get<ProductDto[]>(this.baseUrl + `product/category?category=${category}`, {observe: 'response', params}).pipe(
+      map(response => {
+        if(response.body){
+          this.paginatedResult.result = response.body;
+        }
+        const pagination = response.headers.get('Pagination');
+        if(pagination){
+          this.paginatedResult.pagination = JSON.parse(pagination);
+        }
+        return this.paginatedResult;
+      })
+    )
   }
 
   getSearchedProducts(search: string){

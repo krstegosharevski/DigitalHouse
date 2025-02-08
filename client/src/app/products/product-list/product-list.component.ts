@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BrandDto } from 'src/app/_models/brandDto';
+import { Pagination } from 'src/app/_models/pagination';
 import { ProductDto } from 'src/app/_models/productDto';
 import { ProductsService } from 'src/app/_services/products.service';
 
@@ -15,6 +16,9 @@ export class ProductListComponent implements OnInit {
   filteredProducts: ProductDto[] = [];
   priceFilter: string = '';
   selectedBrands: string[] = [];
+  pagination: Pagination | undefined
+  pageNumber = 1
+  pageSize = 2
 
   constructor(
     private route: ActivatedRoute,
@@ -29,13 +33,23 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getAllProductsByCategory(this.category).subscribe({
-      next: (data) => {
-        this.products = data;
-        this.applyFilters();
+    this.productService.getAllProductsByCategory(this.category, this.pageNumber, this.pageSize).subscribe({
+      next: (response) => {
+        if(response.result && response.pagination){
+          this.products = response.result;
+          this.pagination = response.pagination;
+          this.applyFilters();
+        }
       },
       error: (err) => console.error("Error loading products", err)
     });
+  }
+
+  pageChanged(event: any){
+    if(this.pageNumber !== event.page){
+      this.pageNumber = event.page;
+      this.loadProducts();
+    }
   }
 
   onPriceFilterSelected(priceRange: string): void {
