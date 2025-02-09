@@ -8,11 +8,13 @@ import { BrandsService } from 'src/app/_services/brands.service';
   styleUrls: ['./product-filters.component.css']
 })
 export class ProductFiltersComponent implements OnInit {
-  @Output() priceFilter = new EventEmitter<string>();
-  @Output() brandFilter = new EventEmitter<string[]>();
+  @Output() searchFilters = new EventEmitter<{ minPrice: number, maxPrice: number, brands: number[] }>();
 
   brands: BrandDto[] = [];
-  selectedBrands: Set<string> = new Set();
+  selectedBrands: number[] = []
+  selectedPrice: string | null = null;
+  minPrice: number = 0;
+  maxPrice: number = 150000
 
   priceRanges = [
     { label: '0 - 6 000 MKD', value: '0-6000' },
@@ -21,7 +23,7 @@ export class ProductFiltersComponent implements OnInit {
     { label: '24 000 MKD +', value: '24000+' }
   ];
 
-  constructor(private brandsService: BrandsService) {}
+  constructor(private brandsService: BrandsService) { }
 
   ngOnInit(): void {
     this.loadBrands();
@@ -38,18 +40,40 @@ export class ProductFiltersComponent implements OnInit {
     });
   }
 
+
   onPriceSelected(priceRange: string): void {
-    this.priceFilter.emit(priceRange);
+    this.selectedPrice = priceRange;
+    const regex = /(\d[\d\s]*)/g;
+
+    const matches = priceRange.match(regex);
+
+    if (matches!.length === 1) {
+      this.minPrice = parseInt(matches![0].replace(/\s/g, ''), 10);
+      this.maxPrice = 150000; 
+    } else if (matches!.length === 2) {
+      this.minPrice = parseInt(matches![0].replace(/\s/g, ''), 10);
+      this.maxPrice = parseInt(matches![1].replace(/\s/g, ''), 10);
+    }
   }
 
-  onBrandToggle(brandName: string, event: Event): void {
+  onBrandToggle(brandId: number, event: Event): void {
     const checkbox = event.target as HTMLInputElement;
     if (checkbox.checked) {
-      this.selectedBrands.add(brandName);
+      this.selectedBrands.push(brandId);
     } else {
-      this.selectedBrands.delete(brandName);
+      const index = this.selectedBrands.indexOf(brandId);
+      if (index !== -1) {
+        this.selectedBrands.splice(index, 1);
+      }
     }
-    this.brandFilter.emit(Array.from(this.selectedBrands));
+  }
+
+  applyFilters(): void {
+    this.searchFilters.emit({
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      brands: this.selectedBrands
+    });
   }
 
 }

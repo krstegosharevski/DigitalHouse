@@ -50,8 +50,30 @@ namespace DigitalHouseSystemApi.Data
                 .Include(p => p.ProductColors)
                 .ThenInclude(p => p.Color)
                 .Where(p => p.CategoryId == id)
-                .AsNoTracking();
-                
+                .AsQueryable();
+
+            if (productParams.BrandIds != null && productParams.BrandIds.Any())
+            {
+                query = query.Where(p => productParams.BrandIds.Contains(p.BrandId));
+            }
+            if (productParams.MinPrice.HasValue)
+            {
+                query = query.Where(p => p.Price >= productParams.MinPrice.Value);
+            }
+            if (productParams.MaxPrice.HasValue)
+            {
+                query = query.Where(p => p.Price <= productParams.MaxPrice.Value);
+            }
+
+            //var query = _context.Products
+            //    .Include(p => p.Photo)
+            //    .Include(p => p.Category)
+            //    .Include(p => p.Brand)
+            //    .Include(p => p.ProductColors)
+            //    .ThenInclude(p => p.Color)
+            //    .Where(p => p.CategoryId == id)
+            //    .AsNoTracking();
+
 
             return await PagedList<Product>.CreateAsync(query,productParams.PageNumber, productParams.PageSize);         
         }

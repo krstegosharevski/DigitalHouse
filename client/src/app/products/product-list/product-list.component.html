@@ -7,15 +7,14 @@
   <div class="row my-2 py-2">
     <div class="col-md-3">
       <app-product-filters
-        (priceFilter)="onPriceFilterSelected($event)" 
-        (brandFilter)="onBrandFilterSelected($event)">
+        (searchFilters)="onSearchFiltersApplied($event)">
       </app-product-filters>
     </div>
   
     <div class="col-md-9">
       <div class="products">
         <div class="row p-3">
-          <div class="col-md-4 mb-4" *ngFor="let product of filteredProducts">
+          <div class="col-md-4 mb-4" *ngFor="let product of products">
             <app-product-card [product]="product"></app-product-card>
           </div>
         </div>

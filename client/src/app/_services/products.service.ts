@@ -5,6 +5,7 @@ import { ProductDto } from '../_models/productDto';
 import { map, Observable } from 'rxjs';
 import { ProductEdit } from '../_models/productEdit';
 import { PaginatedResult } from '../_models/pagination';
+import { ProductParams } from '../_models/productParams';
 
 
 @Injectable({
@@ -21,29 +22,45 @@ export class ProductsService {
     return this.http.get<ProductDto[]>(this.baseUrl + "product/get-all");
   }
 
-  getAllProductsByCategory(category: string, page? : number, itemsPerPage?: number){
-    let params = new HttpParams;
-
-    if(page && itemsPerPage){
-      params = params.append('pageNumber', page);
-      params = params.append('pageSize', itemsPerPage)
+  getAllProductsByCategory(category: string, productParams : ProductParams){
+    let params = this.getPaginationHeaders(productParams.pageNumber, productParams.pageSize)
+    params = params.append('MinPrice', productParams.MinPrice);
+    params = params.append('MaxPrice', productParams.MaxPrice);
+    if(productParams.BrandIds.length > 0){
+      productParams.BrandIds.forEach(id => {
+        params = params.append('brandIds', id);
+      });
     }
+    return this.getPaginatedResult<ProductDto[]>(this.baseUrl + `product/category?category=${category}` ,  params);
+  }
 
 
-    return this.http.get<ProductDto[]>(this.baseUrl + `product/category?category=${category}`, {observe: 'response', params}).pipe(
+  private getPaginationHeaders(pageNumber: number, pageSize: number){
+    let params = new HttpParams;
+    params = params.append('pageNumber', pageNumber);
+    params = params.append('pageSize', pageSize);
+    return params;
+  }
+
+
+  private getPaginatedResult<T>(url: string, params: HttpParams){
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>;
+    
+    return this.http.get<T>(url, {observe: 'response', params}).pipe(
       map(response => {
         if(response.body){
-          this.paginatedResult.result = response.body;
+          paginatedResult.result = response.body;
         }
         const pagination = response.headers.get('Pagination');
         if(pagination){
-          this.paginatedResult.pagination = JSON.parse(pagination);
+          paginatedResult.pagination = JSON.parse(pagination);
         }
-        return this.paginatedResult;
+        return paginatedResult;
       })
     )
   }
 
+  
   getSearchedProducts(search: string){
     return this.http.get<ProductDto[]>(this.baseUrl + `product/search?search=${search}`)
   }
