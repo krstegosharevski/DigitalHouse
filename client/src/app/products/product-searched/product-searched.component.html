@@ -1,5 +1,5 @@
   <div class="mt-4 pt-4">
-  <div class="mt-4 alert text-center fw-light" role="alert">
+  <div class="mt-4 alert text-center fw-light mx-2" role="alert">
     Free delivery for all orders!
   </div>
   <div class="container my-2 py-2">
@@ -41,6 +41,13 @@
 
                 <div class="col-md-4 col-12 text-center pt-4">
                   <button class="btn btn-log-in ms-2 fw-light" routerLink="/login">Add to Cart</button>
+                  <div *ngIf="(currentUser$ | async)" class="mt-2">
+                    <button *appHasRole="['Admin']" class="btn btn-success ms-2 fw-light" (click)="routeToEditPage(this.product!.id)">
+                      Edit Product
+                    </button>
+                    
+                  </div>
+
                 </div>
 
               </div>

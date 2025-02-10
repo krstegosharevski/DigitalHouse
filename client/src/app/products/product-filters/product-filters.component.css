@@ -1,0 +1,60 @@
+.btn-selected{
+    background-color: #E20074;
+    background: linear-gradient(to right, #E20074, #b24196);
+    color: white;
+}
+
+.selected-checkbox{
+    background-color: #E20074;
+    border-color: #b24196;
+}
+
+.btn-custom{
+    background-color: #E20074;
+    background: linear-gradient(to right, #E20074, #b24196);
+    color: white;
+}
+
+
+.hover-button {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    color: white;
+    background-color: #E20074;
+    background: linear-gradient(to right, #E20074, #b24196); 
+  }
+  
+  
+  .hover-button::before,
+  .hover-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: rgb(246, 229, 229);
+    transition: width 0.9s ease;
+  }
+  
+  .hover-button::before {
+    top: 0;
+    left: 0;
+  }
+  
+  .hover-button::after {
+    bottom: 0;
+    right: 0;
+  }
+  
+  .hover-button:hover::before,
+  .hover-button:hover::after {
+    width: 100%;
+  }
+
+  .hover-button:hover::before,
+.hover-button:hover::after {
+  animation-play-state: running;
+}

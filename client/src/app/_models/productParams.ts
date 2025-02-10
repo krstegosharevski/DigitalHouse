@@ -3,5 +3,5 @@ export class ProductParams {
     MaxPrice = 150000
     BrandIds : number[] = []
     pageNumber = 1;
-    pageSize = 5;
+    pageSize = 10;
 }

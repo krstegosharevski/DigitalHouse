@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BrandDto } from 'src/app/_models/brandDto';
 import { BrandsService } from 'src/app/_services/brands.service';
 
@@ -9,6 +9,7 @@ import { BrandsService } from 'src/app/_services/brands.service';
 })
 export class ProductFiltersComponent implements OnInit {
   @Output() searchFilters = new EventEmitter<{ minPrice: number, maxPrice: number, brands: number[] }>();
+  @Input() category!: string;
 
   brands: BrandDto[] = [];
   selectedBrands: number[] = []
@@ -30,14 +31,26 @@ export class ProductFiltersComponent implements OnInit {
   }
 
   loadBrands(): void {
-    this.brandsService.getAllBrands().subscribe({
-      next: (brands) => {
-        this.brands = brands;
-      },
-      error: (error) => {
-        console.error('Error loading brands:', error);
-      }
-    });
+    if(this.category){
+      this.brandsService.getBrandsByCategory(this.category).subscribe({
+        next: (brands) => {
+          this.brands = brands;
+        },
+        error: (error) => {
+          console.error('Error loading brands:', error);
+        }
+      });
+    }else{
+      this.brandsService.getAllBrands().subscribe({
+        next: (brands) => {
+          this.brands = brands;
+        },
+        error: (error) => {
+          console.error('Error loading brands:', error);
+        }
+      });
+    }
+    
   }
 
 

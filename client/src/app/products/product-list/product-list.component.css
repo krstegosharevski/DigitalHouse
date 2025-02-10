@@ -1,0 +1,27 @@
+.main{
+    padding-top: 70px;
+}
+::ng-deep pagination .pagination {
+    background-color: white !important; /* Позадина на пагинацијата */
+}
+
+::ng-deep pagination .page-item .page-link {
+    color: #060606 !important; /* Боја на текстот */
+    background-color: #f8f9fa !important; /* Позадина */
+    border: 1px solid #000000 !important; /* Рамка */
+}
+
+
+
+::ng-deep pagination .page-item.active .page-link {
+    background-color: #E20074 !important; /* Активна боја */
+    color: white !important;
+    border-color: #000000 !important;
+    /*background: linear-gradient(to right, #E20074, #b24196);*/
+}
+
+::ng-deep pagination .page-item.disabled .page-link {
+    color: #6c757d !important;
+    background-color: #e9ecef !important;
+    border-color: #dee2e6 !important;
+}

@@ -8,6 +8,7 @@ namespace DigitalHouseSystemApi.Services
         Task<Category> FindByIdAsync(int id);
         Task<IEnumerable<CategoryDto>> FindAllCategoriesAsync();
         Task<bool> SaveAllAsync();
+        Task<Category> FindByNameAsync(string name);
 
     }
 }

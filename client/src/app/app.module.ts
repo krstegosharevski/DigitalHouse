@@ -20,7 +20,6 @@ import { ProblemsComponent } from './problems/problems.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductCategoriesComponent } from './products/product-categories/product-categories.component';
-import { ProductBrandNavComponent } from './products/product-brand-nav/product-brand-nav.component';
 import { ProductFiltersComponent } from './products/product-filters/product-filters.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -31,6 +30,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { HomeComponent } from './home/home.component';
+import { ProductCategoryNavbarComponent } from './products/product-category-navbar/product-category-navbar.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -46,7 +46,6 @@ export function HttpLoaderFactory(http:HttpClient){
     LoginComponent,
     RegisterComponent,
     ProductCategoriesComponent,
-    ProductBrandNavComponent,
     ProductFiltersComponent,
     ProductCardComponent,
     ProductListComponent,
@@ -56,6 +55,7 @@ export function HttpLoaderFactory(http:HttpClient){
     AddProductComponent,
     HasRoleDirective,
     HomeComponent,
+    ProductCategoryNavbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,26 +1,28 @@
 <div class="filter-menu border p-3">
   <div class="price-section mb-4">
-    <h5 class="text-center">Price</h5>
+    <h5 class="text-center fw-light">Price</h5>
     <div *ngFor="let range of priceRanges">
       <button 
         class="btn btn-outline-secondary w-100 my-2" 
+        [ngClass]="{'btn-selected': selectedPrice === range.value}"
         (click)="onPriceSelected(range.value)">
         {{ range.label }}
       </button>
     </div>
   </div>
 
-  <div class="brand-section">
-    <h5 class="text-center">Brands</h5>
+  <div class="brand-section mt-2 pt-2">
+    <h5 class="text-center fw-light">Brands</h5>
     <div class="brand-list">
       <div class="form-check" *ngFor="let brand of brands">
         <input
           class="form-check-input"
+          [ngClass]="{'selected-checkbox': selectedBrands.includes(brand.id)}" 
           type="checkbox"
           [id]="'brand-' + brand.name"
           (change)="onBrandToggle(brand.id, $event)"
         >
-        <label class="form-check-label" [for]="'brand-' + brand.name">
+        <label class="form-check-label fw-light" [for]="'brand-' + brand.name">
           {{ brand.name }}
         </label>
       </div>
@@ -28,6 +30,6 @@
   </div>
 
   <div class="text-center mt-3">
-    <button class="btn btn-primary" (click)="applyFilters()">Search</button>
+    <button class="btn hover-button" (click)="applyFilters()">Search</button>
   </div>
 </div>

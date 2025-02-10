@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-light rounded">
+    <div class="container">
+        <a class="navbar-brand ps-1 fw-light" style="color: white;"><img src="assets/images/home_icon.png" routerLink="" alt="Home" class="pb-1" style="height: 29px; width: 29px;"> > <span routerLink="/product-categories">Products</span> > Categories :</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item fw-light px-3" 
+                *ngFor="let cat of categories"  
+                [routerLink]="['/products', cat.name]" 
+                routerLinkActive="active"
+                > 
+                    {{cat.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

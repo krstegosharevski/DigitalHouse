@@ -2,6 +2,7 @@
 using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 
 namespace DigitalHouseSystemApi.Services.Impl
 {
@@ -34,6 +35,17 @@ namespace DigitalHouseSystemApi.Services.Impl
         public async Task<bool> SaveAllAsync()
         {
             return await _categoryRepository.SaveAllAsync();
+        }
+
+        public async Task<Category> FindByNameAsync(string name)
+        {
+            var category = await _categoryRepository.FindByNameAsync(name);
+            if (category == null)
+            {
+                throw new CategoryNotFoundException(name);
+            }
+            return category;
+
         }
     }
 }

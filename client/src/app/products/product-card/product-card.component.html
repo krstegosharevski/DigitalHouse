@@ -1,23 +1,19 @@
 
 <div class="card">
-    <div class="card-body text-center">
-      <h5 class="card-title">{{ product!.name }}</h5>
-      <p class="text-muted">{{ product!.brandName }}</p>
+    <div class="card-body text-center mb-3 mt-1 ">
+      <h5 class="card-title fw-light">{{ product!.brandName }} {{ product!.name }}</h5>
+     
     </div>
     <img [src]="product.photoUrl" class="card-img-top" alt="Product Image" (click)="toggleDetails()">
     
     <div class="card-body text-center">
-      <p class="text-muted">{{ product!.price }} MKD</p>
-      <div class="stock-status">
-        <span [class.text-success]="product!.isPresent" [class.text-danger]="!product.isPresent">
-          {{ product.isPresent ? 'In Stock' : 'Out of Stock' }}
-        </span>
-      </div>
-      <button class="btn btn-primary" [disabled]="!product.isPresent">
-        Add to Cart
+      <h4 class="text-muted fw-light">{{ product!.price | number}} MKD</h4>
+
+      <button class="btn btn-color mt-2 pt-2" [disabled]="!product.isPresent" style="width: 100px;">
+        <img src="assets/images/cart-white.png" alt="Search" style="height: 26px; width: 26px;">
       </button>
-      <div *ngIf="(currentUser$ | async)">
-        <button *appHasRole="['Admin']" class="btn btn text-success px-2" (click)="rutiraj(this.product!.id)">
+      <div *ngIf="(currentUser$ | async)" class="mt-2">
+        <button *appHasRole="['Admin']" class="btn btn-success px-2 fw-light" (click)="routeToEditPage(this.product!.id)">
           Edit Product
         </button>
         
@@ -28,9 +24,9 @@
   
   <!-- Product Details Modal -->
   <div class="product-modal" *ngIf="showDetails" (click)="toggleDetails()">
-    <div class="modal-content  " (click)="$event.stopPropagation()">
-      <div class="modal-header text-center">
-        <h4>{{ product.name }}</h4>
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h4 class="mx-auto main-title">{{product.brandName}} {{ product.name }}</h4>
         <button type="button" class="close-btn" (click)="toggleDetails()">&times;</button>
       </div>
       <div class="modal-body">
@@ -41,30 +37,31 @@
           <div class="col-md-6">
 
             <div class="description">
-              <h5>Details:</h5>
-              <h6>{{ product.description }}</h6>
+              <h5 class="fw-light text-center">Details:</h5>
+              <h6 class="fw-light text-center pt-2" [innerHTML]="'<span>' + formatDescription(product.description) + '</span>'"></h6>
+
             </div>
-            <br>
-            <h5>Colors:</h5>
-            <div class="colors">
+            <h5 class="fw-light text-center mt-2 pt-4">Colors:</h5>
+            <div class="colors text-center">
               <button 
                 *ngFor="let color of product.colors" 
                 class="color-button" 
                 [style.backgroundColor]="color"
-                
                 [attr.title]="color">
               </button>
             </div>
-            
-            <p class="price">{{ product.price }} MKD</p>
-            <div class="stock-status mb-3">
-              <span [class.text-success]="product.isPresent" [class.text-danger]="!product.isPresent">
-                {{ product.isPresent ? 'In Stock' : 'Out of Stock' }}
-              </span>
+      
+              <h5 class="fw-light text-center mt-2 pt-3">Price: {{ product.price | number}} MKD</h5>
+           
+            <div *ngIf="product.isPresent" class="btn d-flex justify-content-center mt-4 btn-color">
+              <button class="btn" [disabled]="!product.isPresent" style="width: 150px; height: 50px;">
+                <img src="assets/images/cart-white.png" alt="Search" style="height: 26px; width: 26px;">
+              </button>
             </div>
-            <button class="btn btn-primary mt-3" [disabled]="!product.isPresent">
-              Add to Cart
-            </button>
+            <div *ngIf="!product.isPresent" class="mt-3 p-3 out-of-stock">
+              <h4 class="text-center fw-light" style="color: #E20074;">Out of Stock.</h4>
+            </div>
+            
           </div>
         </div>
       </div>

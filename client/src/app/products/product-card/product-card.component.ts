@@ -26,13 +26,16 @@ export class ProductCardComponent implements OnInit {
     
   }
 
-  rutiraj(id:number){
-   // this.router.navigate([`admin/edit-product/${id}`], { state: { editMode: true } });
+  routeToEditPage(id:number){
    this.router.navigate([`admin/edit-product/${id}`], { state: { editMode: true } }).then(() => {
-    console.log('Navigation was successful');
   }).catch(err => {
     console.error('Navigation failed', err);
   });
   }
+
+  formatDescription(description: string): string {
+    return description.replace(/ (?=[A-Za-z]+:)/g, '<br><span><br>');
+  }
+
 
 }

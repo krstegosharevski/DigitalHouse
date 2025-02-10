@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BrandDto } from '../_models/brandDto';
@@ -13,5 +13,10 @@ export class BrandsService {
   getAllBrands(){
       return this.http.get<BrandDto[]>(this.baseUrl + "brand");
     }
+
+  getBrandsByCategory(categoryName: string){
+    let params = new HttpParams().set('categoryName', categoryName);
+  return this.http.get<BrandDto[]>(`${this.baseUrl}brand/by-category`, { params });
+  }
 
 }

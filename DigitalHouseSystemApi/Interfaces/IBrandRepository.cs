@@ -6,5 +6,6 @@ namespace DigitalHouseSystemApi.Interfaces
     {
         Task<Brand> FindByIdAsync(int id);
         Task<IEnumerable<Brand>> GetAllBrandsAsync();
+        Task<IEnumerable<Brand>> GetAllBrandsByProductCategoryAsync(int categoryId);
     }
 }

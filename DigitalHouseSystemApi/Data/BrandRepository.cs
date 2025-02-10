@@ -20,5 +20,17 @@ namespace DigitalHouseSystemApi.Data
         {
             return await _context.Brands.ToListAsync();
         }
+
+        public async Task<IEnumerable<Brand>> GetAllBrandsByProductCategoryAsync(int categoryId)
+        {
+            return await _context.Brands
+                .FromSqlInterpolated($@"
+                SELECT DISTINCT b.* 
+                FROM Brands b 
+                INNER JOIN Products p ON b.Id = p.BrandId 
+                WHERE p.CategoryId = {categoryId}")
+                .ToListAsync();
+
+        }
     }
 }

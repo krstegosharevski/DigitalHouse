@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDto } from 'src/app/_models/productDto';
+import { AccountService } from 'src/app/_services/account.service';
 import { ProductsService } from 'src/app/_services/products.service';
 
 @Component({
@@ -11,8 +12,12 @@ import { ProductsService } from 'src/app/_services/products.service';
 export class ProductSearchedComponent implements OnInit {
   productName : string = '';
   product?: ProductDto = undefined
+  currentUser$ = this.accountService.currentUser$;
 
-  constructor(private route: ActivatedRoute,private productService: ProductsService) { }
+  constructor(private route: ActivatedRoute,
+      private productService: ProductsService,
+      private router : Router,
+      private accountService : AccountService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -29,5 +34,12 @@ export class ProductSearchedComponent implements OnInit {
       error: (err) => console.error("Error loading the product", err)
     })
   }
+
+  routeToEditPage(id:number){
+    this.router.navigate([`admin/edit-product/${id}`], { state: { editMode: true } }).then(() => {
+   }).catch(err => {
+     console.error('Navigation failed', err);
+   });
+   }
 
 }
