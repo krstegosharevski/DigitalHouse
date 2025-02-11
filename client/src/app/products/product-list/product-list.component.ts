@@ -25,6 +25,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.category = params['category'];
+      this.resetFilters();
       this.loadProducts();
     });
   }
@@ -53,6 +54,10 @@ export class ProductListComponent implements OnInit {
     this.productParams.MaxPrice = filters.maxPrice;
     this.productParams.BrandIds = filters.brands;
     this.loadProducts();
+  }
+
+  resetFilters(): void {
+    this.productParams = new ProductParams(); 
   }
 
 }

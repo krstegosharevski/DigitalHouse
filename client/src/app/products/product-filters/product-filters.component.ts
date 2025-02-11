@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BrandDto } from 'src/app/_models/brandDto';
 import { BrandsService } from 'src/app/_services/brands.service';
 
@@ -28,6 +28,16 @@ export class ProductFiltersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBrands();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['category'] && !changes['category'].firstChange) {
+      this.selectedBrands = []; // Ресетирање на селектираните брендови
+      this.selectedPrice = null;
+      this.minPrice = 0;
+      this.maxPrice = 150000;
+      this.loadBrands(); // Повторно вчитување на брендовите
+    }
   }
 
   loadBrands(): void {
