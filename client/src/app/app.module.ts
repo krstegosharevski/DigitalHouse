@@ -31,6 +31,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { HomeComponent } from './home/home.component';
 import { ProductCategoryNavbarComponent } from './products/product-category-navbar/product-category-navbar.component';
+import { ProblemsListComponent } from './problems-list/problems-list.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http:HttpClient){
     HasRoleDirective,
     HomeComponent,
     ProductCategoryNavbarComponent,
+    ProblemsListComponent,
   ],
   imports: [
     BrowserModule,

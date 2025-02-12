@@ -12,6 +12,7 @@ import { ProductSearchedComponent } from './products/product-searched/product-se
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { HomeComponent } from './home/home.component';
+import { ProblemsListComponent } from './problems-list/problems-list.component';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'searched-product/:product', component: ProductSearchedComponent},
   {path: 'admin/add-product', component: AddProductComponent, canActivate: [AdminGuard]},
-  {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]}, 
+  {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]},
+  {path: 'admin/problem-list', component: ProblemsListComponent, canActivate: [AdminGuard]}, 
   {path: '', component: HomeComponent}
 ];
 

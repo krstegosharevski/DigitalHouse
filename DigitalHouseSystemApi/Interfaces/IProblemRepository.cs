@@ -1,9 +1,10 @@
-﻿using DigitalHouseSystemApi.Models;
+﻿using DigitalHouseSystemApi.Helpers;
+using DigitalHouseSystemApi.Models;
 
 namespace DigitalHouseSystemApi.Interfaces
 {
     public interface IProblemRepository
     {
-        Task<IEnumerable<Problem>> FindAllAsync();
+        Task<PagedList<Problem>> FindAllAsync(ProblemParams problemParams);
     }
 }

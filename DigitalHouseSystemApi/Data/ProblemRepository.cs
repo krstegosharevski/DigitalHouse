@@ -1,4 +1,5 @@
-﻿using DigitalHouseSystemApi.Interfaces;
+﻿using DigitalHouseSystemApi.Helpers;
+using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +12,13 @@ namespace DigitalHouseSystemApi.Data
         {
             _context = context;
         }
-        public async Task<IEnumerable<Problem>> FindAllAsync()
+        public async Task<PagedList<Problem>> FindAllAsync(ProblemParams problemParams)
         {
-            return await _context.Problems
-                .Include(p => p.Photo)
-                .ToListAsync();
+            var query =  _context.Problems
+                        .Include(p => p.Photo)
+                        .AsQueryable();
+
+            return await PagedList<Problem>.CreateAsync(query, problemParams.PageNumber, problemParams.PageSize);
         }
     }
 }

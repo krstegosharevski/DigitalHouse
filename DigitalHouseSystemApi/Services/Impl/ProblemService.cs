@@ -1,5 +1,6 @@
 ﻿using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
+using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 
@@ -14,10 +15,12 @@ namespace DigitalHouseSystemApi.Services.Impl
             _problemRepository = problemRepository;
         }
 
-        public async Task<IEnumerable<ProblemDto>> GetAllProblemsToListAsync()
+        public async Task<PagedList<ProblemDto>> GetAllProblemsToListAsync(ProblemParams problemParams)
         {
-            var problems = await _problemRepository.FindAllAsync();
-            return problems.Select(item => item.MappToDtoModel()).ToList();
+            var problems = await _problemRepository.FindAllAsync(problemParams);
+            var problemDtos = problems.Select(item => item.MappToDtoModel()).ToList();
+
+            return new PagedList<ProblemDto>(problemDtos, problems.TotalCount, problemParams.PageNumber, problemParams.PageSize);
         }
     }
 }
