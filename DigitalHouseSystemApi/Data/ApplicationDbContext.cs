@@ -24,7 +24,8 @@ namespace DigitalHouseSystemApi.Data
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
- 
+        public DbSet<Problem> Problems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -51,6 +52,12 @@ namespace DigitalHouseSystemApi.Data
                 .HasOne(ur => ur.Category)
                 .WithOne(u => u.Photo)
                 .HasForeignKey<Photo>(ur => ur.CategoryId)
+                .IsRequired(false);
+
+            builder.Entity<Photo>()
+                .HasOne(ur => ur.Problem)
+                .WithOne(u => u.Photo)
+                .HasForeignKey<Photo>(ur => ur.ProblemId)
                 .IsRequired(false);
 
             builder.Entity<Product>()
