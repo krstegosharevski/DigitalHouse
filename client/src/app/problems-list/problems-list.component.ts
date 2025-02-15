@@ -4,7 +4,7 @@ import { Pagination } from '../_models/pagination';
 import { ProblemParams } from '../_models/problemParams';
 import { ProblemsService } from '../_services/problems.service';
 import { ActivatedRoute } from '@angular/router';
-
+declare var bootstrap: any;
 @Component({
   selector: 'app-problems-list',
   templateUrl: './problems-list.component.html',
@@ -15,6 +15,8 @@ export class ProblemsListComponent implements OnInit {
   problems: ProblemDto[] = [];
   pagination: Pagination | undefined
   productParams: ProblemParams = new ProblemParams();
+  selectedProblem: any = null;
+
 
   constructor(private route : ActivatedRoute,
               private problemService: ProblemsService){ }
@@ -43,6 +45,13 @@ export class ProblemsListComponent implements OnInit {
       this.productParams.pageNumber = event.page;
       this.loadProblems();
     }
+  }
+
+  
+  openModal(problem: any) {
+    this.selectedProblem = problem;
+    var myModal = new bootstrap.Modal(document.getElementById('problemModal'));
+    myModal.show();
   }
 
 }

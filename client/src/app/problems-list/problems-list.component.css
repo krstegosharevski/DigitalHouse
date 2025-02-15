@@ -1,0 +1,42 @@
+::ng-deep pagination .pagination {
+    background-color: white !important;
+}
+
+::ng-deep pagination .page-item .page-link {
+    color: #060606 !important;
+    background-color: #f8f9fa !important;
+    border: 1px solid #000000 !important;
+}
+
+
+
+::ng-deep pagination .page-item.active .page-link {
+    background-color: #E20074 !important;
+    color: white !important;
+    border-color: #000000 !important;
+}
+
+::ng-deep pagination .page-item.disabled .page-link {
+    color: #6c757d !important;
+    background-color: #e9ecef !important;
+    border-color: #dee2e6 !important;
+}
+
+.btn-color {
+    background-color: #E20074;
+    color: white;
+    font-weight: 300;
+}
+
+.btn-color:hover {
+    background: linear-gradient(to right, #E20074, #b24196);
+}
+
+
+.btn-close:hover {
+    filter: invert(25%) sepia(95%) saturate(500%) hue-rotate(310deg);
+}
+
+.problem-context{
+    font-size: 18px;
+}
