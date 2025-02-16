@@ -20,5 +20,23 @@ namespace DigitalHouseSystemApi.Data
 
             return await PagedList<Problem>.CreateAsync(query, problemParams.PageNumber, problemParams.PageSize);
         }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() > 0;
+        }
+
+        public void Save(Problem problem)
+        {
+            _context.Problems.Add(problem);
+            _context.SaveChanges(); 
+        }
+
+        public async Task<Problem?> FindByIdAsync(int id)
+        {
+            return await _context.Problems
+                        .Include(p => p.Photo)
+                        .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }

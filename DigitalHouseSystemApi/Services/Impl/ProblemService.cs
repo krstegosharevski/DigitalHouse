@@ -1,4 +1,5 @@
-﻿using DigitalHouseSystemApi.Data.Mappers;
+﻿using DigitalHouseSystemApi.Data;
+using DigitalHouseSystemApi.Data.Mappers;
 using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
@@ -9,10 +10,13 @@ namespace DigitalHouseSystemApi.Services.Impl
     public class ProblemService : IProblemService
     {
         private readonly IProblemRepository _problemRepository;
+        public readonly IPhotoService _photoService;
 
-        public ProblemService(IProblemRepository problemRepository)
+
+        public ProblemService(IProblemRepository problemRepository, IPhotoService photoService)
         {
             _problemRepository = problemRepository;
+            _photoService = photoService;
         }
 
         public async Task<PagedList<ProblemDto>> GetAllProblemsToListAsync(ProblemParams problemParams)
@@ -22,5 +26,51 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             return new PagedList<ProblemDto>(problemDtos, problems.TotalCount, problemParams.PageNumber, problemParams.PageSize);
         }
+
+        public async Task<ProblemDto> ReportNewProblem(ProblemDto problemDto, IFormFile file)
+        {
+
+            var problem = new Problem(problemDto.Email, problemDto.Name, problemDto.Context);
+
+            _problemRepository.Save(problem);
+
+            
+                if (file != null)
+                {
+                    var success = await AddPhotoAsync(file, problem.Id);
+                    if (!success)
+                    {
+                        throw new Exception("Error adding photo to product");
+                    }
+                }
+         
+
+            return problem.MappToDtoModel();
+        }
+
+        private async Task<bool> AddPhotoAsync(IFormFile file, int productId)
+        {
+            var problem = await _problemRepository.FindByIdAsync(productId);
+
+            if (problem == null) throw new ArgumentException("Error: Problem not found");
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) throw new ArgumentException("Error: Can not add photo!");
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+            problem.Photo = photo;
+
+            if (_problemRepository.SaveChanges()) return true;
+            return false;
+        }
+
+
+
+
     }
 }

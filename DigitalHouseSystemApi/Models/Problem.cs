@@ -8,5 +8,16 @@
         public string Context { get; set; }
         public DateTime CreatedAt { get; set; }
         public Photo? Photo { get; set; }
+
+        public Problem(){}
+
+        public Problem(string email, string name, string context)
+        {
+            Email = email;
+            Name = name;
+            Context = context;
+            CreatedAt = DateTime.Now;
+        }
+
     }
 }

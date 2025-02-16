@@ -1,34 +1,29 @@
 <div class="container mt-4 pt-2">
-    
     <div class="text-center">
         <div class="row my-4 p-4" style="background-color: #f5f7f8;">
-            <!-- <div class="col-1 ps-4 pt-4 btn-custome-2 magenta-color">
-                <button class="btn btn-back" [routerLink]="['/']">Back</button>
-            </div> -->
             <div class="p-4 mt-4">
-                
-                <form class="magenta-color slide-slide"  #ticketForm="ngForm" enctype="multipart/form-data">
+                <form class="magenta-color slide-slide" #ticketForm="ngForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
                     <h1 class="fw-light text-white generate-ticket-title">Report Your Problem Here</h1>
 
                     <div class="form-group">
-                        <label for="title" class="text-white text-size-custom">Your mail :</label>
-                        <input type="text" id="title" name="title"  required>
+                        <label for="email" class="text-white text-size-custom">Your mail :</label>
+                        <input type="email" id="email" name="email" [(ngModel)]="problemData.email" required>
                     </div>
                 
                     <div class="form-group">
-                        <label for="title" class="text-white text-size-custom">Problem Title :</label>
-                        <input type="text" id="title" name="title"  required>
+                        <label for="name" class="text-white text-size-custom">Problem Title :</label>
+                        <input type="text" id="name" name="name" [(ngModel)]="problemData.name" required>
                     </div>
                 
                     <div class="form-group">
-                        <label for="message" class="text-white text-size-custom">Describe the Problem :</label>
-                        <textarea id="message" name="message"  rows="2" required></textarea>
+                        <label for="context" class="text-white text-size-custom">Describe the Problem :</label>
+                        <textarea id="context" name="context" [(ngModel)]="problemData.context" rows="2" required></textarea>
                     </div>
             
                     <div class="form-group white-color">
                         <label class="btn insert-custome">
                             Insert picture 
-                            <input id="picture" name="picture" type="file"  hidden>
+                            <input id="picture" name="picture" type="file" (change)="onFileSelected($event)" hidden>
                         </label>
                     </div>
                 
@@ -36,7 +31,6 @@
                         <button type="submit" class="btn btn-bg hover-button p-3">Send</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

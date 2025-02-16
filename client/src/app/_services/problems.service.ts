@@ -4,7 +4,7 @@ import { PaginatedResult } from '../_models/pagination';
 import { ProblemDto } from '../_models/problemDto';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ProblemParams } from '../_models/problemParams';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +45,8 @@ export class ProblemsService {
         })
       )
     }
+
+    addNewProblem(formData: FormData): Observable<any>{
+        return this.http.post(`${this.baseUrl}problem/report-problem`, formData)
+      }
 }

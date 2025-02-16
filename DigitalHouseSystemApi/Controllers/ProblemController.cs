@@ -27,6 +27,16 @@ namespace DigitalHouseSystemApi.Controllers
 
         }
 
+        [HttpPost("report-problem")]
+        public async Task<ActionResult<ProblemDto>> ReportProblem([FromForm] ProblemDto problem, [FromForm] IFormFile? file = null)
+        {
+            if (problem == null)
+            {
+                return BadRequest("You need to enter a problem!");
+            }
+            return Ok(await _problemService.ReportNewProblem(problem, file));
+        }
+
 
     }
 }

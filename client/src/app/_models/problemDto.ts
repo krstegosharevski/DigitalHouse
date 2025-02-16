@@ -3,5 +3,5 @@ export interface ProblemDto{
     name: string;
     context: string;
     photoUrl?: string;
-    createdAt: Date;
+    createdAt?: Date;
 }

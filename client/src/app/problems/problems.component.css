@@ -47,6 +47,7 @@ label {
 
 /* Input and Textarea Styles */
 input[type="text"],
+input[type="email"],
 textarea,
 input[type="file"] {
   width: 100%;
