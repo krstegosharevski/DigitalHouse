@@ -1,4 +1,4 @@
 export class ProblemParams {
     pageNumber = 1;
-    pageSize = 10;
+    pageSize = 12;
 }

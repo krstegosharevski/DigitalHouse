@@ -15,10 +15,12 @@ export class ProblemsComponent implements OnInit {
     context: '',
   };
   selectedFile?: File;
+  errorMessage: any;
+  showSuccessBanner = false
 
-  constructor(private problemService: ProblemsService) {}
+  constructor(private problemService: ProblemsService) { }
   ngOnInit(): void {
-    
+
   }
 
   onFileSelected(event: any) {
@@ -32,7 +34,7 @@ export class ProblemsComponent implements OnInit {
     formData.append('email', this.problemData.email);
     formData.append('name', this.problemData.name);
     formData.append('context', this.problemData.context);
-    
+
     if (this.selectedFile) {
       formData.append('file', this.selectedFile);
     }
@@ -40,9 +42,21 @@ export class ProblemsComponent implements OnInit {
     this.problemService.addNewProblem(formData).subscribe({
       next: (response) => {
         console.log('Problem reported successfully:', response);
+
+        this.problemData = { email: '', name: '', context: '' };
+        this.selectedFile = undefined;
+
+        this.errorMessage = '';
+        this.showSuccessBanner = true
       },
       error: (error) => {
-        console.error('Error reporting problem:', error);
+        if (error.error?.message) {
+          this.errorMessage = error.error.message;
+          this.showSuccessBanner = false;
+        } else {
+          this.errorMessage = "All fields are required except picture which is optional!";
+          this.showSuccessBanner = false;
+        }
       }
     });
   }

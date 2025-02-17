@@ -1,23 +1,34 @@
 <div class="container mt-4 pt-2">
     <div class="text-center">
         <div class="row my-4 p-4" style="background-color: #f5f7f8;">
+            <div *ngIf="showSuccessBanner" class="alert alert-success">
+                {{ 'Your Problem Was Reported Successfully!' }} 
+              </div>
             <div class="p-4 mt-4">
                 <form class="magenta-color slide-slide" #ticketForm="ngForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
                     <h1 class="fw-light text-white generate-ticket-title">Report Your Problem Here</h1>
 
+                    <div *ngIf="errorMessage" class="alert alert-danger">
+                        {{ errorMessage }}
+                    </div>
+                    
+
                     <div class="form-group">
                         <label for="email" class="text-white text-size-custom">Your mail :</label>
-                        <input type="email" id="email" name="email" [(ngModel)]="problemData.email" required>
+                        <input type="email" id="email" name="email" [(ngModel)]="problemData.email" required #emailRef="ngModel">
+                        <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">Email is required.</div>
                     </div>
                 
                     <div class="form-group">
                         <label for="name" class="text-white text-size-custom">Problem Title :</label>
-                        <input type="text" id="name" name="name" [(ngModel)]="problemData.name" required>
+                        <input type="text" id="name" name="name" [(ngModel)]="problemData.name" required #nameRef="ngModel">
+                        <div *ngIf="nameRef.invalid && nameRef.touched" class="text-danger">Problem Title is required.</div>
                     </div>
                 
                     <div class="form-group">
                         <label for="context" class="text-white text-size-custom">Describe the Problem :</label>
-                        <textarea id="context" name="context" [(ngModel)]="problemData.context" rows="2" required></textarea>
+                        <textarea id="context" name="context" [(ngModel)]="problemData.context" rows="2" required #contextRef="ngModel"></textarea>
+                        <div *ngIf="contextRef.invalid && contextRef.touched" class="text-danger">Problem description is required.</div>
                     </div>
             
                     <div class="form-group white-color">
