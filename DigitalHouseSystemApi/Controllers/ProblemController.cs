@@ -34,7 +34,15 @@ namespace DigitalHouseSystemApi.Controllers
             {
                 return BadRequest("You need to enter a problem!");
             }
-            return Ok(await _problemService.ReportNewProblem(problem, file));
+            try
+            {
+                return Ok(await _problemService.ReportNewProblem(problem, file));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
 

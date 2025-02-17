@@ -11,12 +11,16 @@ namespace DigitalHouseSystemApi.Services.Impl
     {
         private readonly IProblemRepository _problemRepository;
         public readonly IPhotoService _photoService;
+        public readonly IPerspectiveService _perspectiveService;
 
 
-        public ProblemService(IProblemRepository problemRepository, IPhotoService photoService)
+        public ProblemService(IProblemRepository problemRepository, 
+                              IPhotoService photoService,
+                              IPerspectiveService perspectiveService)
         {
             _problemRepository = problemRepository;
             _photoService = photoService;
+            _perspectiveService = perspectiveService;
         }
 
         public async Task<PagedList<ProblemDto>> GetAllProblemsToListAsync(ProblemParams problemParams)
@@ -29,6 +33,13 @@ namespace DigitalHouseSystemApi.Services.Impl
 
         public async Task<ProblemDto> ReportNewProblem(ProblemDto problemDto, IFormFile file)
         {
+
+            var toxicityScore = await _perspectiveService.AnalyzeTextAsync(problemDto.Context);
+
+            if (toxicityScore.HasValue && toxicityScore > 0.65) // Променете ја границата ако е потребно
+            {
+                throw new Exception("Your report contains toxic language and cannot be submitted.");
+            }
 
             var problem = new Problem(problemDto.Email, problemDto.Name, problemDto.Context);
 
