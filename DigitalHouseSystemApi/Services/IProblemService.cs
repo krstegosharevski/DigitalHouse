@@ -9,5 +9,6 @@ namespace DigitalHouseSystemApi.Services
     {
         Task<PagedList<ProblemDto>> GetAllProblemsToListAsync(ProblemParams problemParams);
         Task<ProblemDto> ReportNewProblem(ProblemDto problemDto, IFormFile file);
+        Task<ProblemDto> DeleteProblem(int id);
     }
 }

@@ -17,6 +17,7 @@
         <div class="card-body text-center">
           <div>
             <button class="btn btn-color mt-2" (click)="openModal(problem)">View Details</button>
+            <button class="btn btn-danger ms-2 mt-2" *ngIf="problem.id" (click)="deletePost(problem.id)">Delete</button>
           </div>
           <div class="mt-3 text-center">
             <p class="fw-light">{{ problem.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>

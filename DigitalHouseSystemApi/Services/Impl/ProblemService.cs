@@ -4,6 +4,7 @@ using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 
 namespace DigitalHouseSystemApi.Services.Impl
 {
@@ -76,12 +77,23 @@ namespace DigitalHouseSystemApi.Services.Impl
             };
             problem.Photo = photo;
 
-            if (_problemRepository.SaveChanges()) return true;
+            if (await _problemRepository.SaveChanges()) return true;
             return false;
         }
 
+        public async Task<ProblemDto> DeleteProblem(int id)
+        {
+            var problem  = await _problemRepository.FindByIdAsync(id);
+            if (id < 0 || problem == null)
+            {
+                throw new ProblemNotFoundException(id);
+            }
 
+            _problemRepository.DeleteById(problem);
+            await _problemRepository.SaveChanges();
 
+            return problem.MappToDtoModel();
 
+        }
     }
 }

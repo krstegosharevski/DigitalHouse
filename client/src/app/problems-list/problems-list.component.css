@@ -30,6 +30,8 @@
 
 .btn-color:hover {
     background: linear-gradient(to right, #E20074, #b24196);
+    color: white;
+    font-weight: 300;
 }
 
 

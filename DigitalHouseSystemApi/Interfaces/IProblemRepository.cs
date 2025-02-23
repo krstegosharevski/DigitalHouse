@@ -8,6 +8,7 @@ namespace DigitalHouseSystemApi.Interfaces
         Task<PagedList<Problem>> FindAllAsync(ProblemParams problemParams);
         Task<Problem> FindByIdAsync(int id);
         void Save(Problem problem);
-        bool SaveChanges();
+        Task<bool> SaveChanges();
+        void DeleteById(Problem problem);
     }
 }

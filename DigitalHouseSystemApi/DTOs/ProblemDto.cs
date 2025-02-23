@@ -4,6 +4,7 @@ namespace DigitalHouseSystemApi.DTOs
 {
     public class ProblemDto
     {
+        public int Id { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string Context { get; set; }
@@ -12,8 +13,9 @@ namespace DigitalHouseSystemApi.DTOs
 
         public ProblemDto() { }
 
-        public ProblemDto(string email, string name, string context, DateTime? createdAt, string? photoUrl)
+        public ProblemDto(int id,string email, string name, string context, DateTime? createdAt, string? photoUrl)
         {
+            Id = id;
             Email = email;
             Name = name;
             Context = context;

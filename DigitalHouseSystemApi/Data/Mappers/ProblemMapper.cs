@@ -10,6 +10,7 @@ namespace DigitalHouseSystemApi.Data.Mappers
             if (domainModel == null) { throw new Exception(); }
             return new ProblemDto()
             {
+                Id = domainModel.Id,
                 Email = domainModel.Email,
                 Name = domainModel.Name,
                 Context = domainModel.Context,

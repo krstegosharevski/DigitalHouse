@@ -14,7 +14,7 @@ export class ProblemsListComponent implements OnInit {
 
   problems: ProblemDto[] = [];
   pagination: Pagination | undefined
-  productParams: ProblemParams = new ProblemParams();
+  problemtParams: ProblemParams = new ProblemParams();
   selectedProblem: any = null;
 
 
@@ -28,7 +28,7 @@ export class ProblemsListComponent implements OnInit {
   }
 
   loadProblems(): void{
-    this.problemService.getAllProblems(this.productParams).subscribe({
+    this.problemService.getAllProblems(this.problemtParams).subscribe({
       next: (response) => {
         if(response.result && response.pagination){
           this.problems = response.result;
@@ -41,8 +41,8 @@ export class ProblemsListComponent implements OnInit {
 
 
   pageChanged(event: any){
-    if(this.productParams && this.productParams.pageNumber !== event.page){
-      this.productParams.pageNumber = event.page;
+    if(this.problemtParams && this.problemtParams.pageNumber !== event.page){
+      this.problemtParams.pageNumber = event.page;
       this.loadProblems();
     }
   }
@@ -52,6 +52,18 @@ export class ProblemsListComponent implements OnInit {
     this.selectedProblem = problem;
     var myModal = new bootstrap.Modal(document.getElementById('problemModal'));
     myModal.show();
+  }
+
+  deletePost(id: number){
+    if (confirm("Are you sure you want to delete this problem report?")) {
+      this.problemService.deleteProblemPost(id).subscribe({
+        next: () => {
+          console.log("Successfully deleted");
+          this.problems = this.problems.filter(p => p.id !== id);
+        },
+        error: (err) => console.error(err)
+      });
+    }
   }
 
 }

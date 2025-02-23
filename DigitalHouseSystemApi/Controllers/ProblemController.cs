@@ -2,6 +2,7 @@
 using DigitalHouseSystemApi.Extensions;
 using DigitalHouseSystemApi.Helpers;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,27 @@ namespace DigitalHouseSystemApi.Controllers
             return Ok(problems);
 
         }
+
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult<ProblemDto>> DeleteProblemPost(int id)
+        {
+            try
+            {
+                var deletedProblem = await _problemService.DeleteProblem(id);
+                return Ok(deletedProblem);
+            }
+            catch (ProblemNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpPost("report-problem")]
         public async Task<ActionResult<ProblemDto>> ReportProblem([FromForm] ProblemDto problem, [FromForm] IFormFile? file = null)
