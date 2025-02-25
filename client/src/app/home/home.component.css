@@ -97,13 +97,25 @@
   height: 100%; /* Full height of slide */
 }
 
+.test-class{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /*color: #E20074;*/
+  
+  padding: 15px;
+  height: 100%; /* Full height of slide */
+  transform: translateX(-24%);
+}
+
 .carousel-caption h5{
   font-size: 4.2rem; /* Adjust size based on preference */
-  text-shadow:  3px 3px 5px #E20074; /* Shadow with #E20074 color */
+ /* text-shadow:  2px 2px 4px #E20074; /* Shadow with #E20074 color */
 }
 .carousel-caption p {
   font-size: 3.2rem; /* Adjust size based on preference */
-  text-shadow: 3px 3px 5px #E20074; /* Shadow with #E20074 color */
   
 }
 
@@ -128,6 +140,13 @@ slide img {
     text-shadow: 2px 2px 4px #E20074;
   }
 
+  .carousel-caption h3 {
+    font-size: 0.7rem;
+  }
+  .carousel-caption h4 {
+    font-size: 0.8rem;
+  }
+
   carousel, slide {
     width: 100%;
     max-height: 200px; /* Поставете ја саканата висина */
@@ -141,10 +160,12 @@ slide img {
 }
 
 
-.custom-rounded-top {
+.custom-rounded {
   background: linear-gradient(to bottom,#ffffff, #f5f5f5);
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
   overflow: hidden; /* За да ги заобли и содржините внатре */
   border: 1px solid #ddd; /* За да добие мала граница */
 }
@@ -159,7 +180,7 @@ slide img {
 }
 
 .slide-div{
-  padding-top: 90px;
+  padding-top: 47px;
 }
 
 .slide-slide{

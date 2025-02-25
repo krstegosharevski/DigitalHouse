@@ -1,115 +1,163 @@
-<div class="container slide-div">
-    <carousel>
-        <slide>
-            <img src="https://www.telekom.mk/content/banners/2024/wifi-booster-shape.png" alt="first slide"
-                style="display: block; width: 100%;">
-        </slide>
-        <div class="carousel-caption">
-            <p>THERE IS NO PLACE LIKE</p>
-            <h5>Digital House</h5>
-        </div>
-        <slide >
-            <img src="https://www.telekom.mk/content/banners/2024/tphone-banner-mk.jpg" alt="second slide"
-                style="display: block; width: 100%;">
-        </slide>
-        <slide>
-            <img src="https://www.telekom.mk/content/banners/2024/apple-august-2024.jpg" alt="third slide"
-                style="display: block; width: 100%;">
-        </slide>
-    </carousel>
-</div>
-
-
-
-<div class="mt-4 mb-2">
-    <div  #animatedDiv class="pb-2 pt-2 custom-rounded-top-white mx-4 slide-slide" [@scaleUp]="state">
-        <div class="row">
-            <div>
-                <h1 class="text-center fw-light" style="color: white;">New Products</h1>
-            </div>
-        </div>
-    
-        
-        <div class="container my-3 rounded-4 border" style="background-color: white;">
-            <div class="container">
-                <div class="row justify-content-center p-4">
-                    <div class="col-auto mt-2 ">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                              <div class="col-md-4">
-                                <img src="https://www.telekom.mk/webimg?id=60934&width=240&height=240" class="img-fluid rounded-start" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">APPLE</h5>
-                                  <p class="card-text">iPhone 16</p>
-                                  <p class="card-text"><small class="text-body-secondary">From 64.990 MKD</small></p>
-                                  <button class="btn btn-light">Details</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-
-                    <div class="col-auto mt-2">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                              <div class="col-md-4">
-                                <img src="https://www.telekom.mk/webimg?id=60637&width=240&height=240" class="img-fluid rounded-start" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">SAMSUNG</h5>
-                                  <p class="card-text">Z Fold6</p>
-                                  <p class="card-text"><small class="text-body-secondary">From 119.990 MKD</small></p>
-                                  <button class="btn btn-light">Details</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-
-                    <div class="col-auto mt-2 ms-4">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                              <div class="col-md-4">
-                                <img src="https://www.telekom.mk/webimg?id=60081&width=240&height=240" class="img-fluid rounded-start" alt="...">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">T Phone</h5>
-                                  <p class="card-text">Artich Grey.</p>
-                                  <p class="card-text"><small class="text-body-secondary">13.990 MKD</small></p>
-                                  <button class="btn btn-light">Details</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="rounded-4 mt-1 slide-div">
+  <carousel>
+    <slide>
+      <img src="https://www.telekom.mk/content/banners/2024/wifi-booster-shape.png" alt="first slide"
+        style="display: block; width: 100%;">
+    </slide>
+    <div class="carousel-caption">
+      <p class="fw-light">THERE IS NO PLACE LIKE</p>
+      <h5><strong>Digital House</strong></h5>
     </div>
+    <slide>
+      <img src="https://www.telekom.mk/content/banners/2024/samsung-galaxy-ai.jpg" alt="third slide"
+        style="display: block; width: 100%;">
+    </slide>
+    <slide>
+      <img src="https://www.telekom.mk/content/banners/2024/magenta-moments-january.jpg" alt="third slide"
+        style="display: block; width: 100%;">
+      <div class="carousel-caption test-class">
+        <h3 class="fw-light me-4 px-3">Do You Need a Screen Protector for Your Phone?</h3>
+        <h4 class="fw-light m4-4 px-2 pt-1">Visit Digital House, To Get One!</h4>
+      </div>
+    </slide>
+
+    <slide>
+      <!-- https://www.telekom.mk/content/banners/2024/apple-august-2024.jpg -->
+      <img src="https://www.telekom.mk/content/banners/2024/tphone-banner-mk.jpg" alt="second slide"
+        style="display: block; width: 100%;">
+    </slide>
+  </carousel>
 </div>
 
 
-<div >
-    <div class="custom-rounded-top">
-        <div class="container pb-3" >
-        <div class="row align-items-center">
-          <!-- Лева страна со слика -->
-          <div class="col-md-6">
-            <img src="assets/images/logo.jpg" alt="Digital House Logo" class="img-fluid">
+
+<div class="mt-3 mb-2">
+  <div #animatedDiv class="pb-2 pt-2 custom-rounded-top-white mx-4 slide-slide" [@scaleUp]="state">
+    <div class="row">
+      <div>
+        <h1 class="text-center fw-light" style="color: white;">New Products</h1>
+      </div>
+    </div>
+
+
+    <div class="container my-3 rounded-4 border" style="background-color: white;">
+      <div class="container">
+        <div class="row justify-content-center p-4">
+          <div class="col-auto mt-2 ">
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="https://www.telekom.mk/webimg?id=60934&width=240&height=240" class="img-fluid rounded-start"
+                    alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">APPLE</h5>
+                    <p class="card-text">iPhone 16</p>
+                    <p class="card-text"><small class="text-body-secondary">From 64.990 MKD</small></p>
+                    <button class="btn btn-light">Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          <!-- Десна страна со текст -->
-          <div class="col-md-6 text-center">
-            <h2>Digital House Services</h2>
-            <p>All the services needed for superior communication are available to you in one place. Save time and access the service quickly and easily with just one click.</p>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+
+          <div class="col-auto mt-2">
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="https://www.telekom.mk/webimg?id=60637&width=240&height=240" class="img-fluid rounded-start"
+                    alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">SAMSUNG</h5>
+                    <p class="card-text">Z Fold6</p>
+                    <p class="card-text"><small class="text-body-secondary">From 119.990 MKD</small></p>
+                    <button class="btn btn-light">Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto mt-2 ms-4">
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="https://www.telekom.mk/webimg?id=60081&width=240&height=240" class="img-fluid rounded-start"
+                    alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">T Phone</h5>
+                    <p class="card-text">Artich Grey.</p>
+                    <p class="card-text"><small class="text-body-secondary">13.990 MKD</small></p>
+                    <button class="btn btn-light">Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
+
+<div>
+  <div class="custom-rounded m-2">
+    <div class="container pb-3 m-2">
+      <div class="row align-items-center p-3">
+        <!-- Лева страна со слика -->
+        <div class="col-md-6">
+          <img src="assets/images/mobile-protect.jpeg" alt="Digital House Logo" class="img-fluid rounded-5">
+        </div>
+
+        <!-- Десна страна со текст -->
+        <div class="col-md-6 text-center">
+          <div class="ps-4 ms-4">
+            <h2 class="fw-light pt-2"><strong>Do You Need a Screen Protector for Your Phone?</strong></h2>
+            <p class="fw-light pt-2">In our physical store, we offer custom-made screen protectors using the Mobile
+              Protect+ machine, perfectly tailored for your device!
+              Whether you have a Samsung S24 Ultra, iPhone, Xiaomi, or any other model, we’ve got you covered with:</p>
+            <ul class="pt-2" style="list-style: none;">
+              <li class="fw-light"><strong>Privacy screen protector</strong> – keeps your information private</li>
+              <li class="fw-light"><strong>Matte screen protector</strong> – reduces fingerprints and glare</li>
+              <li class="fw-light"><strong>Clear screen protector</strong> – crystal-clear protection</li>
+            </ul>
+            <h5 class="fw-light pt-2">Visit us and get your screen protected in just minutes!</h5>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-1 mb-2">
+  <div>
+    <div class="container my-3 rounded-4">
+      <div class="container pb-3">
+        <div class="row align-items-center">
+
+          <div class="col-md-6 text-center">
+            <h2 class="fw-light"><strong>Authorized Partner of T-Mobile</strong></h2>
+            <h3 class="fw-light pt-2">Digital House Services</h3>
+            <p class="fw-light pt-4">All the services needed for superior communication are available to you in one
+              place. Save time and
+              access the service quickly and easily with just one click.</p>
+            <p class="fw-light">Digital House offers services and products in collaboration with T-Mobile. All tariffs
+              are provided by T-Mobile,
+              while we act as an intermediary to help customers easily choose and order the options that best suit their
+              needs.</p>
+          </div>
+
+          <div class="col-md-6">
+            <img src="assets/images/logo.jpg" alt="Digital House Logo" class="img-fluid rounded-5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
