@@ -32,6 +32,9 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { HomeComponent } from './home/home.component';
 import { ProductCategoryNavbarComponent } from './products/product-category-navbar/product-category-navbar.component';
 import { ProblemsListComponent } from './problems-list/problems-list.component';
+import { ChooseTariffComponent } from './tariffs/choose-tariff/choose-tariff.component';
+import { Magenta1Component } from './tariffs/magenta1/magenta1.component';
+import { MobileTariffComponent } from './tariffs/mobile-tariff/mobile-tariff.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -58,6 +61,9 @@ export function HttpLoaderFactory(http:HttpClient){
     HomeComponent,
     ProductCategoryNavbarComponent,
     ProblemsListComponent,
+    ChooseTariffComponent,
+    Magenta1Component,
+    MobileTariffComponent,
   ],
   imports: [
     BrowserModule,
