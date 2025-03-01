@@ -6,13 +6,13 @@
 
 .card{
     cursor: pointer;
-    color: white;
-    background-color: black;
+    color: #E20074;
+    background-color:  white;
     border: 1px solid white;
 }
 .card:hover{
-    color: #E20074;
-    background-color:  white;
+    color: white;
+    background-color: black;
 }
 
 h4.card-title{
