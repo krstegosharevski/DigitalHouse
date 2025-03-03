@@ -1,0 +1,37 @@
+.pdt{
+    padding-top: 80px;
+}
+
+.border-magenta{
+    border-color: #E20074 !important;
+    border-width: 1px;
+}
+
+.alert{
+    background-color: #E20074;
+    color: white;
+    font-size: 17px;
+    background: linear-gradient(to right, #E20074, #b24196);
+}
+
+.btn-add-cart {
+    background-color: #E20074;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-add-cart:hover {
+    transform: scale(1);
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.5);
+}
+
+.card{
+    background-color: rgb(246, 248, 250);
+}
+
+@media (min-width: 768px)   {
+    .custom-max-width {
+    max-width: 56rem;
+    min-width: 50rem;
+}
+}  

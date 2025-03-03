@@ -16,6 +16,7 @@ import { ProblemsListComponent } from './problems-list/problems-list.component';
 import { ChooseTariffComponent } from './tariffs/choose-tariff/choose-tariff.component';
 import { Magenta1Component } from './tariffs/magenta1/magenta1.component';
 import { MobileTariffComponent } from './tariffs/mobile-tariff/mobile-tariff.component';
+import { PrepaidComponent } from './tariffs/prepaid/prepaid.component';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'tariffs', component: ChooseTariffComponent},
   {path: 'tariffs/magenta1', component: Magenta1Component},
   {path: 'tariffs/mtariff', component: MobileTariffComponent},
+  {path: 'tariffs/prepaid', component: PrepaidComponent},
   {path: 'searched-product/:product', component: ProductSearchedComponent},
   {path: 'admin/add-product', component: AddProductComponent, canActivate: [AdminGuard]},
   {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]},

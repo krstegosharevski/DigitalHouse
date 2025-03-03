@@ -35,6 +35,7 @@ import { ProblemsListComponent } from './problems-list/problems-list.component';
 import { ChooseTariffComponent } from './tariffs/choose-tariff/choose-tariff.component';
 import { Magenta1Component } from './tariffs/magenta1/magenta1.component';
 import { MobileTariffComponent } from './tariffs/mobile-tariff/mobile-tariff.component';
+import { PrepaidComponent } from './tariffs/prepaid/prepaid.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http:HttpClient){
     ChooseTariffComponent,
     Magenta1Component,
     MobileTariffComponent,
+    PrepaidComponent,
   ],
   imports: [
     BrowserModule,
