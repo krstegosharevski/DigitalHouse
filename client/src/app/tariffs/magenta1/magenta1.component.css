@@ -1,3 +1,39 @@
 .pdt{
     padding-top: 80px;
 }
+.border-magenta{
+    border-color: #ffffff !important;
+    border-width: 1px;
+}
+
+.card-12{
+    background-color: #E20074;
+    background: linear-gradient(to right, #E20074, #b24196);
+    color: white;
+    font-weight: 330;
+}
+
+.card-none{
+    background-color: #E20074;
+    background: linear-gradient(to right, #b24196, #E20074);
+    color: white;
+    font-weight: 330;
+}
+
+.btn-add-cart {
+    background-color: #ffffff;
+    color: #E20074;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-add-cart:hover {
+    transform: scale(1);
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.5);
+}
+
+.sticky{
+    position: fixed;
+    right: 0;
+    height: 500px;
+    z-index: 1;
+}

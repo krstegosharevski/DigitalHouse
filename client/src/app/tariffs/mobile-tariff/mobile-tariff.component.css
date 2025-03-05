@@ -1,3 +1,53 @@
 .pdt{
-    padding-top: 80px;
+    padding-top: 45px;
+}
+
+.border-magenta{
+    border-color: black !important;
+    border-width: 1px;
+}
+
+.card-12{
+    background-color: #eff2f6;
+    color: rgb(58, 57, 57);
+    font-weight: 330;
+    background: linear-gradient(to right, #ffffff, #dadada);
+
+}
+
+.card-12 h2, .card-12 h4,.card-none h2,.card-none h4{
+    color: #E20074;
+}
+
+.card-header{
+    color: #b24196;
+}
+
+.card-none{
+    background-color: #eff2f6;
+    color: rgb(58, 57, 57);
+    font-weight: 330;
+    background: linear-gradient(to right, #ffffff, #dadada);
+}
+
+.card-text{
+    line-height: 1.1 !important;
+}
+
+.btn-add-cart {
+    background-color: #E20074;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-add-cart:hover {
+    transform: scale(1);
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.5);
+}
+
+.alert{
+    background-color: #E20074;
+    color: white;
+    font-size: 17px;
+    /*background: linear-gradient(to right, #E20074, #b24196);*/
 }
