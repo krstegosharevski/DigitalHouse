@@ -1,9 +1,12 @@
-﻿namespace DigitalHouseSystemApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DigitalHouseSystemApi.Models
 {
     public class Magenta1
     {
+        [Key, ForeignKey("AppUser")]
         public int Id { get; set; }
-        public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
 
         public decimal Budget { get; set; }
