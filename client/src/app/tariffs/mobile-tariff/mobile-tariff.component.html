@@ -16,81 +16,35 @@
 </div>
 
 
-<div class="container my-4 p-4 rounded-5" style="background-color: rgb(30, 29, 29);">
+<div class="container my-4 p-4 rounded-5" style="background-color: rgb(242, 242, 242);">
     <div class="row mx-auto">
         <div class="text-center">
             <!-- style="color: rgb(58, 57, 57);" -->
-            <h3 class="my-4 p-2 text-uppercase" style="color: white;"><strong>Trust 12</strong></h3>
+            <h2 class="my-4 p-2 text-uppercase fw-light" style="color: rgb(0, 0, 0);"><strong>Trust 12</strong></h2>
         </div>
 
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-12 rounded-5 border-magenta">
+        <div *ngFor="let tariff of trust12" class="col-12 col-md-3 text-center mx-auto text-center ">
+            <div  class="card card-12 border-magenta fixed-card-container">
                 <div class="card-header p-3">Trust 12</div>
                 <div class="card-body">
-                    <h2 class="card-title fw-light">3GB Internet</h2>
-                    <h5 class="card-title">Mobile S</h5>
+                    <h2 class="card-title fw-light">
+                        <span *ngIf="tariff.internetSpeed === 1000" class="infinity-symbol">∞ </span>
+                        <span *ngIf="tariff.internetSpeed !== 1000">{{ tariff.internetSpeed }}GB</span>
+                        Internet
+                      </h2>
+                    <h3 class="card-title">{{tariff.name}}</h3>
                     <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
+                    <p class="card-text"><strong>Conversation</strong>: {{tariff.conversationTime}}</p>
+                    <p class="card-text"><strong>SMS</strong>: {{tariff.sms}}</p>
+                    <p *ngIf="tariff.roamingInternet" class="card-text"><strong>Roaming</strong>: {{tariff.roamingInternet}} MB</p>
                 </div>
                 <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">549 MKD</h4>
+                    <h4 class="p-2">{{tariff.price}} MKD</h4>
                     <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-12 rounded-5 border-magenta">
-                <div class="card-header p-3">Trust 12</div>
-                <div class="card-body">
-                    <h2 class="card-title fw-light">30GB Internet</h2>
-                    <h5 class="card-title fw-light">Mobile M</h5>
-                    <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
-                </div>
-                <div class="card-footer bg-transparent p-3" style="background-color: white;">
-                    <h4 class="p-2">949 MKD</h4>
-                    <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-12 rounded-5 border-magenta">
-                <div class="card-header p-3">Trust 12</div>
-                <div class="card-body">
-                    <h2 class="card-title fw-light">∞ Internet</h2>
-                    <h5 class="card-title fw-light">Ultimate</h5>
-                    <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
-                </div>
-                <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">1,199 MKD</h4>
-                    <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-12 rounded-5 border-magenta">
-                <div class="card-header p-3">Trust 12</div>
-                <div class="card-body">
-                    <h2 class="card-title fw-light">∞ Internet</h2>
-                    <h5 class="card-title fw-light">Ultimate</h5>
-                    <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
-                </div>
-                <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">1,799 MKD</h4>
-                    <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
-                </div>
-            </div>
-        </div>
+        
     </div>
 
     <div class="my-4">
@@ -99,78 +53,34 @@
 
     <div class="row mb-4 pb-4">
         <div class="text-center">
-            <h3 class="my-4 p-2 text-uppercase" style="color: white;"><strong>Without contractual obligation</strong></h3>
+            <h2 class="my-4 p-2 text-uppercase fw-light" style="color: rgb(0, 0, 0);"><strong>Without contractual obligation</strong></h2>
 
         </div>
 
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-none rounded-5 border-magenta">
+        <div *ngFor="let tariff of noContract" class="col-12 col-md-3 text-center mx-auto text-center ">
+            <div  class="card card-12 border-magenta fixed-card-container">
                 <div class="card-header p-3">No contractual obligation</div>
                 <div class="card-body">
-                    <h2 class="card-title fw-light">3GB Internet</h2>
-                    <h5 class="card-title">Mobile S</h5>
+                    <h2 class="card-title fw-light">
+                        <span *ngIf="tariff.internetSpeed === 1000" class="infinity-symbol">∞ </span>
+                        <span *ngIf="tariff.internetSpeed !== 1000">{{ tariff.internetSpeed }}GB</span>
+                        Internet
+                      </h2>
+
+                    <h3 class="card-title">{{tariff.name}}</h3>
                     <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
+                    <p class="card-text"><strong>Conversation</strong>: {{tariff.conversationTime}}</p>
+                    <p class="card-text"><strong>SMS</strong>: {{tariff.sms}}</p>
+                    <p *ngIf="tariff.roamingInternet" class="card-text"><strong>Roaming</strong>: {{tariff.roamingInternet}} MB</p>
                 </div>
                 <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">599 MKD</h4>
+                    <h4 class="p-2">{{tariff.price}} MKD</h4>
                     <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-none rounded-5 border-magenta">
-                <div class="card-header p-3">No contractual obligation</div>
-                <div class="card-body">
-                    <h2 class="card-title fw-light">30GB Internet</h2>
-                    <h5 class="card-title">Mobile M</h5>
-                    <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
-                </div>
-                <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">1,099 MKD</h4>
-                    <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-none rounded-5 border-magenta">
-                <div class="card-header p-3">No contractual obligation</div>
-                <div class="card-body">
-                    <h2 class="card-title fw-light">∞ Internet</h2>
-                    <h5 class="card-title">Ultimate</h5>
-                    <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
-                </div>
-                <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">1,299 MKD</h4>
-                    <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-3 text-center mx-auto text-center ">
-            <div class="card card-none rounded-5 border-magenta">
-                <div class="card-header p-3">No contractual obligation</div>
-                <div class="card-body">
-                    <h2 class="card-title fw-light">∞ Internet</h2>
-                    <h5 class="card-title">Ultimate</h5>
-                    <p class="card-text pt-3"><strong>5G</strong>: Available</p>
-                    <p class="card-text"><strong>Conversation</strong>: unlimited</p>
-                    <p class="card-text"><strong>SMS</strong>: Unlimited</p>
-                    <p class="card-text"><strong>Roaming</strong>: 250 MB</p>
-                </div>
-                <div class="card-footer bg-transparent p-3">
-                    <h4 class="p-2">1,999 MKD</h4>
-                    <button class="btn btn-add-cart"> <img src="assets/images/cart-white.png" alt="Shipping" style="height: 30px; width: 30px;"> </button>
-                </div>
-            </div>
-        </div>
+
+       
     </div>
 </div>
 

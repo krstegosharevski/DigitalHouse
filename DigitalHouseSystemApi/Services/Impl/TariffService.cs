@@ -56,5 +56,19 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             return tariffsDto;
         }
+
+        public async Task<ICollection<Magenta1TariffDto>> GetAllMagenta1Tariffs()
+        {
+            var tariffs = await _tariffRepository.SelectAllTariffsMagenta1Async();
+
+            ICollection<Magenta1TariffDto> tariffsDto = new List<Magenta1TariffDto>();
+
+            foreach (var item in tariffs)
+            {
+                tariffsDto.Add(item.MappToDtoModelM1());
+            }
+
+            return tariffsDto;
+        }
     }
 }

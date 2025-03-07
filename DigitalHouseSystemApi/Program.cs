@@ -53,6 +53,8 @@ builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
 builder.Services.AddScoped<IProblemService, ProblemService>();
 builder.Services.AddScoped<ITariffRepository, TariffRepository>();
 builder.Services.AddScoped<ITariffService, TariffService>();
+builder.Services.AddScoped<IInternetPackageRepository, InternetPackageRepository>();
+builder.Services.AddScoped<IInternetPackageService, InternetPackageService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.Configure<PerspectiveApiSettings>(builder.Configuration.GetSection("PerspectiveAPI"));
 builder.Services.AddScoped<IPerspectiveService, PerspectiveService>();

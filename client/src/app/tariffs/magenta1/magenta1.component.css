@@ -37,3 +37,15 @@
     height: 500px;
     /* z-index: 1; */
 }
+
+.fixed-card-container {
+    height: 500px; 
+}
+
+.infinity-symbol {
+    font-size: 1.2em; 
+  }
+
+.card-text {
+    line-height: 1; /* Намалена висина меѓу редовите */
+}

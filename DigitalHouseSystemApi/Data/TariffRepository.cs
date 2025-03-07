@@ -37,5 +37,12 @@ namespace DigitalHouseSystemApi.Data
               .ToListAsync();
         }
 
+        public async Task<IEnumerable<Tariff>> SelectAllTariffsMagenta1Async()
+        {
+            return await _context.Tariffs
+             .Include(p => p.TariffType)
+             .Where(p => p.TariffType.Name == ("Magenta1"))
+             .ToListAsync();
+        }
     }
 }

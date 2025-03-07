@@ -9,33 +9,18 @@
 
     <div class="container my-4 py-4 rounded-5 d-flex justify-content-center" style="background-color: white;">
         <div class="row mx-auto d-flex justify-content-center">
-            <div class="col-12 text-center mx-auto text-center d-flex justify-content-center">
+            
+            <div *ngFor="let tariff of tariffs" class="col-12 mt-4 pt-4 text-center mx-auto text-center d-flex justify-content-center">
                 <div class="card rounded-5 border-magenta custom-max-width">
                     <div class="card-header bg-transparent p-3">Prepaid Card</div>
                     <div class="card-body">
-                        <h5 class="card-title">10 + 5 GB internet</h5>
-                        <p class="card-text">Conversation: unlimited</p>
-                        <p class="card-text">SMS: 100SMS</p>
-                        <p class="card-text">Credit: 99 MKD</p>
+                        <h5 class="card-title">{{tariff.name}}</h5>
+                        <p class="card-text">Conversation: {{tariff.conversationTime}}</p>
+                        <p class="card-text">SMS: {{tariff.sms}} SMS</p>
+                        <p *ngIf="tariff.roamingInternet" class="card-text">Roaming: {{tariff.roamingInternet}} MB</p>
                     </div>
                     <div class="card-footer bg-transparent p-3">
-                        <h5>499 MKD</h5>
-                        <button class="btn btn-add-cart">Add to cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mt-4 pt-4 text-center d-flex justify-content-center">
-                <div class="card mb-3 rounded-5 border-magenta custom-max-width">
-                    <div class="card-header bg-transparent p-3">Prepaid Card</div>
-                    <div class="card-body">
-                        <h5 class="card-title">20 + 10 GB internet</h5>
-                        <p class="card-text">Conversation: unlimited</p>
-                        <p class="card-text">SMS: unlimited</p>
-                        <p class="card-text">Roaming: 3 GB</p>
-                        <p class="card-text">Credit: 99 MKD</p>
-                    </div>
-                    <div class="card-footer bg-transparent p-3">
-                        <h5>1,299 MKD</h5>
+                        <h5>{{tariff.price | currency:'MKD ':'symbol-narrow' }}</h5>
                         <button class="btn btn-add-cart">Add to cart</button>
                     </div>
                 </div>

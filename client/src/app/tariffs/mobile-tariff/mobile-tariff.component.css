@@ -3,15 +3,15 @@
 }
 
 .border-magenta{
-    border-color: black !important;
+    border-color: #E20074 !important;
     border-width: 1px;
 }
 
 .card-12{
-    background-color: #eff2f6;
+    background-color: #ffffff;
     color: rgb(58, 57, 57);
     font-weight: 330;
-    background: linear-gradient(to right, #ffffff, #dadada);
+    /* background: linear-gradient(to right, #ffffff, #dadada); */
 
 }
 
@@ -20,14 +20,13 @@
 }
 
 .card-header{
-    color: #b24196;
+    color: #E20074;
 }
 
 .card-none{
-    background-color: #eff2f6;
+    background-color: #ffffff;
     color: rgb(58, 57, 57);
     font-weight: 330;
-    background: linear-gradient(to right, #ffffff, #dadada);
 }
 
 .card-text{
@@ -51,3 +50,12 @@
     font-size: 17px;
     /*background: linear-gradient(to right, #E20074, #b24196);*/
 }
+
+.fixed-card-container {
+    height: 450px; 
+}
+
+.infinity-symbol {
+    font-size: 1.2em; 
+  }
+  

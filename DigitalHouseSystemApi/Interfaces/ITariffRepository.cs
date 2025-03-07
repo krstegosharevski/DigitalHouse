@@ -8,6 +8,8 @@ namespace DigitalHouseSystemApi.Interfaces
         Task<IEnumerable<Tariff>> SelectAllTariffsPrepaidAsync();
         Task<IEnumerable<Tariff>> SelectAllTariffsTrust12Async();
         Task<IEnumerable<Tariff>> SelectAllTariffsNoContractAsync();
+        Task<IEnumerable<Tariff>> SelectAllTariffsMagenta1Async();
+
 
     }
 }

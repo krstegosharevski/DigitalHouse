@@ -7,6 +7,8 @@ namespace DigitalHouseSystemApi.Services
         Task<ICollection<PrepaidTariffDto>> GetAllPrepaidTariffs();
         Task<ICollection<Trust12TariffDto>> GetAllTrust12Tariffs();
         Task<ICollection<NoContractTariffDto>> GetAllNoContractTariffs();
+        Task<ICollection<Magenta1TariffDto>> GetAllMagenta1Tariffs();
+
 
     }
 }

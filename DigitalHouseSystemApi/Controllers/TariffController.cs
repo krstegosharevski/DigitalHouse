@@ -30,5 +30,11 @@ namespace DigitalHouseSystemApi.Controllers
         { 
             return  Ok(await _tariffService.GetAllNoContractTariffs());
         }
+
+        [HttpGet("magenta1")]
+        public async Task<ActionResult<ICollection<Magenta1TariffDto>>> GetMagenta1Tariffs()
+        {
+            return Ok(await _tariffService.GetAllMagenta1Tariffs());
+        }
     }
 }
