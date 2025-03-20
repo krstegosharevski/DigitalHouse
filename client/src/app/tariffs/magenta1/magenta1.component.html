@@ -1,8 +1,5 @@
-<div class="pdt" style="background-color: #eff2f6;">
-
-
+<div class="pdt bcolor">
     <div class="container-fluid my-4 py-4">
-
         <div class="row">
             <div class="col-12 col-md-9">
                 <div class="container">
@@ -19,7 +16,7 @@
                                     Services</strong></h3>
                         </div>
 
-                        <div *ngFor="let tariff of magenta1" class="col-12 col-md-3 text-center mx-auto text-center ">
+                        <div *ngFor="let tariff of magenta1" class="col-12 col-md-3 text-center mx-auto text-center">
                             <div class="card card-12 rounded-5 border-magenta fixed-card-container">
                                 <div class="card-header bg-transparent border-magenta p-3">Magenta 1</div>
                                 <div class="card-body">
@@ -28,18 +25,26 @@
                                         <span *ngIf="tariff.internetSpeed === 1000" class="infinity-symbol">∞ </span>
                                         <span *ngIf="tariff.internetSpeed !== 1000">{{ tariff.internetSpeed }}GB</span>
                                         Internet
-                                      </h3>
+                                    </h3>
                                     <p class="card-text pt-3"><strong>5G</strong>: Available</p>
                                     <p class="card-text"><strong>Conversation</strong>: {{tariff.conversationTime}}</p>
                                     <p class="card-text"><strong>SMS</strong>: {{tariff.sms}}</p>
                                     <p *ngIf="tariff.roamingInternet" class="card-text"><strong>Roaming</strong>: {{tariff.roamingInternet}} MB</p>
                                     <p *ngIf="tariff.internationalNetworkCalls" class="card-text"><strong>International Calls</strong>: {{tariff.internationalNetworkCalls}} minutes</p>
-
                                 </div>
                                 <div class="card-footer bg-transparent border-magenta p-3">
                                     <h5>{{tariff.price | currency:'MKD ':'symbol-narrow' }}</h5>
-                                    <button class="btn btn-add-cart"> <img src="assets/images/cart.png" alt="Shipping"
-                                            style="height: 24px; width: 24px;"> </button>
+                                    <div>
+                                        <!-- <p *ngIf="getSelectedLineCount(tariff) > 0" class="">
+                                            Selected: {{ getSelectedLineCount(tariff) }}
+                                        </p> -->
+                                        <button 
+                                            class="btn btn-add-cart"
+                                            [disabled]="!canAddMoreLines()"
+                                            (click)="selectMobileLine(tariff)">
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -51,14 +56,13 @@
 
                     <div class="row">
                         <div class="text-center">
-                            <h3 class="my-4 p-2 text-uppercase" style="color: rgb(58, 57, 57);"><strong>Interner &
+                            <h3 class="my-4 p-2 text-uppercase" style="color: rgb(58, 57, 57);"><strong>Internet &
                                     TV</strong></h3>
                         </div>
 
-                        <div *ngFor="let inet of internet" class="col-12 col-md-3 text-center mx-auto text-center ">
+                        <div *ngFor="let inet of internet" class="col-12 col-md-3 text-center mx-auto text-center">
                             <div class="card card-none rounded-5 border-magenta fixed-card-container">
-                                <div class="card-header bg-transparent border-magenta p-3">Magenta1
-                                </div>
+                                <div class="card-header bg-transparent border-magenta p-3">Magenta1</div>
                                 <div class="card-body">
                                     <h2 class="card-title">{{inet.name}}</h2>
                                     <h5 class="card-title fw-light">{{inet.internetSpeed}} Internet</h5>
@@ -69,8 +73,12 @@
                                 </div>
                                 <div class="card-footer bg-transparent border-magenta p-3">
                                     <h5>{{inet.price | currency:'MKD ':'symbol-narrow' }}</h5>
-                                    <button class="btn btn-add-cart"> <img src="assets/images/cart.png" alt="Shipping"
-                                            style="height: 24px; width: 24px;"> </button>
+                                    <button 
+                                        class="btn" 
+                                        [ngClass]="{'btn-add-cart': selectedInternet?.id !== inet.id, 'btn-remove-cart': selectedInternet?.id === inet.id}"
+                                        (click)="selectInternetPackage(inet)">
+                                        {{ selectedInternet?.id === inet.id ? 'Selected' : 'Select' }}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -78,36 +86,40 @@
                 </div>
             </div>
 
-            <div class="col-12 col-md-3 rounded-5  sticky" style="background-color: white;">
+            <div class="col-12 col-md-3 sticky" style="background-color: white;">
                 <div class="m-2 p-2">
                     <h5 class="">Your</h5>
                     <h4 class="text-uppercase"><strong style="color: #E20074;">Magenta1</strong></h4>
                     <div class="">
-                        <p>Budget: 19000</p>
+                        <p>Budget: {{ budget | currency:'MKD ':'symbol-narrow' }}</p>
                     </div>
-                    <div class="">
-                        <h3>Monthly fee</h3>
-                        <p>Vkupno: 2000</p>
-                        <p>Bez ured: 1990</p>
+                    <div class="bcolor p-2">
+                        <h4 class="fw-light ps-2"><strong>Monthly fee</strong></h4>
+                        <p class="fw-light ps-2">Total: {{ budget | currency:'MKD ':'symbol-narrow' }}</p>
                     </div>
-                    <div class="">
-                        <h3>Mobile Lines</h3>
-                        <ul>
-                            <li>S</li>
-                            <li>Ultra</li>
+                    <div class="bcolor p-2">
+                        <h4 class="fw-light ps-2"><strong>Mobile Lines</strong></h4>
+                        <ul class="fw-light">
+                            <li *ngFor="let line of selectedMobileLines; let i = index" class="fw-light py-1">
+                                {{ line.name }}
+                                <!-- <button class="btn btn-sm btn-link btn-text-danger" (click)="unselectMobileLine(i)">X</button> -->
+                                <button class="btn btn-sm pb-1 ms-2" (click)="unselectMobileLine(i)" style="background-color: #E20074; color: white;">Remove</button>
+
+                            </li>
                         </ul>
-                        <h3>Internet</h3>
-                        <ul>
-                            <li>M</li>
-                        </ul>
+                        <h4 class="fw-light ps-2"><strong>Internet</strong></h4>
+                        <h5 *ngIf="selectedInternet" class="fw-light ps-4">{{ selectedInternet.name }}</h5>
                     </div>
-    
-                    <div class="">
-                        <button class="btn btn-add-cart">Order Now</button>
+
+                    <div class="m-4 p-2">
+                        <button 
+                            class="btn btn-order-now" 
+                            [disabled]="!isValidBundle()">
+                            Order Now
+                        </button>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

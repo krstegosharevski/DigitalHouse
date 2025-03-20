@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
       if (event instanceof NavigationEnd) {
         // Скриј го навигациониот бар само на страната за најава
         this.showNavbar = !event.url.includes('/login') && !event.url.includes('/register');
-        this.showFooter = !event.url.includes('/login') && !event.url.includes('/register');
+        this.showFooter = !event.url.includes('/login') && !event.url.includes('/register') &&  !event.url.includes('/tariffs/magenta1');
       }
     });
   }
