@@ -55,6 +55,8 @@ builder.Services.AddScoped<ITariffRepository, TariffRepository>();
 builder.Services.AddScoped<ITariffService, TariffService>();
 builder.Services.AddScoped<IInternetPackageRepository, InternetPackageRepository>();
 builder.Services.AddScoped<IInternetPackageService, InternetPackageService>();
+builder.Services.AddScoped<IMagenta1Repository, Magenta1Repository>();
+builder.Services.AddScoped<IMagenta1Service, Magenta1Service>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.Configure<PerspectiveApiSettings>(builder.Configuration.GetSection("PerspectiveAPI"));
 builder.Services.AddScoped<IPerspectiveService, PerspectiveService>();

@@ -72,6 +72,9 @@
               <li  role="menuitem" class="px-3 ms-4 py-2 fw-light">
                 <a *appHasRole="['Admin', 'Moderator']" class="nav-link-user" routerLink="admin/problem-list" routerLinkActive="active" >Problems</a>
               </li>
+              <li  role="menuitem" class="px-3 ms-4 py-2 fw-light">
+                <a *appHasRole="['Admin', 'Moderator']" class="nav-link-user" routerLink="admin/magenta-approve" routerLinkActive="active" >Magenta1</a>
+              </li>
               <li class="divider dropdown-divider"></li>
               <li role="menuitem" class="ms-4 px-3 py-2"><button class="btn btn-log-in fw-light" (click)="logout();">Log Out</button></li>
             </ul>

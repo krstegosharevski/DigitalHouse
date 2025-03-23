@@ -15,6 +15,7 @@ namespace DigitalHouseSystemApi.Models
         public InternetPackage InternetPackage { get; set; }
 
         public ICollection<Magenta1Tariff> Magenta1Tariffs { get; set; }
+        public bool Approved { get; set; }
 
         public void AddTariff(Tariff tariff)
         {
