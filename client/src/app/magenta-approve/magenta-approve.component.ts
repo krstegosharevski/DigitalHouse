@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Magenta1 } from '../_models/magenta1';
+import { Magenta1Service } from '../_services/magenta1.service';
 
 @Component({
   selector: 'app-magenta-approve',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MagentaApproveComponent implements OnInit {
 
-  constructor() { }
+  magenta1 : Magenta1[] = [];
+
+  constructor(private magenta1Service : Magenta1Service) { }
 
   ngOnInit(): void {
+    this.fetchMagenta1s()
+  }
+
+  fetchMagenta1s(){
+    this.magenta1Service.getAllMagenta1().subscribe({
+      next : (response) => {
+        this.magenta1 = response
+      },
+      error : (err) => console.log(err)
+    })
   }
 
 }

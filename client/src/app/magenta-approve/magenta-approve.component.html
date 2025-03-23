@@ -1,41 +1,19 @@
 <div style="padding-top: 60px;" >
     <div class="container my-4">
         <div class="row my-4">
-            <div class="card text-center my-4 py-4">
-                <div class="card-header">
-                    Magenta1 Approval.
+            <div *ngFor="let m of magenta1" class="card text-center my-4 py-4">
+                <div class="card-header" style="background-color: #E20074 !important; color: white;">
+                    {{m.username}}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <div class="d-flex">
-                        <a href="#" class="btn btn-success ms-auto">Approve</a>
+                    <h5 class="card-title fw-light">The user <strong>{{m.username}}</strong> with budget <strong>{{m.budget}}</strong> whant's to make Magenta1</h5>
+                    <h5 class="card-text fw-light">Internet Package: <strong>{{m.internetPackage}}</strong></h5>
+                    <h5 class="fw-light mt-2">Tariffs:</h5>
+                    <div>
+                        <h5 class="fw-ligth d-inline-block me-2" *ngFor="let mt of m.magenta1Tariffs"> <strong>{{mt}}</strong> </h5>
                     </div>
-                </div>
-            </div>
-
-            <div class="card text-center my-4 py-4">
-                <div class="card-header">
-                    Magenta1 Approval.
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                     <div class="d-flex">
-                        <a href="#" class="btn btn-success ms-auto">Approve</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card text-center my-4 py-4">
-                <div class="card-header">
-                    Magenta1 Approval.
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <div class="d-flex">
-                        <a href="#" class="btn btn-success ms-auto">Approve</a>
+                        <a href="#" class="btn btn-custom ms-auto">Approve</a>
                     </div>
                 </div>
             </div>
