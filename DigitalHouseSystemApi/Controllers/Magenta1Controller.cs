@@ -1,5 +1,6 @@
 ﻿using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,28 @@ namespace DigitalHouseSystemApi.Controllers
         public async Task<ActionResult<IEnumerable<Magenta1Dto>>> GetAll()
         {
             return Ok(await _magenta1Service.GetAllMagenta1());
+        }
+
+        [HttpPut("approve/{id}")]
+        public async Task<ActionResult<Magenta1Dto>> ApproveMagenta1(int id)
+        {
+            try
+            {
+                return Ok(await _magenta1Service.UpdateStatusOnMagenta1(id));
+            }
+            catch (Magenta1NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (CantApproveNewMagenta1 ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
 
