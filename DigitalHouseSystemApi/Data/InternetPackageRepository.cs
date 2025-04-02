@@ -16,5 +16,10 @@ namespace DigitalHouseSystemApi.Data
         {
             return await _context.InternetPackages.ToListAsync();
         }
+
+        public async Task<InternetPackage?> FindByIdAsync(int id)
+        {
+            return await _context.InternetPackages.FindAsync(id);
+        }
     }
 }

@@ -9,10 +9,16 @@ namespace DigitalHouseSystemApi.Services.Impl
     public class Magenta1Service : IMagenta1Service
     {
         private readonly IMagenta1Repository _magenta1Repository;
+        private readonly IInternetPackageRepository _internetPackageRepository;
+        private readonly ITariffRepository _tariffRepository;
 
-        public Magenta1Service(IMagenta1Repository magenta1Repository)
+        public Magenta1Service(IMagenta1Repository magenta1Repository,
+            IInternetPackageRepository internetPackageRepository,
+            ITariffRepository tariffRepository)
         {
             _magenta1Repository = magenta1Repository;
+            _internetPackageRepository = internetPackageRepository;
+            _tariffRepository = tariffRepository;
         }
 
         public async Task<IEnumerable<Magenta1Dto>> GetAllMagenta1()
@@ -68,6 +74,39 @@ namespace DigitalHouseSystemApi.Services.Impl
             }
 
             throw new CantApproveNewMagenta1(m.AppUser.UserName);
+        }
+
+        public async Task<Magenta1Dto> CreateMagenta1(CreateMagenta1Dto createMagenta1)
+        {
+            InternetPackage? ip = await _internetPackageRepository.FindByIdAsync(createMagenta1.InternetPackageId);
+            if (ip == null)
+            {
+                throw new Exception("ERROR");
+            }
+
+            Magenta1 magenta1 = new Magenta1(createMagenta1.UserId, createMagenta1.Budget, ip);
+
+            foreach (int tariffId in createMagenta1.Magenta1TariffsId)
+            {
+                Tariff? tariff = await _tariffRepository.FindByIdAsync(tariffId);
+                if (tariff == null)
+                {
+                    throw new Exception($"Tariff with ID {tariffId} not found");
+                }
+
+                magenta1.AddTariff(tariff); // Додај ја тарифата во Magenta1
+            }
+
+            await _magenta1Repository.AddAsync(magenta1);
+            await _magenta1Repository.SaveChangesAsync();
+
+            // Мапирај го ентитетот во DTO и врати го
+            ICollection<string> magenta1tariffs = new List<string>();
+            foreach (Magenta1Tariff mt in magenta1.Magenta1Tariffs)
+            {
+                magenta1tariffs.Add(mt.Tariff.Name);
+            }
+            return new Magenta1Dto(createMagenta1.UserId, "Username K", createMagenta1.Budget, "InternetPackage M", magenta1tariffs);
         }
     }
 }

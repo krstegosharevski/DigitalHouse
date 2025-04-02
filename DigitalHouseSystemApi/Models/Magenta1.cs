@@ -14,7 +14,7 @@ namespace DigitalHouseSystemApi.Models
         public int InternetPackageId { get; set; }
         public InternetPackage InternetPackage { get; set; }
 
-        public ICollection<Magenta1Tariff> Magenta1Tariffs { get; set; }
+        public ICollection<Magenta1Tariff> Magenta1Tariffs { get; set; } = new List<Magenta1Tariff>();
         public bool Approved { get; set; }
 
         public void AddTariff(Tariff tariff)
@@ -30,6 +30,16 @@ namespace DigitalHouseSystemApi.Models
             }
 
             Magenta1Tariffs.Add(new Magenta1Tariff { Tariff = tariff, Magenta1 = this });
+        }
+
+        public Magenta1() { }
+
+        public Magenta1(int id, decimal budget, InternetPackage internetPackage)
+        {
+            Id = id;
+            Budget = budget;
+            InternetPackage = internetPackage;
+
         }
 
     }

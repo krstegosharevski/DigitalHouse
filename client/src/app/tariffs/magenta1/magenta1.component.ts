@@ -106,4 +106,8 @@ export class Magenta1Component implements OnInit {
     return this.selectedMobileLines.length >= 1 && this.selectedInternet !== null;
   }
 
+  orderNow(){
+    
+  }
+
 }

@@ -9,6 +9,7 @@ namespace DigitalHouseSystemApi.Interfaces
         Task<IEnumerable<Tariff>> SelectAllTariffsTrust12Async();
         Task<IEnumerable<Tariff>> SelectAllTariffsNoContractAsync();
         Task<IEnumerable<Tariff>> SelectAllTariffsMagenta1Async();
+        Task<Tariff?> FindByIdAsync(int id);
 
 
     }

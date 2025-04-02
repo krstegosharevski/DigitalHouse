@@ -44,5 +44,12 @@ namespace DigitalHouseSystemApi.Data
              .Where(p => p.TariffType.Name == ("Magenta1"))
              .ToListAsync();
         }
+
+        public async Task<Tariff?> FindByIdAsync(int id)
+        {
+            return await _context.Tariffs
+                 .Include(p => p.TariffType)
+                 .FirstOrDefaultAsync(p => p.Id == id);
+        }
     }
 }
