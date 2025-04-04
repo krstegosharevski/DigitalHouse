@@ -7,5 +7,7 @@
 
         public int TariffId { get; set; }
         public Tariff Tariff { get; set; }
+
+        public int Quantity { get; set; } = 1;
     }
 }

@@ -29,7 +29,22 @@ namespace DigitalHouseSystemApi.Models
                 throw new InvalidOperationException("A Magenta1 package can have a maximum of 5 tariffs.");
             }
 
-            Magenta1Tariffs.Add(new Magenta1Tariff { Tariff = tariff, Magenta1 = this });
+            var existing = Magenta1Tariffs.FirstOrDefault(mt => mt.Tariff.Id == tariff.Id);
+            if (existing != null)
+            {
+                existing.Quantity += 1; 
+            }
+            else
+            {
+                Magenta1Tariffs.Add(new Magenta1Tariff
+                {
+                    Tariff = tariff,
+                    Magenta1 = this,
+                    Quantity = 1
+                });
+            }
+
+            //Magenta1Tariffs.Add(new Magenta1Tariff { Tariff = tariff, Magenta1 = this });
         }
 
         public Magenta1() { }

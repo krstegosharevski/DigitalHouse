@@ -42,7 +42,18 @@ namespace DigitalHouseSystemApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
+        }
+
+        [HttpPost("create")]
+        public async Task<ActionResult<Magenta1Dto>> CreateMagenta1(CreateMagenta1Dto magentaToCreate)
+        {
+            try
+            {
+                return Ok(await _magenta1Service.CreateMagenta1(magentaToCreate));
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

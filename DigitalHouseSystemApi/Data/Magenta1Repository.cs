@@ -46,5 +46,15 @@ namespace DigitalHouseSystemApi.Data
                 .ThenInclude(p => p.Tariff)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public async Task AddAsync(Magenta1 entity)
+        {
+            await _context.Magenta1s.AddAsync(entity);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }
