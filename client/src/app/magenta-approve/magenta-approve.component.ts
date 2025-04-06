@@ -26,4 +26,14 @@ export class MagentaApproveComponent implements OnInit {
     })
   }
 
+  // add method when click on button approve to be approved magenta1 for the user.
+  approveMagenta1(id : number){
+    this.magenta1Service.approveMagenta1(id).subscribe({
+      next: (response) => {
+        this.fetchMagenta1s();
+      },
+      error : (err) => console.log(err)
+    })
+  }
+
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { map, take } from 'rxjs';
 import { InternetPackage } from 'src/app/_models/internetPackage';
 import { Tariff } from 'src/app/_models/tariff';
+import { AccountService } from 'src/app/_services/account.service';
 import { InternetPackagesService } from 'src/app/_services/internet-packages.service';
+import { Magenta1Service } from 'src/app/_services/magenta1.service';
 import { TariffsService } from 'src/app/_services/tariffs.service';
 
 @Component({
@@ -16,9 +19,14 @@ export class Magenta1Component implements OnInit {
   selectedInternet: InternetPackage | null = null;
   selectedMobileLines: Tariff[] = [];
 
+  currentUser$ = this.accountService.currentUser$;
+  userId : number = 0;
+
   constructor(
     private tariffsService: TariffsService,
-    private internetPackageService: InternetPackagesService
+    private internetPackageService: InternetPackagesService,
+    private accountService : AccountService,
+    private magenta1Service: Magenta1Service
   ) {}
 
   ngOnInit(): void {
@@ -106,8 +114,33 @@ export class Magenta1Component implements OnInit {
     return this.selectedMobileLines.length >= 1 && this.selectedInternet !== null;
   }
 
-  orderNow(){
-    
+  //create this method to be added new magenta for the user.
+  //also display some baner idk...
+  orderNow() {
+    this.currentUser$.subscribe(user => {
+      if (!user || !this.selectedInternet) return;
+  
+      const magentaData = {
+        userId: Number(user.id), // 💥 ова е клучно
+        budget: this.budget,
+        internetPackageId: this.selectedInternet.id,
+        magenta1TariffsId: this.selectedMobileLines.map(t => t.id)
+      };
+  
+      console.log('Sending:', magentaData); // Провери го ова!
+  
+      this.magenta1Service.createMagenta1(magentaData).subscribe({
+        next: (res) => {
+          console.log('Created successfully', res);
+          // прикажи банер или пренасочи
+        },
+        error: (err) => {
+          console.error('Error from backend:', err.error.errors);
+        }
+      });
+    });
   }
+  
+  
 
 }

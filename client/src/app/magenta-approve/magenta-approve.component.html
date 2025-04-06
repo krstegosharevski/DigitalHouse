@@ -13,10 +13,13 @@
                     <h5 class="card-text fw-light">Internet Package: <strong>{{m.internetPackage}}</strong></h5>
                     <h5 class="fw-light mt-2">Tariffs:</h5>
                     <div>
+                        <h5>Id: {{m.id}}</h5>
                         <h5 class="fw-ligth d-inline-block me-2" *ngFor="let mt of m.magenta1Tariffs"> <strong>{{mt}}</strong> </h5>
                     </div>
                     <div class="d-flex">
-                        <a href="#" class="btn btn-custom ms-auto">Approve</a>
+                        
+                            <button (click)="approveMagenta1(m.id)" class="btn btn-custom ms-auto" style="color: white;">Approve</button>
+                        
                     </div>
                 </div>
             </div>

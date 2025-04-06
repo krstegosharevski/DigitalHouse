@@ -114,7 +114,8 @@
                     <div class="m-4 p-2">
                         <button 
                             class="btn btn-order-now" 
-                            [disabled]="!isValidBundle()">
+                            [disabled]="!isValidBundle()"
+                            (click)="orderNow()">
                             Order Now
                         </button>
                     </div>

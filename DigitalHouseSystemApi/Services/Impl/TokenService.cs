@@ -25,11 +25,13 @@ namespace DigitalHouseSystemApi.Services
            {
                new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+               new Claim("id", user.Id.ToString())
            };
 
             var roles = await _userManager.GetRolesAsync(user);
 
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+            
 
 
 
