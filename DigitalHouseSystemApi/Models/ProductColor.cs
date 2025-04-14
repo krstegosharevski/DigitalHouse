@@ -8,12 +8,15 @@
         public int ColorId { get; set; }
         public Color Color { get; set; } = null!;
 
+        public int Quantity { get; set; }
+
         public ProductColor() { }
 
-        public ProductColor(Product product, Color color)
+        public ProductColor(Product product, Color color, int quantity)
         {
             Product = product;
             Color = color;
+            Quantity = quantity;
         }
     }
 }

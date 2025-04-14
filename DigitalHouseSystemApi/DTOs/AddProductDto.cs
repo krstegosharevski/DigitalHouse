@@ -9,6 +9,8 @@
         public int Quantity  { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
-        public List<int> ColorIds { get; set; } = new List<int>();
+
+        //public List<int> ColorIds { get; set; } = new List<int>();
+        public List<ProductColorDto> ProductColors { get; set; }
     }
 }

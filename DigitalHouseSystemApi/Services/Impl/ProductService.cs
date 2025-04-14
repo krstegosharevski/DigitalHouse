@@ -76,28 +76,31 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             int countProducts = 0;
 
-            if (productDto.ColorIds != null)
-            {
-                countProducts = productDto.ColorIds.Count;
-            }
-
-            var product = new Product(productDto.Name, productDto.Price, productDto.Description, productDto.IsPresent,productDto.Quantity = countProducts, category, brand);
+            var product = new Product(productDto.Name, productDto.Price, productDto.Description, productDto.IsPresent,productDto.Quantity = 0, category, brand);
 
             _productRepository.Save(product);
 
-            if (productDto.ColorIds != null && productDto.ColorIds.Any())
+            if (productDto.ProductColors != null && productDto.ProductColors.Any())
             {
-                var colors = await _colorService.GetAllColorsByIdAsync(productDto.ColorIds);
-                foreach (var color in colors)
+                var colorIds = productDto.ProductColors.Select(pc => pc.ColorId).ToList();
+                var colors = await _colorService.GetAllColorsByIdAsync(colorIds);
+
+                foreach (var pc in productDto.ProductColors)
                 {
-                    product.ProductColors.Add(new ProductColor
+                    var color = colors.FirstOrDefault(c => c.Id == pc.ColorId);
+                    if (color != null)
                     {
-                        Product = product,
-                        Color = color
-                    });
+                        product.ProductColors.Add(new ProductColor
+                        {
+                            Product = product,
+                            Color = color,
+                            Quantity = pc.Quantity
+                        });
+                        countProducts += pc.Quantity;
+                    }
                 }
             }
-
+            product.Quantity = countProducts;
 
             if (await _productRepository.SaveAllAsync())
             {
@@ -128,64 +131,54 @@ namespace DigitalHouseSystemApi.Services.Impl
             var category = await _categoryRepository.FindByIdAsync(productDto.CategoryId);
             var brand = await _brandRepository.FindByIdAsync(productDto.BrandId);
 
-
             if (category == null)
-            {
                 throw new CategoryNotFoundException(productDto.CategoryId);
-            }
             if (brand == null)
-            {
                 throw new BrandNotFoundException(productDto.BrandId);
-            }
-
-            int countProducts = prod.Quantity;
-
-            if (productDto.ColorIds != null)
-            {
-                countProducts = productDto.ColorIds.Count;
-            }
 
             prod.Name = productDto.Name;
             prod.Description = productDto.Description;
             prod.Price = productDto.Price;
-            prod.Quantity = countProducts;
+           // prod.Quantity = productDto.Quantity;
             prod.IsPresent = productDto.IsPresent;
             prod.Category = category;
             prod.Brand = brand;
-
-            if (productDto.ColorIds != null && productDto.ColorIds.Any())
+            int countProducts = 0;
+            if (productDto.ProductColors != null && productDto.ProductColors.Any())
             {
                 prod.ProductColors.Clear();
 
-                var colors = await _colorService.GetAllColorsByIdAsync(productDto.ColorIds);
-                foreach (var color in colors)
+                foreach (var pc in productDto.ProductColors)
                 {
                     prod.ProductColors.Add(new ProductColor
                     {
-                        Product = prod,
-                        Color = color
+                        ProductId = id,
+                        ColorId = pc.ColorId,
+                        Quantity = pc.Quantity
                     });
+                    countProducts += pc.Quantity;
                 }
             }
+            prod.Quantity = countProducts;
 
-            if (file != null) 
+            if (file != null)
             {
                 await DeletePhoto(id);
-
-                var success = await AddPhotoAsync(file, id); 
+                var success = await AddPhotoAsync(file, id);
                 if (!success)
                 {
                     throw new Exception("Error adding photo to product");
                 }
             }
 
-            if(await _productRepository.SaveAllAsync())
+            if (await _productRepository.SaveAllAsync())
             {
                 return prod.MappToDtoModel();
             }
 
             throw new Exception("Error saving product");
         }
+
 
         public async Task<bool> AddPhotoAsync(IFormFile file, int productId)
         {
@@ -263,12 +256,14 @@ namespace DigitalHouseSystemApi.Services.Impl
                 throw new ProductNotFoundException(id);
             }
 
-            ICollection<int> colorIds = new List<int>();
+            //ICollection<int> colorIds = new List<int>();
+            List<ProductColorDto> colors = new List<ProductColorDto>();
             if (prod.ProductColors.Any())
             {
                 foreach (var c in prod.ProductColors)
                 {
-                    colorIds.Add(c.ColorId);
+                    //colorIds.Add(c.ColorId);
+                    colors.Add(new ProductColorDto(c.ColorId, c.Quantity));
                 }
             }
 
@@ -282,7 +277,7 @@ namespace DigitalHouseSystemApi.Services.Impl
                 PhotoUrl = prod.Photo?.Url,
                 Category = prod.CategoryId,
                 Brand = prod.BrandId,
-                Colors = colorIds
+                ProductColors = colors
             };
            
         }

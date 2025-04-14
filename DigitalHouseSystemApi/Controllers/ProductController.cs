@@ -8,6 +8,7 @@ using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace DigitalHouseSystemApi.Controllers
 {
@@ -96,15 +97,29 @@ namespace DigitalHouseSystemApi.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("add-product")]
-        public async Task<ActionResult<ProductDto>> AddProduct([FromForm] AddProductDto productDto, [FromForm] IFormFile file)
+        public async Task<ActionResult<ProductDto>> AddProduct([FromForm] IFormCollection form, [FromForm] IFormFile file)
         {
-            if (productDto == null)
+            if (form == null)
             {
                 return BadRequest("Invalid product data");
             }
 
             try
             {
+                var productColorsJson = form["ProductColors"];
+                var productColors = JsonConvert.DeserializeObject<List<ProductColorDto>>(productColorsJson!);
+
+                var productDto = new AddProductDto
+                {
+                    Name = form["Name"],
+                    Price = double.Parse(form["Price"]),
+                    Description = form["Description"],
+                    IsPresent = bool.Parse(form["IsPresent"]),
+                    Quantity = int.TryParse(form["Quantity"], out int qty) ? qty : 0,
+                    CategoryId = int.Parse(form["CategoryId"]),
+                    BrandId = int.Parse(form["BrandId"]),
+                    ProductColors = productColors!
+                };
                 // thorough the service; adding.
                 var addedProduct = await _productService.AddProductAsync(productDto, file);
                
@@ -128,21 +143,35 @@ namespace DigitalHouseSystemApi.Controllers
         [HttpPut("edit-product")]
         public async Task<ActionResult<ProductDto>> EditProduct(
                                     [FromQuery] int productId,
-                                    [FromForm] AddProductDto productDto, 
+                                    [FromForm] IFormCollection form, 
                                     [FromForm] IFormFile? file = null)
         {
-            
-            if (productDto == null)
+
+            if (form == null)
             {
                 return BadRequest("Invalid product data");
             }
 
             try
             {
-                // thorough the service; adding.
-                var addedProduct = await _productService.EditProductAsync(productId,productDto, file);
+                var productColorsJson = form["ProductColors"];
+                var productColors = JsonConvert.DeserializeObject<List<ProductColorDto>>(productColorsJson!);
 
-                return Ok(addedProduct);
+                var productDto = new AddProductDto
+                {
+                    Name = form["Name"],
+                    Price = double.Parse(form["Price"]),
+                    Description = form["Description"],
+                    IsPresent = bool.Parse(form["IsPresent"]),
+                    Quantity = int.TryParse(form["Quantity"], out int qty) ? qty : 0,
+                    CategoryId = int.Parse(form["CategoryId"]),
+                    BrandId = int.Parse(form["BrandId"]),
+                    ProductColors = productColors!
+                };
+
+                var editedProduct = await _productService.EditProductAsync(productId, productDto, file);
+
+                return Ok(editedProduct);
             }
             catch (CategoryNotFoundException ex)
             {
