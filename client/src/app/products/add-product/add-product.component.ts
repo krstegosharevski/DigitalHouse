@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddProductDto } from 'src/app/_models/addProductDto';
 import { BrandDto } from 'src/app/_models/brandDto';
 import { CategoryDto } from 'src/app/_models/categoryDto';
 import { Color } from 'src/app/_models/color';
-import { ProductDto } from 'src/app/_models/productDto';
+import { ProductColorDto } from 'src/app/_models/productColorDto';
 import { BrandsService } from 'src/app/_services/brands.service';
 import { CategoriesService } from 'src/app/_services/categories.service';
 import { ColorsService } from 'src/app/_services/colors.service';
@@ -17,11 +17,10 @@ import { ProductsService } from 'src/app/_services/products.service';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-
-  categories: CategoryDto[] = []
-  brands: BrandDto[] = []
+  categories: CategoryDto[] = [];
+  brands: BrandDto[] = [];
   colors: Color[] = [];
-  selectedColors: number[] = [];
+  selectedColorQuantities: Map<number, number> = new Map<number, number>();
   selectedFile: File | null = null;
   newProduct?: AddProductDto = undefined;
 
@@ -47,14 +46,14 @@ export class AddProductComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id'); 
       if (idParam) {
-        this.id = +idParam; // Converting
+        this.id = +idParam;
       }
     });
 
     if (this.id != null) {
-      this.isEditMode = true
+      this.isEditMode = true;
       this.productService.getProductForEdit(this.id).subscribe({
-        next : (product) =>{
+        next: (product) => {
           this.newProduct = {
             name: product.name,
             price: product.price,
@@ -62,11 +61,14 @@ export class AddProductComponent implements OnInit {
             isPresent: product.isPresent,
             categoryId: product.category,
             brandId: product.brand,
-            colorIds: product.colors
-          }
-          this.selectedColors = [...product.colors];
+            productColors: product.productColors || []
+          };
+          // Initialize selected colors with quantities
+          product.productColors?.forEach(pc => {
+            this.selectedColorQuantities.set(pc.colorId, pc.quantity);
+          });
         }
-      })
+      });
     } else {
       this.newProduct = {
         name: '',
@@ -75,48 +77,63 @@ export class AddProductComponent implements OnInit {
         isPresent: false,
         categoryId: 0,
         brandId: 0,
-        colorIds: []
+        productColors: []
       };
     }
-    this.getColors()
-    this.getBrands()
-    this.getCategories()
+    this.getColors();
+    this.getBrands();
+    this.getCategories();
   }
 
   getColors() {
     this.colorsService.getAllColors().subscribe({
       next: (colors) => {
-        this.colors = colors
+        this.colors = colors;
       },
       error: (err) => console.error(err)
-    })
+    });
   }
 
   getBrands() {
     this.brandService.getAllBrands().subscribe({
       next: (brands) => {
-        this.brands = brands
+        this.brands = brands;
       },
       error: (err) => console.error(err)
-    })
+    });
   }
 
   getCategories() {
     this.categoryService.getAllCategories().subscribe({
       next: (categories) => {
-        this.categories = categories
+        this.categories = categories;
       },
       error: (err) => console.error(err)
-    })
+    });
   }
 
-  toggleColorSelection(color: number) {
-    const index = this.selectedColors.indexOf(color);
-    if (index > -1) {
-      this.selectedColors.splice(index, 1);
+  toggleColorSelection(colorId: number) {
+    if (this.selectedColorQuantities.has(colorId)) {
+      this.selectedColorQuantities.delete(colorId);
     } else {
-      this.selectedColors.push(color);
+      this.selectedColorQuantities.set(colorId, 0);
     }
+  }
+
+  onQuantityChange(event: Event, colorId: number) {
+    const input = event.target as HTMLInputElement;
+    const quantity = parseInt(input.value, 10);
+    if (!isNaN(quantity) && quantity >= 0) {
+      this.selectedColorQuantities.set(colorId, quantity);
+    }
+  }
+
+  isColorSelected(colorId: number): boolean {
+    return this.selectedColorQuantities.has(colorId);
+  }
+
+  getColorQuantity(colorId: number): number {
+    return this.selectedColorQuantities.get(colorId) || 0;
   }
 
   onFileSelected(event: any) {
@@ -134,45 +151,44 @@ export class AddProductComponent implements OnInit {
       isPresent: false,
       categoryId: 0,
       brandId: 0,
-      colorIds: []
+      productColors: []
     };
-    this.selectedColors = [];
+    this.selectedColorQuantities.clear();
     this.selectedFile = null;
     this.showErrorBanner = false;
   }
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
-      this.showErrorBanner = true; // Show error baner
+      this.showErrorBanner = true;
       return;
     }
 
-    if (this)
-      this.newProduct!.colorIds = this.selectedColors;
-
-   
+    const productColors: ProductColorDto[] = Array.from(this.selectedColorQuantities.entries())
+      .map(([colorId, quantity]) => ({
+        colorId,
+        quantity
+      }));
 
     const formData = new FormData();
-    formData.append('name', this.newProduct!.name);
-    formData.append('price', this.newProduct!.price.toString());
-    formData.append('description', this.newProduct!.description);
-    formData.append('isPresent', this.newProduct!.isPresent.toString());
-    formData.append('categoryId', this.newProduct!.categoryId.toString());
-    formData.append('brandId', this.newProduct!.brandId.toString());
-    this.newProduct!.colorIds.forEach((colorId, index) => {
-      formData.append(`colorIds[${index}]`, colorId.toString());
-    });
+    formData.append('Name', this.newProduct!.name);
+    formData.append('Price', this.newProduct!.price.toString());
+    formData.append('Description', this.newProduct!.description);
+    formData.append('IsPresent', this.newProduct!.isPresent.toString());
+    formData.append('CategoryId', this.newProduct!.categoryId.toString());
+    formData.append('BrandId', this.newProduct!.brandId.toString());
+    formData.append('ProductColors', JSON.stringify(productColors));
+    
     if (this.selectedFile) {
       formData.append('file', this.selectedFile);
     }
-   
+
+    // Log form data for debugging
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
 
     if (this.isEditMode) {
-      
-      formData.forEach(x => {
-        console.log(x);
-      })
-      
       this.productService.updateProduct(this.id, formData).subscribe({
         next: (response) => {
           console.log('Product updated successfully', response);
@@ -182,9 +198,11 @@ export class AddProductComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error updating product', err);
+          this.showErrorBanner = true;
         }
       });
     } else {
+      console.log("vleze tuka");
       this.productService.addNewProduct(formData).subscribe({
         next: (response) => {
           console.log('Product added successfully', response);
@@ -194,12 +212,9 @@ export class AddProductComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error adding product', err);
+          this.showErrorBanner = true;
         }
       });
     }
-
-    
   }
-
-
 }

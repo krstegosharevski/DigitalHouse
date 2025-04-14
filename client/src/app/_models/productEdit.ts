@@ -1,3 +1,5 @@
+import { ProductColorDto } from "./productColorDto";
+
 export interface ProductEdit{
     id: number;
     name: string;
@@ -7,5 +9,5 @@ export interface ProductEdit{
     photoUrl: string;
     category: number;
     brand: number;
-    colors: number[]
+    productColors: ProductColorDto[];
 }

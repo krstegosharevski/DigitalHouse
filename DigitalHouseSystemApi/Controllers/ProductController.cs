@@ -97,7 +97,7 @@ namespace DigitalHouseSystemApi.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("add-product")]
-        public async Task<ActionResult<ProductDto>> AddProduct([FromForm] IFormCollection form, [FromForm] IFormFile file)
+        public async Task<ActionResult<ProductDto>> AddProduct([FromForm] IFormCollection form, [FromForm] IFormFile? file)
         {
             if (form == null)
             {

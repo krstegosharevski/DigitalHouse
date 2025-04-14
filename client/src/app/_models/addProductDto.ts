@@ -1,3 +1,5 @@
+import { ProductColorDto } from "./productColorDto";
+
 export interface AddProductDto {
     name: string;
     price: number;
@@ -5,5 +7,5 @@ export interface AddProductDto {
     isPresent: boolean;
     categoryId: number;
     brandId: number;
-    colorIds: number[];
+    productColors: ProductColorDto[];
 }
