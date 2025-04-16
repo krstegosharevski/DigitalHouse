@@ -47,7 +47,9 @@
                 *ngFor="let color of product.colors" 
                 class="color-button" 
                 [style.backgroundColor]="color"
-                [attr.title]="color">
+                [attr.title]="color"
+                (click)="saveColor(color)"
+                >
               </button>
             </div>
       

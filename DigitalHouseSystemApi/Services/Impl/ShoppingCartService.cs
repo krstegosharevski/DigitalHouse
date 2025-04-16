@@ -35,13 +35,29 @@ namespace DigitalHouseSystemApi.Services.Impl
         }
 
         // Neznam kolku e dobro implementirano...
-        public async Task<ShoppingCartItem> AddToCart(ProductDto productDto, string username)
-        {
-            var product = await _productRepository.FindProductByName(productDto.Name);
-            if (product == null) { throw new ProductNotFoundException(productDto.Name); }
+        //public async Task<ShoppingCartItem> AddToCart(ProductDto productDto, string username)
+        //{
+        //    var product = await _productRepository.FindProductByName(productDto.Name);
+        //    if (product == null) { throw new ProductNotFoundException(productDto.Name); }
 
-            
-            ShoppingCartItem item = new ShoppingCartItem(product);
+
+        //    ShoppingCartItem item = new ShoppingCartItem(product);
+
+        //    var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatus(username, ShoppingCartStatus.ACTIVE);
+
+        //    shoppingCart.Items.Add(item);
+
+        //    await _shoppingCartRepository.UpdateAsync(shoppingCart);
+
+        //    return item;
+        //}
+        public async Task<ShoppingCartItem> AddToCart(int productId, string hexCode, string username)
+        {
+            var product = await _productRepository.FindByIdAsync(productId);
+            if (product == null) { throw new ProductNotFoundException(product.Name); }
+
+
+            ShoppingCartItem item = new ShoppingCartItem(product,hexCode);
 
             var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatus(username, ShoppingCartStatus.ACTIVE);
 
@@ -51,6 +67,6 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             return item;
         }
-         
+
     }
 }

@@ -13,6 +13,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr *ngFor="let prod of shoppingCartItems">
+                            <td><img src="{{prod.photoUrl}}" style="width: 75px; height: 75px;"></td>
+                            <td>{{prod.name}}</td>
+                            <td>{{prod.price}}</td>
+                            <td>{{prod.totalQuantity}}</td>
+                            <td>{{prod.hexCode}}</td>
+                            <!-- <td>
+                                <div 
+                                  class="rounded-4" 
+                                  style="width: 30px; height: 30px;" 
+                                  [style.backgroundColor]="prod.hexCode"
+                                ></div>
+                              </td> -->
+                            <td><button class="btn x-button">X</button></td>
+                        </tr>
                         <tr>
                             <td>https,lel</td>
                             <td>Iphone 15</td>

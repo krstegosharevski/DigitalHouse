@@ -11,10 +11,11 @@
         public ShoppingCart ShoppingCart { get; set; }
 
         public ShoppingCartItem() { }
-        public ShoppingCartItem(Product product)
+        public ShoppingCartItem(Product product, string hexCode)
         {
             Product = product;
             TotalQuantity = 1;
+            HexCode = hexCode;
         }
     }
 }

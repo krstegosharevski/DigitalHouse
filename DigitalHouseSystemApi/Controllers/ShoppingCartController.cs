@@ -15,13 +15,32 @@ namespace DigitalHouseSystemApi.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
-        [HttpPost("add-product")]
-        public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCard(ProductDto product, string username)
+        //[HttpPost("add-product")]
+        //public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCard(ProductDto product, string username)
+        //{
+        //    try
+        //    {
+        //        var item = await _shoppingCartService.AddToCart(product, username);
+        //        return Ok(item.MappToDtoModel()); 
+        //    }
+        //    catch (ProductNotFoundException ex)
+        //    {
+        //        return NotFound(ex.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
+
+        [HttpPost("add-to-cart")]
+        public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCart(int productId, string hexCode, string username)
         {
             try
             {
-                var item = await _shoppingCartService.AddToCart(product, username);
-                return Ok(item.MappToDtoModel()); 
+                var item = await _shoppingCartService.AddToCart(productId, hexCode, username);
+                return Ok(item.MappToDtoModel());
             }
             catch (ProductNotFoundException ex)
             {

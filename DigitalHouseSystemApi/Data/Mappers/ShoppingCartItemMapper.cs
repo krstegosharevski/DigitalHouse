@@ -12,6 +12,9 @@ namespace DigitalHouseSystemApi.Data.Mappers
             {
                 Name = domainModel.Product.Name,
                 TotalQuantity = domainModel.TotalQuantity,
+                HexCode = domainModel.HexCode,
+                PhotoUrl = domainModel.Product.Photo.Url,
+                Price = domainModel.Product.Price
             };
         }
     }

@@ -37,5 +37,11 @@ export class ProductCardComponent implements OnInit {
     return description.replace(/ (?=[A-Za-z]+:)/g, '<br><span><br>');
   }
 
+  // ovdeka gi imash glavnite raboti shto treba da mu gi pushtish na bekendot za da go dodade vo
+  // koshnickata... Od koga ke go selektira
+  saveColor( color : string){
+    console.log(color + " " + this.product.id);
+  }
+
 
 }

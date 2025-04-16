@@ -26,6 +26,7 @@ namespace DigitalHouseSystemApi.Data
             var shoppingCart = await _context.ShoppingCarts
                 .Include(p => p.Items)
                 .ThenInclude(item => item.Product)
+                .ThenInclude(photo => photo.Photo)
                 .FirstOrDefaultAsync(
             p => p.AppUser.UserName == username && p.Status == status);
 
