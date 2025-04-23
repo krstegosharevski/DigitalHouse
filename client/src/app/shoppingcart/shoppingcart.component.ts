@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingcartCartItem } from '../_models/shoppingCartItem';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -9,17 +10,25 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 })
 export class ShoppingcartComponent implements OnInit {
   shoppingCartItems: ShoppingcartCartItem[] = [];
-  username:string = "krste";
+  currentUser$ = this.accountService.currentUser$;
 
-  constructor(private shoppingCartService : ShoppingCartService ) { }
+  constructor(private shoppingCartService : ShoppingCartService, private accountService: AccountService ) { }
 
   ngOnInit(): void {
-    this.shoppingCartService.getAllShoppingCartItems(this.username).subscribe({
-      next : (response) => {
-          this.shoppingCartItems = response;
-      },
-      error : (err) => console.log(err)
-    })
+    this.accountService.currentUser$.subscribe({
+      next: (user) => {
+        if (user) {
+          const username = user.username;
+          this.shoppingCartService.getAllShoppingCartItems(username).subscribe({
+            next: (response) => {
+              this.shoppingCartItems = response;
+            },
+            error: (err) => console.log(err)
+          });
+        }
+      }
+    });
   }
+  
 
 }

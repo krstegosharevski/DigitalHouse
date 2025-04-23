@@ -56,7 +56,7 @@
               <h5 class="fw-light text-center mt-2 pt-3">Price: {{ product.price | number}} MKD</h5>
            
             <div *ngIf="product.isPresent" class="btn d-flex justify-content-center mt-4 btn-color">
-              <button class="btn" [disabled]="!product.isPresent" style="width: 150px; height: 50px;">
+              <button class="btn" (click)="addToCart()" [disabled]="!product.isPresent" style="width: 150px; height: 50px;">
                 <img src="assets/images/cart-white.png" alt="Search" style="height: 26px; width: 26px;">
               </button>
             </div>

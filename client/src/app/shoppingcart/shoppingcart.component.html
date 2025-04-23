@@ -18,7 +18,6 @@
                             <td>{{prod.name}}</td>
                             <td>{{prod.price}}</td>
                             <td>{{prod.totalQuantity}}</td>
-                            <td>{{prod.hexCode}}</td>
                             <!-- <td>
                                 <div 
                                   class="rounded-4" 
@@ -26,6 +25,11 @@
                                   [style.backgroundColor]="prod.hexCode"
                                 ></div>
                               </td> -->
+                              <td><button 
+                                class="color-button" 
+                                [style.backgroundColor]="prod.hexCode"
+                                >
+                              </button></td>
                             <td><button class="btn x-button">X</button></td>
                         </tr>
                         <tr>

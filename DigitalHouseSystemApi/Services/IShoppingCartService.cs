@@ -5,7 +5,7 @@ namespace DigitalHouseSystemApi.Services
 {
     public interface IShoppingCartService
     {
-        Task<ShoppingCartItem> AddToCart(int productId, string hexCode, string username);
+        Task<ShoppingCartItem> AddToCart(AddToCartDto dto);
         Task<ShoppingCart> ActiveShoppingCart(string username);
     }
 }

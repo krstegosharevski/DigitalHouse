@@ -51,15 +51,15 @@ namespace DigitalHouseSystemApi.Services.Impl
 
         //    return item;
         //}
-        public async Task<ShoppingCartItem> AddToCart(int productId, string hexCode, string username)
+        public async Task<ShoppingCartItem> AddToCart(AddToCartDto dto)
         {
-            var product = await _productRepository.FindByIdAsync(productId);
+            var product = await _productRepository.FindByIdAsync(dto.ProductId);
             if (product == null) { throw new ProductNotFoundException(product.Name); }
 
 
-            ShoppingCartItem item = new ShoppingCartItem(product,hexCode);
+            ShoppingCartItem item = new ShoppingCartItem(product,dto.HexCode);
 
-            var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatus(username, ShoppingCartStatus.ACTIVE);
+            var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatus(dto.Username, ShoppingCartStatus.ACTIVE);
 
             shoppingCart.Items.Add(item);
 

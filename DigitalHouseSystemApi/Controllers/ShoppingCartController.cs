@@ -35,11 +35,11 @@ namespace DigitalHouseSystemApi.Controllers
         //}
 
         [HttpPost("add-to-cart")]
-        public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCart(int productId, string hexCode, string username)
+        public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCart([FromBody] AddToCartDto dto)
         {
             try
             {
-                var item = await _shoppingCartService.AddToCart(productId, hexCode, username);
+                var item = await _shoppingCartService.AddToCart(dto);
                 return Ok(item.MappToDtoModel());
             }
             catch (ProductNotFoundException ex)
