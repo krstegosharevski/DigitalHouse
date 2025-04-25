@@ -2,6 +2,7 @@
 {
     public class ShoppingCartItemDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int TotalQuantity { get; set; }
         public string? HexCode { get; set; }
@@ -10,8 +11,9 @@
 
         public ShoppingCartItemDto() { }
 
-        public ShoppingCartItemDto(string name, int totalQuantity, string photoUrl, double price)
+        public ShoppingCartItemDto(int id, string name, int totalQuantity, string photoUrl, double price)
         {
+            Id = id;
             Name = name;
             TotalQuantity = totalQuantity;
             PhotoUrl = photoUrl;

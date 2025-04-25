@@ -106,6 +106,12 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+.selected-color {
+  transform: scale(1.2);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  border: 2px solid #000; /* или бело ако бојата е темна */
+}
+
 .btn-color {
   background-color: #E20074;
   color: white;

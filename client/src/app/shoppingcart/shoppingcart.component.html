@@ -18,43 +18,14 @@
                             <td>{{prod.name}}</td>
                             <td>{{prod.price}}</td>
                             <td>{{prod.totalQuantity}}</td>
-                            <!-- <td>
-                                <div 
-                                  class="rounded-4" 
-                                  style="width: 30px; height: 30px;" 
-                                  [style.backgroundColor]="prod.hexCode"
-                                ></div>
-                              </td> -->
-                              <td><button 
+                            <td>
+                              <button 
                                 class="color-button" 
                                 [style.backgroundColor]="prod.hexCode"
                                 >
-                              </button></td>
-                            <td><button class="btn x-button">X</button></td>
-                        </tr>
-                        <tr>
-                            <td>https,lel</td>
-                            <td>Iphone 15</td>
-                            <td>30 000</td>
-                            <td>1</td>
-                            <td><button class="btn round"></button></td>
-                            <td><button class="btn x-button">X</button></td>
-                        </tr>
-                        <tr>
-                            <td>https,lel</td>
-                            <td>Iphone 15</td>
-                            <td>30 000</td>
-                            <td>1</td>
-                            <td><button class="btn round"></button></td>
-                            <td><button class="btn x-button">X</button></td>
-                        </tr>
-                        <tr>
-                            <td>https,lel</td>
-                            <td>Iphone 15</td>
-                            <td>30 000</td>
-                            <td>1</td>
-                            <td><button class="btn round"></button></td>
-                            <td><button class="btn x-button">X</button></td>
+                              </button>
+                            </td>
+                            <td><button (click)="removeFromCart(prod.id)" class="btn x-button">X</button></td>
                         </tr>
                     </tbody>
                 </table>

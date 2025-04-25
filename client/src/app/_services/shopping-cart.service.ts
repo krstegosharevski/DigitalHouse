@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ShoppingcartCartItem } from '../_models/shoppingCartItem';
 import { environment } from 'src/environments/environment';
@@ -24,6 +24,11 @@ export class ShoppingCartService {
 
   addToCart(addToCartDto : AddToCart){
     return this.http.post( this.baseUrl + "shoppingcart/add-to-cart", addToCartDto)
+  }
+
+  deleteItemFromCart(itemId: number) {
+    const params = new HttpParams().set('itemId', itemId.toString());
+    return this.http.delete(this.baseUrl + 'shoppingcart/remove-item', { params });
   }
   
 }

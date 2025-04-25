@@ -12,7 +12,8 @@ export class ShoppingcartComponent implements OnInit {
   shoppingCartItems: ShoppingcartCartItem[] = [];
   currentUser$ = this.accountService.currentUser$;
 
-  constructor(private shoppingCartService : ShoppingCartService, private accountService: AccountService ) { }
+  constructor(private shoppingCartService : ShoppingCartService, 
+              private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
@@ -29,6 +30,15 @@ export class ShoppingcartComponent implements OnInit {
       }
     });
   }
-  
+
+  removeFromCart(id: number){
+    this.shoppingCartService.deleteItemFromCart(id).subscribe({
+      next : (res) => {
+        console.log("uspeshno!")
+        this.ngOnInit()
+      },
+      error : (err) => console.log("error")
+    })
+  } 
 
 }

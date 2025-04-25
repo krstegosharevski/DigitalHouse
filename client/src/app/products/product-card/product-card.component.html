@@ -9,7 +9,7 @@
     <div class="card-body text-center">
       <h4 class="text-muted fw-light">{{ product!.price | number}} MKD</h4>
 
-      <button class="btn btn-color mt-2 pt-2" [disabled]="!product.isPresent" style="width: 100px;">
+      <button (click)="toggleDetails()" class="btn btn-color mt-2 pt-2" [disabled]="!product.isPresent" style="width: 100px;">
         <img src="assets/images/cart-white.png" alt="Search" style="height: 26px; width: 26px;">
       </button>
       <div *ngIf="(currentUser$ | async)" class="mt-2">
@@ -49,14 +49,15 @@
                 [style.backgroundColor]="color"
                 [attr.title]="color"
                 (click)="saveColor(color)"
+                [ngClass]="{'selected-color': color === selectedColor}"
                 >
               </button>
             </div>
       
               <h5 class="fw-light text-center mt-2 pt-3">Price: {{ product.price | number}} MKD</h5>
            
-            <div *ngIf="product.isPresent" class="btn d-flex justify-content-center mt-4 btn-color">
-              <button class="btn" (click)="addToCart()" [disabled]="!product.isPresent" style="width: 150px; height: 50px;">
+            <div *ngIf="product.isPresent"  class="btn d-flex justify-content-center mt-4 btn-color">
+              <button class="btn" (click)="addToCart()" [disabled]="!product.isPresent  || color === ''" style="width: 150px; height: 50px;">
                 <img src="assets/images/cart-white.png" alt="Search" style="height: 26px; width: 26px;">
               </button>
             </div>

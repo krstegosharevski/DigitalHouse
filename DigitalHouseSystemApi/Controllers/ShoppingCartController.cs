@@ -15,25 +15,6 @@ namespace DigitalHouseSystemApi.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
-        //[HttpPost("add-product")]
-        //public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCard(ProductDto product, string username)
-        //{
-        //    try
-        //    {
-        //        var item = await _shoppingCartService.AddToCart(product, username);
-        //        return Ok(item.MappToDtoModel()); 
-        //    }
-        //    catch (ProductNotFoundException ex)
-        //    {
-        //        return NotFound(ex.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-
-        //}
-
         [HttpPost("add-to-cart")]
         public async Task<ActionResult<ShoppingCartItemDto>> АddProdductToShoppingCart([FromBody] AddToCartDto dto)
         {
@@ -50,7 +31,6 @@ namespace DigitalHouseSystemApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpGet("get-shoppingcart")]
@@ -80,10 +60,28 @@ namespace DigitalHouseSystemApi.Controllers
 
         }
 
-        //public Task<ActionResult<ShoppingCardItem>> removeFromShoppingCard(ShoppingCardItem item);
+        [HttpDelete("remove-item")]
+        public async Task<ActionResult<ShoppingCartItemDto>> removeFromShoppingCart([FromQuery] int itemId)
+        {
+            try
+            {
+                var shoppingCartItemDto = await _shoppingCartService.RemoveFromCart(itemId);
+                return Ok(shoppingCartItemDto);
+            }
+            catch (ShoppingCartItemNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // Cancel the shopping cart; so the cart will go status CANCALED
 
         // Buy the shopping cart; so the cart will go status COMPLETED
 
-        // Cancel the shopping cart; so the cart will go status CANCALED
+
     }
 }

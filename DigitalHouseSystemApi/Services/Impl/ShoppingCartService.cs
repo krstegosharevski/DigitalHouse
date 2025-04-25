@@ -1,4 +1,5 @@
-﻿using DigitalHouseSystemApi.DTOs;
+﻿using DigitalHouseSystemApi.Data.Mappers;
+using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Models.Exceptions;
@@ -34,23 +35,6 @@ namespace DigitalHouseSystemApi.Services.Impl
             return shoppingcard;
         }
 
-        // Neznam kolku e dobro implementirano...
-        //public async Task<ShoppingCartItem> AddToCart(ProductDto productDto, string username)
-        //{
-        //    var product = await _productRepository.FindProductByName(productDto.Name);
-        //    if (product == null) { throw new ProductNotFoundException(productDto.Name); }
-
-
-        //    ShoppingCartItem item = new ShoppingCartItem(product);
-
-        //    var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatus(username, ShoppingCartStatus.ACTIVE);
-
-        //    shoppingCart.Items.Add(item);
-
-        //    await _shoppingCartRepository.UpdateAsync(shoppingCart);
-
-        //    return item;
-        //}
         public async Task<ShoppingCartItem> AddToCart(AddToCartDto dto)
         {
             var product = await _productRepository.FindByIdAsync(dto.ProductId);
@@ -68,5 +52,13 @@ namespace DigitalHouseSystemApi.Services.Impl
             return item;
         }
 
+        public async Task<ShoppingCartItemDto> RemoveFromCart(int id)
+        {
+            var item = await _shoppingCartItemRepository.DeleteItem(id);
+            
+            if (item == null) throw new ShoppingCartItemNotFoundException(id);
+
+            return item.MappToDtoModel();
+        }
     }
 }

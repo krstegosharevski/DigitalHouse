@@ -24,8 +24,12 @@
               <p class="fw-light pt-4 small">Colors:</p>
 
               <div class="colors mb-4" style="padding-bottom: 30px;">
-                <button *ngFor="let color of product?.colors" class="color-button" [style.backgroundColor]="color"
-                  [attr.title]="color">
+                <button 
+                *ngFor="let color of product?.colors" 
+                class="color-button" 
+                [style.backgroundColor]="color"
+                [attr.title]="color"
+                (click)="saveColor(color)">
                 </button>
               </div>
 
@@ -40,7 +44,7 @@
                 </div>
 
                 <div class="col-md-4 col-12 text-center pt-4">
-                  <button class="btn btn-log-in ms-2 fw-light" routerLink="/login">Add to Cart</button>
+                  <button class="btn btn-log-in ms-2 fw-light" (click)="addToCart()">Add to Cart</button>
                   <div *ngIf="(currentUser$ | async)" class="mt-2">
                     <button *appHasRole="['Admin']" class="btn btn-success ms-2 fw-light" (click)="routeToEditPage(this.product!.id)">
                       Edit Product

@@ -10,6 +10,7 @@ namespace DigitalHouseSystemApi.Data.Mappers
             if (domainModel == null) { throw new Exception(); }
             return new ShoppingCartItemDto()
             {
+                Id = domainModel.Id,
                 Name = domainModel.Product.Name,
                 TotalQuantity = domainModel.TotalQuantity,
                 HexCode = domainModel.HexCode,

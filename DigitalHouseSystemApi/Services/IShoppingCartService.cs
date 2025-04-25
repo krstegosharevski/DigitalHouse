@@ -7,5 +7,6 @@ namespace DigitalHouseSystemApi.Services
     {
         Task<ShoppingCartItem> AddToCart(AddToCartDto dto);
         Task<ShoppingCart> ActiveShoppingCart(string username);
+        Task<ShoppingCartItemDto> RemoveFromCart(int id);
     }
 }
