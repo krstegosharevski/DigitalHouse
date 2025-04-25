@@ -1,5 +1,6 @@
 ﻿using DigitalHouseSystemApi.Interfaces;
 using DigitalHouseSystemApi.Models;
+using DigitalHouseSystemApi.Models.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalHouseSystemApi.Data
@@ -15,6 +16,7 @@ namespace DigitalHouseSystemApi.Data
             _context = context; 
             _userRepository = userRepository;
         }
+
         public async Task<ShoppingCart> FindByIdAsync(int id)
         {
             return await _context.ShoppingCarts.FirstOrDefaultAsync(p => p.Id == id);
@@ -50,6 +52,23 @@ namespace DigitalHouseSystemApi.Data
         {
             _context.ShoppingCarts.Update(shoppingCart);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<ShoppingCartStatus> ChangeStatusCancel(string username)
+        {
+            var shoppingCart = await _context.ShoppingCarts
+                .Include(p => p.Items)
+                .ThenInclude(item => item.Product)
+                .ThenInclude(photo => photo.Photo)
+                .FirstOrDefaultAsync(
+            p => p.AppUser.UserName == username && p.Status == ShoppingCartStatus.ACTIVE);
+
+            if (shoppingCart == null) throw new ShoppingCartNotFoundException(username);
+
+            shoppingCart.Status = ShoppingCartStatus.CANCALED;
+            await _context.SaveChangesAsync();
+
+            return shoppingCart.Status;
         }
     }
 }

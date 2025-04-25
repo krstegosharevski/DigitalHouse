@@ -13,6 +13,7 @@ namespace DigitalHouseSystemApi.Interfaces
         Task<ShoppingCart> Save(ShoppingCart shoppingCart);
 
         Task UpdateAsync(ShoppingCart shoppingCart);
+        Task<ShoppingCartStatus> ChangeStatusCancel(string username);
 
 
     }

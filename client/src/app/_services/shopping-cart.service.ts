@@ -30,5 +30,10 @@ export class ShoppingCartService {
     const params = new HttpParams().set('itemId', itemId.toString());
     return this.http.delete(this.baseUrl + 'shoppingcart/remove-item', { params });
   }
+
+  cancelCart(username: string) {
+    const params = new HttpParams().set('username', username);
+    return this.http.put<boolean>(this.baseUrl + 'shoppingcart/cancel-status', null, { params });
+  }
   
 }

@@ -3,7 +3,7 @@
     public class ShoppingCartItemNotFoundException : Exception
     {
         public ShoppingCartItemNotFoundException(int id)
-      : base($"Shopping Cart with Id: {id} was not found. zs e 0?")
+      : base($"Shopping Cart with Id: {id} was not found.")
         {
         }
     }

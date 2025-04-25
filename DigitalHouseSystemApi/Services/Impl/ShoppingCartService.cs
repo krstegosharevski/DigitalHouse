@@ -60,5 +60,17 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             return item.MappToDtoModel();
         }
+
+        public async Task<bool> CancelStatus(string username)
+        {
+            var status = await _shoppingCartRepository.ChangeStatusCancel(username);
+            
+            if (status == ShoppingCartStatus.CANCALED)
+            {
+               return true;
+            }
+
+            return false;
+        }
     }
 }

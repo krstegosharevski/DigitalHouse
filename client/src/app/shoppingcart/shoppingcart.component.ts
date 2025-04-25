@@ -11,16 +11,17 @@ import { AccountService } from '../_services/account.service';
 export class ShoppingcartComponent implements OnInit {
   shoppingCartItems: ShoppingcartCartItem[] = [];
   currentUser$ = this.accountService.currentUser$;
+  username: string | undefined
 
-  constructor(private shoppingCartService : ShoppingCartService, 
-              private accountService: AccountService) { }
+  constructor(private shoppingCartService: ShoppingCartService,
+    private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
         if (user) {
-          const username = user.username;
-          this.shoppingCartService.getAllShoppingCartItems(username).subscribe({
+          this.username = user.username;
+          this.shoppingCartService.getAllShoppingCartItems(this.username).subscribe({
             next: (response) => {
               this.shoppingCartItems = response;
             },
@@ -31,14 +32,24 @@ export class ShoppingcartComponent implements OnInit {
     });
   }
 
-  removeFromCart(id: number){
+  removeFromCart(id: number) {
     this.shoppingCartService.deleteItemFromCart(id).subscribe({
-      next : (res) => {
-        console.log("uspeshno!")
+      next: (res) => {
         this.ngOnInit()
       },
-      error : (err) => console.log("error")
+      error: (err) => console.log("error")
     })
-  } 
+  }
+
+  cancelCart() {
+    if (this.username) {
+      this.shoppingCartService.cancelCart(this.username).subscribe({
+        next: (res) => {
+          this.ngOnInit()
+        },
+        error: (err) => console.log(err)
+      })
+    }
+  }
 
 }
