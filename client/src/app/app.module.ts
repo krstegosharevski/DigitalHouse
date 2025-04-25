@@ -37,8 +37,8 @@ import { Magenta1Component } from './tariffs/magenta1/magenta1.component';
 import { MobileTariffComponent } from './tariffs/mobile-tariff/mobile-tariff.component';
 import { PrepaidComponent } from './tariffs/prepaid/prepaid.component';
 import { MagentaApproveComponent } from './magenta-approve/magenta-approve.component';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -70,7 +70,7 @@ export function HttpLoaderFactory(http:HttpClient){
     MobileTariffComponent,
     PrepaidComponent,
     MagentaApproveComponent,
-    ConfirmDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

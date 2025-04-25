@@ -22,8 +22,21 @@ namespace DigitalHouseSystemApi.Data
             return await _context.ShoppingCarts.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        //Kreiraj ako nemat!
         public async Task<ShoppingCart> FindByUsernameAndStatus(string username, ShoppingCartStatus status)
+        {
+            var shoppingCart = await _context.ShoppingCarts
+                .Include(p => p.Items)
+                .ThenInclude(item => item.Product)
+                .ThenInclude(photo => photo.Photo)
+                .FirstOrDefaultAsync(
+            p => p.AppUser.UserName == username && p.Status == status);
+
+            if (shoppingCart == null) throw new ShoppingCartNotFoundException(username);
+
+            return shoppingCart;
+        }
+
+        public async Task<ShoppingCart> FindByUsernameAndStatusForAdd(string username, ShoppingCartStatus status)
         {
             var shoppingCart = await _context.ShoppingCarts
                 .Include(p => p.Items)
@@ -54,19 +67,20 @@ namespace DigitalHouseSystemApi.Data
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ShoppingCartStatus> ChangeStatusCancel(string username)
+        public ShoppingCartStatus ChangeStatusCancel(string username)
         {
-            var shoppingCart = await _context.ShoppingCarts
+            var shoppingCart =  _context.ShoppingCarts
                 .Include(p => p.Items)
                 .ThenInclude(item => item.Product)
                 .ThenInclude(photo => photo.Photo)
-                .FirstOrDefaultAsync(
-            p => p.AppUser.UserName == username && p.Status == ShoppingCartStatus.ACTIVE);
+                .FirstOrDefault( p => 
+                p.AppUser.UserName == username && 
+                p.Status == ShoppingCartStatus.ACTIVE);
 
             if (shoppingCart == null) throw new ShoppingCartNotFoundException(username);
 
             shoppingCart.Status = ShoppingCartStatus.CANCALED;
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return shoppingCart.Status;
         }

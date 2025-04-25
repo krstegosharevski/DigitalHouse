@@ -78,15 +78,14 @@ namespace DigitalHouseSystemApi.Controllers
             }
         }
 
-        // Cancel the shopping cart; so the cart will go status CANCALED
         [HttpPut("cancel-status")]
-        public async Task<ActionResult<bool>> cancelStatusCart(string username)
+        public ActionResult<bool> cancelStatusCart(string username)
         {
             if (username == null) return BadRequest(false);
 
             try
             {
-                var deleted = await _shoppingCartService.CancelStatus(username);
+                var deleted =  _shoppingCartService.CancelStatus(username);
                 return Ok(deleted);
             }
             catch (ShoppingCartNotFoundException ex)

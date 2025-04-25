@@ -43,7 +43,7 @@ namespace DigitalHouseSystemApi.Services.Impl
 
             ShoppingCartItem item = new ShoppingCartItem(product,dto.HexCode);
 
-            var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatus(dto.Username, ShoppingCartStatus.ACTIVE);
+            var shoppingCart = await _shoppingCartRepository.FindByUsernameAndStatusForAdd(dto.Username, ShoppingCartStatus.ACTIVE);
 
             shoppingCart.Items.Add(item);
 
@@ -61,9 +61,9 @@ namespace DigitalHouseSystemApi.Services.Impl
             return item.MappToDtoModel();
         }
 
-        public async Task<bool> CancelStatus(string username)
+        public bool CancelStatus(string username)
         {
-            var status = await _shoppingCartRepository.ChangeStatusCancel(username);
+            var status =  _shoppingCartRepository.ChangeStatusCancel(username);
             
             if (status == ShoppingCartStatus.CANCALED)
             {
