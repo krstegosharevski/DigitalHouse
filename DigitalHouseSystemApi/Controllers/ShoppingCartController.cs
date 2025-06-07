@@ -3,6 +3,7 @@ using DigitalHouseSystemApi.DTOs;
 using DigitalHouseSystemApi.Models;
 using DigitalHouseSystemApi.Models.Exceptions;
 using DigitalHouseSystemApi.Services;
+using DigitalHouseSystemApi.Services.Impl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalHouseSystemApi.Controllers
@@ -10,9 +11,11 @@ namespace DigitalHouseSystemApi.Controllers
     public class ShoppingCartController : BaseApiController
     {
         private readonly IShoppingCartService _shoppingCartService;
-        public ShoppingCartController(IShoppingCartService shoppingCartService) 
+        private readonly ILemonSqueezyService _lemonSqueezyService;
+        public ShoppingCartController(IShoppingCartService shoppingCartService, ILemonSqueezyService lemonSqueezyService) 
         {
             _shoppingCartService = shoppingCartService;
+            _lemonSqueezyService = lemonSqueezyService;
         }
 
         [HttpPost("add-to-cart")]
@@ -99,6 +102,30 @@ namespace DigitalHouseSystemApi.Controllers
         }
 
         // Buy the shopping cart; so the cart will go status COMPLETED
+
+        // Loginc to buy
+        [HttpPost("create-payment")]
+        public async Task<IActionResult> CreatePayment([FromQuery] string username)
+        {
+            try
+            {
+                var cart = await _shoppingCartService.ActiveShoppingCart(username);
+
+                if (cart == null || !cart.Items.Any())
+                    return BadRequest("Cart is empty");
+
+                var totalAmount = cart.Items.Sum(x => x.TotalQuantity * x.Product.Price);
+
+                var checkoutUrl =  await _lemonSqueezyService.CreateCheckoutAsync("test@example.com", (decimal)totalAmount, username);
+                //var checkoutUrl = "shhshs";
+
+                return Ok(new { url = checkoutUrl });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
     }

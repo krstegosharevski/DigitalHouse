@@ -61,6 +61,7 @@ builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection(
 builder.Services.Configure<PerspectiveApiSettings>(builder.Configuration.GetSection("PerspectiveAPI"));
 builder.Services.AddScoped<IPerspectiveService, PerspectiveService>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddHttpClient<ILemonSqueezyService, LemonSqueezyService>();
 
 
 
