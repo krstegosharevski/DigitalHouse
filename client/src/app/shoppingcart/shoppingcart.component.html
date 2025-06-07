@@ -40,7 +40,10 @@
                 <div class="card-body">
                   <h5 class="card-title fw-light">50000 MKD</h5>
                 </div>
-                <button class="btn btn-buy fw-light">BUY NOW</button>
+                 <div *ngIf="(currentUser$ | async)" class="mt-2">
+                     <button (click)="buyNow()" class="btn btn-buy fw-light">BUY NOW</button>
+                 </div>
+               
             </div>
             <div class="card text-center p-3 m-3" style="width: 18rem;">
                 <button mat-button (click)="cancelCart()" class="btn btn-danger fw-light">Cancel cart</button>

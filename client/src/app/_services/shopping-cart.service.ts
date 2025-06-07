@@ -35,5 +35,11 @@ export class ShoppingCartService {
     const params = new HttpParams().set('username', username);
     return this.http.put<boolean>(this.baseUrl + 'shoppingcart/cancel-status', null, { params });
   }
+
+  createPayment(username: string) {
+  const params = new HttpParams().set('username', username);
+  return this.http.post<any>(this.baseUrl + 'shoppingcart/create-payment', null, { params });
+}
+
   
 }

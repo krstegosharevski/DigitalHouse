@@ -78,4 +78,10 @@ export class ShoppingcartComponent implements OnInit {
     });
   }
 
+  buyNow() {
+  this.shoppingCartService.createPayment(this.username!).subscribe((res: any) => {
+    window.location.href = res.url; // редиректирај го корисникот кон Lemon Squeezy
+  });
+}
+
 }
