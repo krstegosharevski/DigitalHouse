@@ -15,12 +15,13 @@ export class ShoppingcartComponent implements OnInit {
   shoppingCartItems: ShoppingcartCartItem[] = [];
   currentUser$ = this.accountService.currentUser$;
   username: string | undefined
+  totalPrice: number = 0;
 
   constructor(private shoppingCartService: ShoppingCartService,
     private accountService: AccountService,
-    private dialog: MatDialog, 
-    private router: Router  
-    ) { }
+    private dialog: MatDialog,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
@@ -30,6 +31,7 @@ export class ShoppingcartComponent implements OnInit {
           this.shoppingCartService.getAllShoppingCartItems(this.username).subscribe({
             next: (response) => {
               this.shoppingCartItems = response;
+              this.countPrice();
             },
             error: (err) => console.log(err)
           });
@@ -43,20 +45,37 @@ export class ShoppingcartComponent implements OnInit {
       this.shoppingCartService.getAllShoppingCartItems(this.username).subscribe({
         next: (response) => {
           this.shoppingCartItems = response;
+          this.countPrice();
         },
         error: (err) => console.log(err)
       });
     }
   }
 
-  removeFromCart(id: number) {
-    this.shoppingCartService.deleteItemFromCart(id).subscribe({
-      next: (res) => {
-        this.getAllSHoppingCartItems()
-      },
-      error: (err) => console.log("error")
-    })
+  countPrice() {
+    this.totalPrice = 0;
+    this.shoppingCartItems.forEach(x => this.totalPrice += x.price);
   }
+
+
+  removeFromCart(id: number) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.shoppingCartService.deleteItemFromCart(id).subscribe({
+          next: (res) => {
+            this.getAllSHoppingCartItems()
+            this.countPrice()
+          },
+          error: (err) => console.log("error")
+        })
+      } else {
+        console.log('Cancaled');
+      }
+    });
+  }
+
 
   cancelCart() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
@@ -73,15 +92,15 @@ export class ShoppingcartComponent implements OnInit {
           });
         }
       } else {
-        console.log('Откажано');
+        console.log('Cancaled');
       }
     });
   }
 
   buyNow() {
-  this.shoppingCartService.createPayment(this.username!).subscribe((res: any) => {
-    window.location.href = res.url; // редиректирај го корисникот кон Lemon Squeezy
-  });
-}
+    this.shoppingCartService.createPayment(this.username!).subscribe((res: any) => {
+      window.location.href = res.url; // редиректирај го корисникот кон Lemon Squeezy
+    });
+  }
 
 }

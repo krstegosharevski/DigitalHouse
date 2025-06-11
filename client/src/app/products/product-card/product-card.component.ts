@@ -59,14 +59,18 @@ export class ProductCardComponent implements OnInit {
     this.selectedColor = color
   }
 
-  addToCart(){
-    this.shoppingCartService.addToCart(this.addCartDto!).subscribe({
-      next : (response) =>{
-        console.log("succesfull added/created!")
-      },
-      error : (err) => console.log("you have error here!" + err)
-    })
-  }
+  addToCart() {
+  this.shoppingCartService.addToCart(this.addCartDto!).subscribe({
+    next: (response) => {
+      alert("✅ The product has been successfully added to cart!");
+    },
+    error: (err) => {
+      alert("❌ An error occurred while adding to cart.");
+      console.log("Error: " + err);
+    }
+  });
+}
+
 
 
 }

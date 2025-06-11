@@ -28,7 +28,7 @@
                                 >
                               </button>
                             </td>
-                            <td><button (click)="removeFromCart(prod.id)" class="btn x-button">X</button></td>
+                            <td><button (click)="removeFromCart(prod.id)" class="btn mt-2 x-button">X</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -38,7 +38,7 @@
             <div class="card text-center p-3 m-3" style="width: 18rem;">
                 <h3 class="fw-light">Your total price:</h3>
                 <div class="card-body">
-                  <h5 class="card-title fw-light">50000 MKD</h5>
+                  <h5 class="card-title fw-light">{{totalPrice | number}} MKD</h5>
                 </div>
                  <div *ngIf="(currentUser$ | async)" class="mt-2">
                      <button (click)="buyNow()" class="btn btn-buy fw-light">BUY NOW</button>

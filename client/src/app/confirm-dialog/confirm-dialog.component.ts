@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   template: `
     <h1 mat-dialog-title class="dialog-title">Are you sure?</h1>
     <div mat-dialog-content class="dialog-content">
-      <p>Your shopping cart will be cancelled</p>
+      <!-- <p>Your shopping cart will be cancelled</p> -->
     </div>
     <div mat-dialog-actions class="dialog-actions">
       <button mat-button (click)="closeDialog(false)" class="no-button">No</button>
