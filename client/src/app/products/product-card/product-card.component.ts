@@ -65,7 +65,7 @@ export class ProductCardComponent implements OnInit {
       alert("✅ The product has been successfully added to cart!");
     },
     error: (err) => {
-      alert("❌ An error occurred while adding to cart.");
+      this.router.navigate(["/login"])
       console.log("Error: " + err);
     }
   });
