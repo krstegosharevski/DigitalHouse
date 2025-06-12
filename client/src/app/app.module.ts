@@ -40,6 +40,8 @@ import { MagentaApproveComponent } from './magenta-approve/magenta-approve.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { SuccessfulPaymentComponent } from './successful-payment/successful-payment.component';
+import { PaymentAddressInfoComponent } from './payment-address-info/payment-address-info.component';
+import { OrdersComponent } from './orders/orders.component';
 
 export function HttpLoaderFactory(http:HttpClient){
   return new TranslateHttpLoader(http);
@@ -72,7 +74,9 @@ export function HttpLoaderFactory(http:HttpClient){
     PrepaidComponent,
     MagentaApproveComponent,
     ConfirmationDialogComponent,
-    SuccessfulPaymentComponent
+    SuccessfulPaymentComponent,
+    PaymentAddressInfoComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,

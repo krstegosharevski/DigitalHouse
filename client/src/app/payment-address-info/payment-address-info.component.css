@@ -1,0 +1,230 @@
+form {
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Heading */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.text-style {
+    color: rgb(0, 0, 0);
+    font-weight: 300;
+    color: #000000 !important;
+}
+
+.text-size-custom {
+    font-size: large;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label Styles */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Input and Textarea Styles */
+input[type="text"],
+textarea,
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="text"],
+select {
+    text-align: center;
+    /* Center text within input field */
+}
+
+.color-for-bg {
+    background-color: white;
+}
+
+.btn-back {
+    background-color: white;
+    color: #E20074;
+}
+
+.insert-custome {
+    background-color: #000000;
+    color: white;
+    font-weight: 370;
+}
+
+.insert-custome:hover {
+    color: black;
+    background-color: white;
+}
+
+/* Hover button style. */
+
+.hover-button {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    color: white;
+    background-color: black;
+}
+
+
+.hover-button::before,
+.hover-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #e267a7;
+    /* another color: ff6347;*/
+    transition: width 0.9s ease;
+}
+
+.hover-button::before {
+    top: 0;
+    left: 0;
+}
+
+.hover-button::after {
+    bottom: 0;
+    right: 0;
+}
+
+.hover-button:hover::before,
+.hover-button:hover::after {
+    width: 100%;
+}
+
+
+@keyframes line-hover {
+    0% {
+        left: -100%;
+        right: 100%;
+    }
+
+    50% {
+        left: 100%;
+        right: -100%;
+    }
+
+    100% {
+        left: -100%;
+        right: 100%;
+    }
+}
+
+.hover-button:hover::before,
+.hover-button:hover::after {
+    animation-play-state: running;
+}
+
+/* End Hover Button style */
+
+
+/* Text Wormy style */
+
+h1.generate-ticket-title {
+    position: relative;
+    display: inline-block;
+    color: #000000;
+    padding: 5px 10px;
+    overflow: hidden;
+}
+
+h1.generate-ticket-title::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #E20074;
+    animation: border-slide-right 5s linear infinite;
+}
+
+h1.generate-ticket-title::before {
+    top: 0;
+    left: -100%;
+}
+
+h1.generate-ticket-title::after {
+    bottom: 0;
+    left: -100%;
+}
+
+@keyframes border-slide-right {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    80% {
+        transform: translateX(100%);
+    }
+
+    95% {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Colors div */
+.color-box {
+    width: 29px;
+    height: 29px;
+    margin: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.color-box.selected {
+    border: 2px solid black;
+}
+
+.bg-neutral{
+    background-color: #f5f7f8;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 3px solid #000000;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: rgb(41, 205, 41);
+  }
+ 
+  

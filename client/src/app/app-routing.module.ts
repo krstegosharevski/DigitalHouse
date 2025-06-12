@@ -19,6 +19,8 @@ import { MobileTariffComponent } from './tariffs/mobile-tariff/mobile-tariff.com
 import { PrepaidComponent } from './tariffs/prepaid/prepaid.component';
 import { MagentaApproveComponent } from './magenta-approve/magenta-approve.component';
 import { SuccessfulPaymentComponent } from './successful-payment/successful-payment.component';
+import { PaymentAddressInfoComponent } from './payment-address-info/payment-address-info.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   {path: 'aboutus', component: AboutUsComponent},
@@ -38,7 +40,9 @@ const routes: Routes = [
   {path: 'admin/edit-product/:id', component: AddProductComponent, canActivate: [AdminGuard]},
   {path: 'admin/problem-list', component: ProblemsListComponent, canActivate: [AdminGuard]}, 
   {path: 'admin/magenta-approve', component: MagentaApproveComponent, canActivate: [AdminGuard]}, 
+  {path: 'admin/orders', component: OrdersComponent, canActivate: [AdminGuard]},
   {path: 'payment-successful', component: SuccessfulPaymentComponent},
+  {path: 'payment-address-info', component: PaymentAddressInfoComponent},
   {path: '', component: HomeComponent}
 ];
 
